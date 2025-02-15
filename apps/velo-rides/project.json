@@ -1,60 +1,28 @@
 {
-  "$schema": "node_modules/nx/schemas/project-schema.json",
-  "name": "angular-starter",
+  "name": "velo-rides",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "projectType": "application",
-  "generators": {
-    "@schematics/angular:component": {
-      "inlineTemplate": true,
-      "inlineStyle": true,
-      "style": "scss",
-      "skipTests": true,
-      "changeDetection": "OnPush",
-      "flat": true
-    },
-    "@schematics/angular:class": {
-      "skipTests": true
-    },
-    "@schematics/angular:directive": {
-      "skipTests": true
-    },
-    "@schematics/angular:guard": {
-      "skipTests": true
-    },
-    "@schematics/angular:interceptor": {
-      "skipTests": true
-    },
-    "@schematics/angular:pipe": {
-      "skipTests": true
-    },
-    "@schematics/angular:resolver": {
-      "skipTests": true
-    },
-    "@schematics/angular:service": {
-      "skipTests": true
-    }
-  },
-  "sourceRoot": "src",
   "prefix": "app",
+  "sourceRoot": "apps/velo-rides/src",
+  "tags": [],
   "targets": {
     "build": {
-      "executor": "@angular-devkit/build-angular:application",
+      "executor": "@angular-devkit/build-angular:browser",
+      "outputs": ["{options.outputPath}"],
       "options": {
-        "outputPath": "dist/angular-starter",
-        "index": "src/index.html",
-        "browser": "src/main.ts",
-        "polyfills": [],
-        "tsConfig": "tsconfig.app.json",
+        "outputPath": "dist/apps/velo-rides",
+        "index": "apps/velo-rides/src/index.html",
+        "main": "apps/velo-rides/src/main.ts",
+        "polyfills": ["zone.js"],
+        "tsConfig": "apps/velo-rides/tsconfig.app.json",
         "inlineStyleLanguage": "scss",
         "assets": [
           {
             "glob": "**/*",
-            "input": "public"
+            "input": "apps/velo-rides/public"
           }
         ],
-        "styles": [
-          "@angular/material/prebuilt-themes/azure-blue.css",
-          "src/styles.scss"
-        ],
+        "styles": ["apps/velo-rides/src/styles.scss"],
         "scripts": []
       },
       "configurations": {
@@ -62,21 +30,24 @@
           "budgets": [
             {
               "type": "initial",
-              "maximumWarning": "500kB",
-              "maximumError": "1MB"
+              "maximumWarning": "500kb",
+              "maximumError": "1mb"
             },
             {
               "type": "anyComponentStyle",
-              "maximumWarning": "4kB",
-              "maximumError": "8kB"
+              "maximumWarning": "4kb",
+              "maximumError": "8kb"
             }
           ],
           "outputHashing": "all"
         },
         "development": {
+          "buildOptimizer": false,
           "optimization": false,
+          "vendorChunk": true,
           "extractLicenses": false,
-          "sourceMap": true
+          "sourceMap": true,
+          "namedChunks": true
         }
       },
       "defaultConfiguration": "production"
@@ -85,47 +56,29 @@
       "executor": "@angular-devkit/build-angular:dev-server",
       "configurations": {
         "production": {
-          "buildTarget": "angular-starter:build:production"
+          "buildTarget": "velo-rides:build:production"
         },
         "development": {
-          "buildTarget": "angular-starter:build:development"
+          "buildTarget": "velo-rides:build:development"
         }
       },
       "defaultConfiguration": "development"
     },
     "extract-i18n": {
-      "executor": "@angular-devkit/build-angular:extract-i18n"
-    },
-    "test": {
-      "executor": "@angular-devkit/build-angular:karma",
+      "executor": "@angular-devkit/build-angular:extract-i18n",
       "options": {
-        "polyfills": [],
-        "tsConfig": "tsconfig.spec.json",
-        "inlineStyleLanguage": "scss",
-        "assets": [
-          {
-            "glob": "**/*",
-            "input": "public"
-          }
-        ],
-        "styles": [
-          "@angular/material/prebuilt-themes/azure-blue.css",
-          "src/styles.scss"
-        ],
-        "scripts": []
+        "buildTarget": "velo-rides:build"
       }
     },
     "lint": {
-      "executor": "@angular-eslint/builder:lint",
+      "executor": "@nx/eslint:lint"
+    },
+    "serve-static": {
+      "executor": "@nx/web:file-server",
       "options": {
-        "lintFilePatterns": [
-          "src/**/*.ts",
-          "src/**/*.html"
-        ]
-      },
-      "outputs": [
-        "{options.outputFile}"
-      ]
+        "buildTarget": "velo-rides:build",
+        "spa": true
+      }
     }
   }
 }

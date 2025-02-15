@@ -25,7 +25,7 @@ Open `tailwind.config.js` and add the following code to `module.exports`:
 ```javascript
 module.exports = {
   // ...
-  content: ["./src/**/*.{html,ts}"],
+  content: ['./src/**/*.{html,ts}'],
 };
 ```
 
@@ -68,27 +68,27 @@ To integrate `eslint-plugin-unused-imports` and sheriff into ESLint, add the fol
 ```javascript
 // exsting imports...
 
-const sheriff = require("@softarc/eslint-plugin-sheriff");
-const unusedImports = require("eslint-plugin-unused-imports");
+const sheriff = require('@softarc/eslint-plugin-sheriff');
+const unusedImports = require('eslint-plugin-unused-imports');
 
 module.exports = tseslint.config(
   // exsting setup...
   {
-    files: ["**/*.ts"],
+    files: ['**/*.ts'],
     extends: [sheriff.configs.all],
   },
   {
-    plugins: { "unused-imports": unusedImports },
+    plugins: { 'unused-imports': unusedImports },
     rules: {
-      "@typescript-eslint/no-unused-vars": "off",
-      "unused-imports/no-unused-imports": "error",
-      "unused-imports/no-unused-vars": [
-        "warn",
+      '@typescript-eslint/no-unused-vars': 'off',
+      'unused-imports/no-unused-imports': 'error',
+      'unused-imports/no-unused-vars': [
+        'warn',
         {
-          vars: "all",
-          varsIgnorePattern: "^_",
-          args: "after-used",
-          argsIgnorePattern: "^_",
+          vars: 'all',
+          varsIgnorePattern: '^_',
+          args: 'after-used',
+          argsIgnorePattern: '^_',
         },
       ],
     },
@@ -122,8 +122,8 @@ Create the `.lintstagedrc` with the following content:
 `.husky/pre-commit`, should have the following content:
 
 ```bash
-pnpm ng lint
-pnpm ng test --watch=false
+pnpm nx lint
+pnpm nx test --watch=false
 pnpm lint-staged --allow-empty
 ```
 
@@ -145,12 +145,12 @@ Add the following to the ESLint configuration `eslint.config.js`:
 
 ```javascript
 // existing imports...
-const ngrx = require("@ngrx/eslint-plugin/v9");
+const ngrx = require('@ngrx/eslint-plugin/v9');
 
 module.exports = tseslint.config(
   // existing config...
   {
-    files: ["**/*.ts"],
+    files: ['**/*.ts'],
     extends: [...ngrx.configs.signals],
   },
 );

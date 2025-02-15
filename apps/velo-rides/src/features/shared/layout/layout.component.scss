@@ -1,0 +1,40 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  height: 100vh;
+}
+
+mat-toolbar {
+  @apply fixed top-0 left-0 right-0 z-[1000] flex justify-between px-4 py-2 text-white bg-[#1d1b1b];
+}
+
+div {
+  @apply flex h-full items-center;
+}
+
+.menu-button {
+  @apply h-full;
+}
+
+.menu-items {
+  @apply hidden;
+}
+
+.library-name {
+  @apply hidden;
+}
+
+@media (min-width: 640px) {
+  .menu-items {
+    @apply flex;
+  }
+
+  .library-name {
+    @apply flex;
+  }
+
+  .mobile-menu-button {
+    @apply hidden;
+  }
+}

@@ -1,16 +1,13 @@
-import {
-  ApplicationConfig,
-  provideExperimentalZonelessChangeDetection,
-} from '@angular/core';
+import { ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
 import { provideRouter } from '@angular/router';
-
-import { routes } from './app.routes';
-import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { appRoutes } from './app.routes';
+import { withFetch } from '@angular/common/http';
+import { provideHttpClient } from '@angular/common/http';
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideExperimentalZonelessChangeDetection(),
-    provideRouter(routes),
-    provideAnimationsAsync(),
+    provideZoneChangeDetection({ eventCoalescing: true }),
+    provideHttpClient(withFetch()),
+    provideRouter(appRoutes),
   ],
 };

@@ -1,0 +1,64 @@
+<mat-toolbar>
+  <div>
+    <div id="layout-left-custom-items"></div>
+
+    <a routerLink="/" class="text-xl font-bold uppercase">Velo Rides</a>
+
+    <div class="menu-items">
+      @for (link of links; track link) {
+        @if (link.routerLink) {
+          <a mat-button [routerLink]="link.url">{{ link.label }}</a>
+        } @else if (!link.disabled) {
+          <a mat-button [href]="link.url">{{ link.label }}</a>
+        } @else {
+          <a mat-button [href]="link.url" disabled class="!text-gray-400 !cursor-not-allowed !pointer-events-auto">{{
+            link.label
+          }}</a>
+        }
+      }
+    </div>
+  </div>
+
+  <div id="layout-right-custom-items">
+    <button hlmBtn variant="ghost" align="end" [brnMenuTriggerFor]="menu">
+      <hlm-avatar variant="medium">
+        <img src="/assets/avatar.png" alt="spartan logo. Resembling a spartanic shield" hlmAvatarImage />
+
+        <span class="bg-white text-primary" hlmAvatarFallback>RG</span>
+      </hlm-avatar>
+    </button>
+
+    <ng-template #menu>
+      <hlm-menu class="w-36" variant="menubar">
+        <hlm-menu-group>
+          <button hlmMenuItem>
+            <ng-icon hlm name="lucideUser" hlmMenuIcon />
+            <span>My Rides</span>
+          </button>
+
+          <button hlmMenuItem>
+            <ng-icon hlm name="lucideLayers" hlmMenuIcon />
+            <span>Organise Ride</span>
+          </button>
+
+        </hlm-menu-group>
+
+        <hlm-menu-separator />
+
+        <hlm-menu-group>
+          <button hlmMenuItem>
+            <ng-icon hlm name="lucideCircleUser" hlmMenuIcon />
+            <span>My Account</span>
+          </button>
+
+          <button hlmMenuItem>
+            <ng-icon hlm name="lucideLogOut" hlmMenuIcon />
+            <span>Logout</span>
+          </button>
+        </hlm-menu-group>
+      </hlm-menu>
+    </ng-template>
+  </div>
+</mat-toolbar>
+
+<router-outlet></router-outlet>

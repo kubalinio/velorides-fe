@@ -23,7 +23,7 @@ import type {
   MapDataEvent,
   MapMouseEvent,
   MapSourceDataEvent,
-  MapStyleDataEvent,
+  mapTilesDataEvent,
   MapTouchEvent,
   MapWheelEvent,
   PointLike,
@@ -96,7 +96,8 @@ export class MapComponent implements OnChanges, OnDestroy, MapEvent {
   /** Init input */
   readonly refreshExpiredTiles = input<MapOptions['refreshExpiredTiles']>();
   /** Init input */
-  readonly canvasContextAttributes = input<MapOptions['canvasContextAttributes']>();
+  readonly canvasContextAttributes =
+    input<MapOptions['canvasContextAttributes']>();
   /** Init input */
   readonly bearingSnap = input<MapOptions['bearingSnap']>();
   /** Init input */
@@ -112,7 +113,8 @@ export class MapComponent implements OnChanges, OnDestroy, MapEvent {
   /** Init input */
   readonly maxTileCacheSize = input<MapOptions['maxTileCacheSize']>();
   /** Init input */
-  readonly localIdeographFontFamily = input<MapOptions['localIdeographFontFamily']>();
+  readonly localIdeographFontFamily =
+    input<MapOptions['localIdeographFontFamily']>();
   /** Init input */
   readonly trackResize = input<MapOptions['trackResize']>();
   /** Init input */
@@ -124,7 +126,8 @@ export class MapComponent implements OnChanges, OnDestroy, MapEvent {
   /** Init input */
   readonly cooperativeGestures = input<MapOptions['cooperativeGestures']>();
   /** Init input */
-  readonly cancelPendingTileRequestsWhileZooming = input<MapOptions['cancelPendingTileRequestsWhileZooming']>();
+  readonly cancelPendingTileRequestsWhileZooming =
+    input<MapOptions['cancelPendingTileRequestsWhileZooming']>();
   /** Init input */
   readonly centerClampedToGround = input<MapOptions['centerClampedToGround']>();
   /** Init input */
@@ -132,7 +135,8 @@ export class MapComponent implements OnChanges, OnDestroy, MapEvent {
   /** Init input */
   readonly maxCanvasSize = input<MapOptions['maxCanvasSize']>();
   /** Init input */
-  readonly maxTileCacheZoomLevels = input<MapOptions['maxTileCacheZoomLevels']>();
+  readonly maxTileCacheZoomLevels =
+    input<MapOptions['maxTileCacheZoomLevels']>();
   /** Init input */
   readonly pixelRatio = input<MapOptions['pixelRatio']>();
   /** Init input */
@@ -272,10 +276,10 @@ export class MapComponent implements OnChanges, OnDestroy, MapEvent {
   readonly render = output<MapLibreEvent & EventData>();
   readonly mapError = output<ErrorEvent & EventData>();
   readonly data = output<MapDataEvent & EventData>();
-  readonly styleData = output<MapStyleDataEvent & EventData>();
+  readonly styleData = output<mapTilesDataEvent & EventData>();
   readonly sourceData = output<MapSourceDataEvent & EventData>();
   readonly dataLoading = output<MapDataEvent & EventData>();
-  readonly styleDataLoading = output<MapStyleDataEvent & EventData>();
+  readonly styleDataLoading = output<mapTilesDataEvent & EventData>();
   readonly sourceDataLoading = output<MapSourceDataEvent & EventData>();
   readonly styleImageMissing = output<
     {
@@ -349,7 +353,8 @@ export class MapComponent implements OnChanges, OnDestroy, MapEvent {
           fitBoundsOptions: this.fitBoundsOptions(),
           locale: this.locale,
           cooperativeGestures: this.cooperativeGestures(),
-          cancelPendingTileRequestsWhileZooming: this.cancelPendingTileRequestsWhileZooming(),
+          cancelPendingTileRequestsWhileZooming:
+            this.cancelPendingTileRequestsWhileZooming(),
           centerClampedToGround: this.centerClampedToGround(),
           elevation: this.elevation(),
           maplibreLogo: this.maplibreLogo(),
@@ -407,7 +412,7 @@ export class MapComponent implements OnChanges, OnDestroy, MapEvent {
       !changes.renderWorldCopies.isFirstChange()
     ) {
       this.mapService.updateRenderWorldCopies(
-        changes.renderWorldCopies.currentValue
+        changes.renderWorldCopies.currentValue,
       );
     }
     if (changes.scrollZoom && !changes.scrollZoom.isFirstChange()) {
@@ -421,12 +426,12 @@ export class MapComponent implements OnChanges, OnDestroy, MapEvent {
     }
     if (changes.touchZoomRotate && !changes.touchZoomRotate.isFirstChange()) {
       this.mapService.updateTouchZoomRotate(
-        changes.touchZoomRotate.currentValue
+        changes.touchZoomRotate.currentValue,
       );
     }
     if (changes.doubleClickZoom && !changes.doubleClickZoom.isFirstChange()) {
       this.mapService.updateDoubleClickZoom(
-        changes.doubleClickZoom.currentValue
+        changes.doubleClickZoom.currentValue,
       );
     }
     if (changes.keyboard && !changes.keyboard.isFirstChange()) {
@@ -451,7 +456,7 @@ export class MapComponent implements OnChanges, OnDestroy, MapEvent {
     ) {
       this.mapService.fitBounds(
         changes.fitBounds.currentValue,
-        this.fitBoundsOptions()
+        this.fitBoundsOptions(),
       );
     }
     if (
@@ -463,13 +468,13 @@ export class MapComponent implements OnChanges, OnDestroy, MapEvent {
         changes.fitScreenCoordinates.isFirstChange()
       ) {
         console.warn(
-          '[ngx-maplibre-gl] center / zoom / pitch / fitBounds inputs are being overridden by fitScreenCoordinates input'
+          '[ngx-maplibre-gl] center / zoom / pitch / fitBounds inputs are being overridden by fitScreenCoordinates input',
         );
       }
       this.mapService.fitScreenCoordinates(
         changes.fitScreenCoordinates.currentValue,
         bearing ? bearing[0] : 0,
-        this.movingOptions()
+        this.movingOptions(),
       );
     }
     if (
@@ -485,7 +490,9 @@ export class MapComponent implements OnChanges, OnDestroy, MapEvent {
     } else if (
       (changes.center && !changes.center.isFirstChange()) ||
       (changes.zoom && !changes.zoom.isFirstChange()) ||
-      (changes.bearing && !changes.bearing.isFirstChange() && !changes.fitScreenCoordinates) ||
+      (changes.bearing &&
+        !changes.bearing.isFirstChange() &&
+        !changes.fitScreenCoordinates) ||
       (changes.pitch && !changes.pitch.isFirstChange()) ||
       (changes.roll && !changes.roll.isFirstChange())
     ) {
@@ -496,7 +503,7 @@ export class MapComponent implements OnChanges, OnDestroy, MapEvent {
         changes.center ? center : undefined,
         changes.bearing && bearing ? bearing[0] : undefined,
         changes.pitch && pitch ? pitch[0] : undefined,
-        changes.roll ? changes.roll.currentValue : undefined
+        changes.roll ? changes.roll.currentValue : undefined,
       );
     }
     if (changes.terrain && !changes.terrain.isFirstChange()) {

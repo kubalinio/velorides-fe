@@ -8,7 +8,7 @@ import {
   MapDataEvent,
   MapMouseEvent,
   MapSourceDataEvent,
-  MapStyleDataEvent,
+  mapTilesDataEvent,
   MapTouchEvent,
   MapWheelEvent,
   StyleSpecification,
@@ -142,10 +142,10 @@ describe('MapService', () => {
         render: new OutputEmitterRef<MapLibreEvent & EventData>(),
         mapError: new OutputEmitterRef<ErrorEvent & EventData>(),
         data: new OutputEmitterRef<MapDataEvent & EventData>(),
-        styleData: new OutputEmitterRef<MapStyleDataEvent & EventData>(),
+        styleData: new OutputEmitterRef<mapTilesDataEvent & EventData>(),
         sourceData: new OutputEmitterRef<MapSourceDataEvent & EventData>(),
         dataLoading: new OutputEmitterRef<MapDataEvent & EventData>(),
-        styleDataLoading: new OutputEmitterRef<MapStyleDataEvent & EventData>(),
+        styleDataLoading: new OutputEmitterRef<mapTilesDataEvent & EventData>(),
         sourceDataLoading: new OutputEmitterRef<
           MapSourceDataEvent & EventData
         >(),
@@ -208,10 +208,13 @@ describe('MapService', () => {
       popupOpen: { emit: jasmine.createSpy() },
       popupClose: { emit: jasmine.createSpy() },
     } as any;
-    const popup = mapService.createPopup({ 
-      popupOptions: {}, 
-      popupEvents
-    }, container);
+    const popup = mapService.createPopup(
+      {
+        popupOptions: {},
+        popupEvents,
+      },
+      container,
+    );
     mapService.addPopupToMap(popup, [0, 0]);
     mapService.removePopupFromMap(popup);
     popup.fire('close');

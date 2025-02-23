@@ -12,6 +12,7 @@ import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { MapService } from './map.service';
 import { StyleSpecification } from 'maplibre-gl';
 import { pipe, switchMap, tap } from 'rxjs';
+import { RouteType } from './models/routes';
 
 export const MapStore = signalStore(
   { providedIn: 'root' },
@@ -21,6 +22,7 @@ export const MapStore = signalStore(
     bicycleRoutes: undefined as
       | GeoJSON.FeatureCollection['features']
       | undefined,
+    selectedRouteType: ['lcn', 'rcn', 'ncn', 'icn'] as RouteType[],
   }),
   withProps(() => ({
     _mapService: inject(MapService),
@@ -39,12 +41,29 @@ export const MapStore = signalStore(
       pipe(
         switchMap(() =>
           store._mapService
-            .getBicycleRoutes()
+            .getBicycleRoutes(store.selectedRouteType())
             .pipe(
               tap((routes: GeoJSON.FeatureCollection['features']) =>
                 patchState(store, { bicycleRoutes: routes }),
               ),
             ),
+        ),
+      ),
+    ),
+    changeRouteType: rxMethod<RouteType>(
+      pipe(
+        tap((routeType) => {
+          patchState(store, {
+            selectedRouteType: store.selectedRouteType().includes(routeType)
+              ? store.selectedRouteType().filter((type) => type !== routeType)
+              : [...store.selectedRouteType(), routeType],
+          });
+        }),
+        switchMap(() =>
+          store._mapService.getBicycleRoutes(store.selectedRouteType()),
+        ),
+        tap((routes: GeoJSON.FeatureCollection['features']) =>
+          patchState(store, { bicycleRoutes: routes }),
         ),
       ),
     ),

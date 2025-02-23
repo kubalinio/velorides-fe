@@ -30,8 +30,4 @@ import { PopupComponent } from '@velo/ngx-maplibre-gl';
 })
 export class HoverPopupComponent {
   @Input() hoverRoute: GeoJSON.Feature<GeoJSON.Point> | null;
-
-  ngOnInit() {
-    console.log(this.hoverRoute);
-  }
 }

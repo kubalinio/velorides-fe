@@ -16,7 +16,7 @@ import { ClickPopupComponent } from './popup-click.component';
 
 import { MapStore } from '@velo/maps/data-access';
 import { RouteStore } from '@velo/routes/data-access';
-
+import { FiltersRouteComponent } from './filters-route.component';
 @Component({
   standalone: true,
   selector: 'app-viewing-map',
@@ -31,6 +31,7 @@ import { RouteStore } from '@velo/routes/data-access';
     SidebarButtonComponent,
     HoverPopupComponent,
     ClickPopupComponent,
+    FiltersRouteComponent,
   ],
   template: `
     <section class="map-container relative">
@@ -40,19 +41,19 @@ import { RouteStore } from '@velo/routes/data-access';
         [center]="[18.966941330820333, 50.66308832195875]"
         [cursorStyle]="cursorStyle"
       >
-        <mgl-marker
+        <!-- <mgl-marker
           [lngLat]="[18.966941330820333, 50.66308832195875]"
           [draggable]="true"
           (markerDragEnd)="onDragEnd($event)"
-        ></mgl-marker>
-        @if (coordinates) {
+        ></mgl-marker> -->
+        <!-- @if (coordinates) {
           <mgl-control position="bottom-left">
             <mat-card appearance="outlined">
               <div>Longitude:&nbsp;{{ coordinates[0] }}</div>
               <div>Latitude:&nbsp;{{ coordinates[1] }}</div>
             </mat-card>
           </mgl-control>
-        }
+        } -->
 
         <mgl-geojson-source id="routes">
           @for (
@@ -75,7 +76,7 @@ import { RouteStore } from '@velo/routes/data-access';
             'line-cap': 'round',
           }"
           [paint]="{
-            'line-color': ['coalesce', ['get', 'colour'], '#000'],
+            'line-color': ['coalesce', ['get', 'colour'], '#1515fa'],
             'line-width': [
               'case',
               ['==', ['get', '@id'], $selectedRoute()?.['@id'] ?? ''],
@@ -122,6 +123,10 @@ import { RouteStore } from '@velo/routes/data-access';
         ></map-click-popup>
       </mgl-map>
       <sidebar-button></sidebar-button>
+
+      <div class="absolute bottom-4 left-4">
+        <filters-route></filters-route>
+      </div>
     </section>
   `,
   styles: [
@@ -159,7 +164,6 @@ export class DisplayMapComponent {
   ngOnInit() {
     this.mapStore.getMapTiles('standard');
     this.mapStore.getBicycleRoutes();
-    console.log(this.$bicycleRoutes());
   }
 
   onDragEnd(marker: Marker) {

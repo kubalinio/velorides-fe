@@ -52,6 +52,15 @@
       ],
       "@spartan-ng/ui-typography-helm": [
         "libs/shared/ui/ui-typography-helm/src/index.ts"
+      ],
+      "@spartan-ng/ui-popover-helm": [
+        "libs/shared/ui/ui-popover-helm/src/index.ts"
+      ],
+      "@spartan-ng/ui-switch-helm": [
+        "libs/shared/ui/ui-switch-helm/src/index.ts"
+      ],
+      "@spartan-ng/ui-label-helm": [
+        "libs/shared/ui/ui-label-helm/src/index.ts"
       ]
     },
     "strict": true,

@@ -1,4 +1,3 @@
-import { JsonPipe } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { RouteStore } from '@velo/routes/data-access';
 import {
@@ -23,7 +22,6 @@ import { hlmLarge } from '@spartan-ng/ui-typography-helm';
     provideIcons({ lucideArrowLeft, lucideMapPin, lucideExternalLink }),
   ],
   imports: [
-    JsonPipe,
     NgIconComponent,
     HlmButtonDirective,
     HlmCardHeaderDirective,
@@ -116,7 +114,6 @@ import { hlmLarge } from '@spartan-ng/ui-typography-helm';
             </li>
           </ul>
         </div>
-        <!-- <pre>{{ $selectedRoute() | json }}</pre> -->
       } @else {
         <div class="flex flex-col gap-3 p-6">
           <h2 class="${hlmLarge}">Route Types</h2>
@@ -126,7 +123,7 @@ import { hlmLarge } from '@spartan-ng/ui-typography-helm';
           >
             <li>
               <span class="inline-block size-5 rounded-full bg-red-900"></span>
-              <span>Route Intercontinental</span>
+              <span>Route International</span>
             </li>
 
             <li>

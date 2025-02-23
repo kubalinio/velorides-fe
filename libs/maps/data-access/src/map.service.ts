@@ -3,6 +3,7 @@ import { StyleSpecification } from 'maplibre-gl';
 import { of } from 'rxjs';
 import { Observable } from 'rxjs';
 import mockBicycleRoutes from './mocks/geo-bike-roads.json';
+import { RouteType } from './models/routes';
 
 @Injectable({
   providedIn: 'root',
@@ -66,13 +67,19 @@ export class MapService {
     return of(Object.keys(this.OSM_STYLES));
   }
 
-  getBicycleRoutes(): Observable<GeoJSON.Feature<GeoJSON.MultiLineString>[]> {
+  getBicycleRoutes(
+    routeTypes: RouteType[],
+  ): Observable<GeoJSON.Feature<GeoJSON.MultiLineString>[]> {
     return of(
-      mockBicycleRoutes.features.map((feature) => ({
-        type: 'Feature' as const,
-        properties: feature.properties,
-        geometry: feature.geometry as GeoJSON.MultiLineString,
-      })),
+      mockBicycleRoutes.features
+        .filter((feature) =>
+          routeTypes.includes(feature.properties?.network as RouteType),
+        )
+        .map((feature) => ({
+          type: 'Feature' as const,
+          properties: feature.properties,
+          geometry: feature.geometry as GeoJSON.MultiLineString,
+        })),
     );
   }
 }

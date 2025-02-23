@@ -18,6 +18,9 @@ export const MapStore = signalStore(
   withState({
     style: 'standard' as const,
     mapTiles: undefined as StyleSpecification | undefined,
+    bicycleRoutes: undefined as
+      | GeoJSON.FeatureCollection['features']
+      | undefined,
   }),
   withProps(() => ({
     _mapService: inject(MapService),
@@ -32,10 +35,24 @@ export const MapStore = signalStore(
         ),
       ),
     ),
+    getBicycleRoutes: rxMethod<void>(
+      pipe(
+        switchMap(() =>
+          store._mapService
+            .getBicycleRoutes()
+            .pipe(
+              tap((routes: GeoJSON.FeatureCollection['features']) =>
+                patchState(store, { bicycleRoutes: routes }),
+              ),
+            ),
+        ),
+      ),
+    ),
   })),
   withHooks((store) => ({
     onInit() {
-      store.getMapTiles('bright');
+      store.getMapTiles('standard');
+      store.getBicycleRoutes();
     },
   })),
 );

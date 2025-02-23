@@ -5,6 +5,7 @@ import { MatListModule } from '@angular/material/list';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { RouterOutlet } from '@angular/router';
 import { hlm } from '@spartan-ng/brain/core';
+import { SidebarComponent } from './sidebar.component';
 
 @Component({
   template: `
@@ -30,7 +31,7 @@ import { hlm } from '@spartan-ng/brain/core';
         class="!bg-gray-200 !border-gray-200"
       >
         <mat-nav-list>
-          <h3 matSubheader>Viewing map</h3>
+          <sidebar-viewing-map></sidebar-viewing-map>
         </mat-nav-list>
       </mat-sidenav>
     </mat-sidenav-container>
@@ -54,6 +55,7 @@ import { hlm } from '@spartan-ng/brain/core';
     MatIconModule,
     MatButtonModule,
     RouterOutlet,
+    SidebarComponent,
   ],
 })
 export class ViewingMapComponent {

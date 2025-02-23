@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router';
-import { DisplayMapComponent } from './components/map/map.component';
+import { DisplayMapComponent } from './map.component';
 
 export const VIEWING_MAP_ROUTES: Routes = [
   {

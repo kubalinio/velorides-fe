@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { StyleSpecification } from 'maplibre-gl';
 import { of } from 'rxjs';
 import { Observable } from 'rxjs';
+import mockBicycleRoutes from './mocks/geo-bike-roads.json';
 
 @Injectable({
   providedIn: 'root',
@@ -63,5 +64,15 @@ export class MapService {
 
   getAvailableStyles(): Observable<string[]> {
     return of(Object.keys(this.OSM_STYLES));
+  }
+
+  getBicycleRoutes(): Observable<GeoJSON.Feature<GeoJSON.MultiLineString>[]> {
+    return of(
+      mockBicycleRoutes.features.map((feature) => ({
+        type: 'Feature' as const,
+        properties: feature.properties,
+        geometry: feature.geometry as GeoJSON.MultiLineString,
+      })),
+    );
   }
 }

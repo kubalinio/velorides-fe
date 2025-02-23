@@ -1,7 +1,7 @@
 {
-  "name": "maps-data-access",
+  "name": "routes-data-access",
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "libs/maps/data-access/src",
+  "sourceRoot": "libs/routes/data-access/src",
   "prefix": "lib",
   "projectType": "library",
   "tags": [],

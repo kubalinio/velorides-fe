@@ -1,0 +1,1194 @@
+{
+  "type": "FeatureCollection",
+  "generator": "overpass-turbo",
+  "copyright": "The data included in this document is from www.openstreetmap.org. The data is made available under ODbL.",
+  "timestamp": "2025-02-24T17:58:01Z",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/452265439",
+        "direction": "270-90",
+        "tourism": "viewpoint"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [19.5425884, 50.3428898],
+            [19.5426035, 50.3428385],
+            [19.5426798, 50.3428477],
+            [19.5426647, 50.342899],
+            [19.5425884, 50.3428898]
+          ]
+        ]
+      },
+      "id": "way/452265439"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/798535010",
+        "tourism": "viewpoint"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [19.4363625, 50.3989862]
+      },
+      "id": "node/798535010"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/1403076721",
+        "tourism": "viewpoint"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [19.3816151, 50.6149198]
+      },
+      "id": "node/1403076721"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/1493056045",
+        "alt_name": "Pustynia Błędowska",
+        "direction": "180",
+        "name": "Punkt Widokowy Dąbrówka",
+        "tourism": "viewpoint"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [19.5196975, 50.3602739]
+      },
+      "id": "node/1493056045"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/1633191578",
+        "tourism": "viewpoint"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [19.4278008, 50.3976596]
+      },
+      "id": "node/1633191578"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/1646893975",
+        "name": "Wiatrak na wyspie",
+        "tourism": "viewpoint"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [18.9727107, 50.5444865]
+      },
+      "id": "node/1646893975"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/1646913755",
+        "tourism": "viewpoint"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [18.9803739, 50.5416606]
+      },
+      "id": "node/1646913755"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/1646913791",
+        "tourism": "viewpoint"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [18.9869319, 50.5423714]
+      },
+      "id": "node/1646913791"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/1759532089",
+        "tourism": "viewpoint"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [19.0890997, 50.361082]
+      },
+      "id": "node/1759532089"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/1759532106",
+        "tourism": "viewpoint"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [19.1188067, 50.4013317]
+      },
+      "id": "node/1759532106"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/1774748840",
+        "tourism": "viewpoint"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [19.081114, 50.4266757]
+      },
+      "id": "node/1774748840"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/1855578405",
+        "access": "private",
+        "tourism": "viewpoint"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [19.5527405, 50.4593273]
+      },
+      "id": "node/1855578405"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/1947028423",
+        "tourism": "viewpoint"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [19.1296546, 50.3275803]
+      },
+      "id": "node/1947028423"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/2021565577",
+        "height": "36.5",
+        "man_made": "tower",
+        "name": "Dostrzegalnia pożarowa",
+        "operator": "Lasy Państwowe",
+        "operator:division": "Nadleśnictwo Koszęcin",
+        "tourism": "viewpoint",
+        "tower:type": "observation"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [18.8294053, 50.6378058]
+      },
+      "id": "node/2021565577"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/2222866370",
+        "tourism": "viewpoint"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [19.5374865, 50.5603823]
+      },
+      "id": "node/2222866370"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/2324265959",
+        "direction": "270",
+        "tourism": "viewpoint"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [19.5489077, 50.336323]
+      },
+      "id": "node/2324265959"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/2448358279",
+        "tourism": "viewpoint"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [19.1021938, 50.3500163]
+      },
+      "id": "node/2448358279"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/2448358527",
+        "tourism": "viewpoint"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [19.0829425, 50.3957069]
+      },
+      "id": "node/2448358527"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/2591900208",
+        "source": "Geoportal: ortofoto",
+        "tourism": "viewpoint",
+        "wikidata": "Q56340069",
+        "wikipedia": "pl:Hałda popłuczkowa w Tarnowskich Górach"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [18.8543487, 50.4159567]
+      },
+      "id": "node/2591900208"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/3039744801",
+        "fee": "yes",
+        "tourism": "viewpoint"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [19.2725065, 50.7482988]
+      },
+      "id": "node/3039744801"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/3522514232",
+        "tourism": "viewpoint"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [18.9307092, 50.3911373]
+      },
+      "id": "node/3522514232"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/3684327992",
+        "addr:city": "Ożarowice",
+        "addr:street": "Boczna",
+        "description": "platforma spotterska o wymiarach 9 x 2,5 wysoka 2,5 metra. kierunek pasa 08.",
+        "height": "2.5",
+        "man_made": "platform",
+        "material": "metal",
+        "name": "Platforma spotterska „08”",
+        "start_date": "2015",
+        "tourism": "viewpoint",
+        "wheelchair": "no"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [19.0520911, 50.4762459]
+      },
+      "id": "node/3684327992"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/3708874243",
+        "addr:city": "Ożarowice",
+        "addr:street": "Sportowa",
+        "construction": "tower",
+        "covered": "yes",
+        "fee": "no",
+        "material": "metal",
+        "name": "Punkt Widokowy Pyrzowice Ożarowice 4K – Lotnisko",
+        "opening_hours": "Mo-Su 08:00-21:00",
+        "operator": "Biblioteka I Ośrodek Kultury w Tąpkowicach",
+        "tourism": "viewpoint",
+        "wheelchair": "no"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [19.0425004, 50.4718883]
+      },
+      "id": "node/3708874243"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/4208923355",
+        "name": "Taras widokowy",
+        "tourism": "viewpoint"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [19.2699174, 50.7289046]
+      },
+      "id": "node/4208923355"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/4265842686",
+        "tourism": "viewpoint"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [19.2923388, 50.8291421]
+      },
+      "id": "node/4265842686"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/4315275647",
+        "tourism": "viewpoint"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [19.1243374, 50.7958666]
+      },
+      "id": "node/4315275647"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/4433890150",
+        "source:geometry": "geoportal.gov.pl:ortofoto/isok",
+        "tourism": "viewpoint"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [19.5509289, 50.4641163]
+      },
+      "id": "node/4433890150"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/4543142379",
+        "addr:city": "Mierzęcice",
+        "addr:street": "Leśna",
+        "description": "platforma spotterska o wymiarach 9 x 2,5 wysoka 2,5 metra. kierunek pasa 26.",
+        "height": "2.5",
+        "man_made": "platform",
+        "material": "metal",
+        "name": "Platforma spotterska „26”",
+        "start_date": "2015",
+        "tourism": "viewpoint",
+        "wheelchair": "no"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [19.1057434, 50.4735523]
+      },
+      "id": "node/4543142379"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/4699882446",
+        "name": "Bastion królewski (bastion Potockich)",
+        "name:hu": "Királyi bástya (Potocki-bástya)",
+        "name:ru": "Королевский бастион (Бастион Потоцких)",
+        "tourism": "viewpoint"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [19.0982362, 50.8119992]
+      },
+      "id": "node/4699882446"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/4699882447",
+        "name": "Bastion św. Barbary (bastion Lubomirskich)",
+        "name:hu": "Szent Borbála-bástya (Lubomirski-bástya)",
+        "tourism": "viewpoint",
+        "url": "https://fotopolska.eu/Fortyfikacje_bastionowe_klasztoru_Bastion_Lubomirskich_-_Bastion?map_z=19",
+        "url:0": "url:0"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [19.0958529, 50.8119362]
+      },
+      "id": "node/4699882447"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/4699882448",
+        "name": "Bastion św. Trójcy (bastion Szaniawskich)",
+        "name:hu": "Szentháromság-bástya (Szaniawski-bástya)",
+        "tourism": "viewpoint",
+        "url": "https://fotopolska.eu/Fortyfikacje_bastionowe_klasztoru_Bastion_Szaniawskich_-_Bastion?map_z=19"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [19.0983036, 50.8132161]
+      },
+      "id": "node/4699882448"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/4699882449",
+        "name": "Bastion Morsztynów (bastion św. Rocha)",
+        "name:hu": "Morsztyn-bástya (Szent Rókus-bástya)",
+        "tourism": "viewpoint",
+        "url": "https://fotopolska.eu/Fortyfikacje_bastionowe_klasztoru_Bastion_Morsztynow_sw._Rocha?map_z=19"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [19.0959644, 50.8133366]
+      },
+      "id": "node/4699882449"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/4775717680",
+        "historic": "yes",
+        "man_made": "tower",
+        "name": "Baszta Kredencerska",
+        "ruins": "yes",
+        "tourism": "viewpoint",
+        "tower:type": "defensive"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [19.5520453, 50.4529866]
+      },
+      "id": "node/4775717680"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/4912898556",
+        "source:geometry": "geoportal.gov.pl/isok",
+        "tourism": "viewpoint"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [19.5303774, 50.5727988]
+      },
+      "id": "node/4912898556"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/4912898557",
+        "source:geometry": "geoportal.gov.pl/isok",
+        "tourism": "viewpoint"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [19.5299457, 50.5728799]
+      },
+      "id": "node/4912898557"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/5892454494",
+        "source:geometry": "geoportal.gov.pl:ISOK_CIEŃ-laser",
+        "tourism": "viewpoint"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [18.9529412, 50.3314745]
+      },
+      "id": "node/5892454494"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/5892454495",
+        "source:geometry": "geoportal.gov.pl:ISOK_CIEŃ-laser",
+        "tourism": "viewpoint"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [18.9527766, 50.3314637]
+      },
+      "id": "node/5892454495"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/5892454496",
+        "source:geometry": "geoportal.gov.pl:ISOK_CIEŃ-laser",
+        "tourism": "viewpoint"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [18.9552661, 50.3294695]
+      },
+      "id": "node/5892454496"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/5892454497",
+        "source:geometry": "geoportal.gov.pl:ISOK_CIEŃ-laser",
+        "tourism": "viewpoint"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [18.9535311, 50.3327358]
+      },
+      "id": "node/5892454497"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/5892454530",
+        "source:geometry": "geoportal.gov.pl:ISOK_CIEŃ-laser",
+        "tourism": "viewpoint"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [18.9525209, 50.3335538]
+      },
+      "id": "node/5892454530"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/5892471127",
+        "source:geometry": "geoportal.gov.pl:ISOK_CIEŃ-laser",
+        "tourism": "viewpoint"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [18.9543623, 50.3279127]
+      },
+      "id": "node/5892471127"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/5892474472",
+        "source:geometry": "geoportal.gov.pl:ISOK_CIEŃ-laser",
+        "tourism": "viewpoint"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [18.9528802, 50.3304697]
+      },
+      "id": "node/5892474472"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/5892474475",
+        "source:geometry": "geoportal.gov.pl:ISOK_CIEŃ-laser",
+        "tourism": "viewpoint"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [18.9539647, 50.3310076]
+      },
+      "id": "node/5892474475"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/5892474476",
+        "source:geometry": "geoportal.gov.pl:ISOK_CIEŃ-laser",
+        "tourism": "viewpoint"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [18.9543911, 50.3303007]
+      },
+      "id": "node/5892474476"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/5896401200",
+        "information": "board",
+        "name": "Punkt widokowy Folwark Segiet",
+        "tourism": "viewpoint"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [18.8458291, 50.4181481]
+      },
+      "id": "node/5896401200"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/5909544766",
+        "source:geometry": "geoportal.gov.pl:ISOK_CIEŃ-laser",
+        "tourism": "viewpoint"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [18.9544506, 50.331108]
+      },
+      "id": "node/5909544766"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/6644570078",
+        "tourism": "viewpoint"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [18.9150939, 50.332754]
+      },
+      "id": "node/6644570078"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/7042206405",
+        "source:geometry": "geoportal.gov.pl:Orto/ISOK_CIEŃ-laser/EGB&GPS",
+        "tourism": "viewpoint"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [19.2715627, 50.7686668]
+      },
+      "id": "node/7042206405"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/7042222257",
+        "source:geometry": "geoportal.gov.pl:Orto/ISOK_CIEŃ-laser/EGB&GPS",
+        "tourism": "viewpoint"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [19.0689393, 50.5839781]
+      },
+      "id": "node/7042222257"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/7042222258",
+        "source:geometry": "geoportal.gov.pl:Orto/ISOK_CIEŃ-laser/EGB&GPS",
+        "tourism": "viewpoint"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [19.0677961, 50.5825699]
+      },
+      "id": "node/7042222258"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/7058213237",
+        "tourism": "viewpoint"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [19.5237045, 50.5243581]
+      },
+      "id": "node/7058213237"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/7058213261",
+        "tourism": "viewpoint"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [19.5233846, 50.5240522]
+      },
+      "id": "node/7058213261"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/7441877068",
+        "tourism": "viewpoint"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [18.7788421, 50.6188038]
+      },
+      "id": "node/7441877068"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/7555052020",
+        "direction": "180",
+        "tourism": "viewpoint"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [19.3008044, 50.821712]
+      },
+      "id": "node/7555052020"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/7620607702",
+        "tourism": "viewpoint"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [19.4211038, 50.6608505]
+      },
+      "id": "node/7620607702"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/7651940455",
+        "tourism": "viewpoint"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [19.5307332, 50.4774065]
+      },
+      "id": "node/7651940455"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/8007784517",
+        "tourism": "viewpoint"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [18.9887858, 50.5412415]
+      },
+      "id": "node/8007784517"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/8085875760",
+        "tourism": "viewpoint"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [19.1310042, 50.3271287]
+      },
+      "id": "node/8085875760"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/8095110300",
+        "direction": "N",
+        "tourism": "viewpoint"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [19.2333092, 50.77821]
+      },
+      "id": "node/8095110300"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/8572168942",
+        "fee": "no",
+        "man_made": "tower",
+        "material": "wood",
+        "tourism": "viewpoint",
+        "tower:construction": "freestanding",
+        "tower:type": "observation"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [18.9479231, 50.7855823]
+      },
+      "id": "node/8572168942"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/9575944101",
+        "direction": "315-135",
+        "tourism": "viewpoint"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [19.4842378, 50.6343951]
+      },
+      "id": "node/9575944101"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/9706913023",
+        "noname": "yes",
+        "tourism": "viewpoint"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [19.5386251, 50.341582]
+      },
+      "id": "node/9706913023"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/9729759157",
+        "tourism": "viewpoint"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [19.5216904, 50.5631536]
+      },
+      "id": "node/9729759157"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/9729778304",
+        "tourism": "viewpoint"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [19.5213507, 50.5632507]
+      },
+      "id": "node/9729778304"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/9735236735",
+        "tourism": "viewpoint"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [19.3937931, 50.6431915]
+      },
+      "id": "node/9735236735"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/9735236736",
+        "tourism": "viewpoint"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [19.3924825, 50.6411264]
+      },
+      "id": "node/9735236736"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/9806649924",
+        "tourism": "viewpoint"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [19.4544193, 50.6286744]
+      },
+      "id": "node/9806649924"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/9848747922",
+        "tourism": "viewpoint"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [19.2163373, 50.5684034]
+      },
+      "id": "node/9848747922"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/10176601493",
+        "tourism": "viewpoint"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [19.1543605, 50.8119922]
+      },
+      "id": "node/10176601493"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/10560554646",
+        "direction": "270",
+        "tourism": "viewpoint"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [19.1956456, 50.8185686]
+      },
+      "id": "node/10560554646"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/10771317841",
+        "tourism": "viewpoint"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [19.3552083, 50.7019008]
+      },
+      "id": "node/10771317841"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/10831954180",
+        "tourism": "viewpoint"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [18.7511103, 50.3605902]
+      },
+      "id": "node/10831954180"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/10831954189",
+        "tourism": "viewpoint"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [18.749881, 50.3605121]
+      },
+      "id": "node/10831954189"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/10831954194",
+        "tourism": "viewpoint"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [18.7503963, 50.36197]
+      },
+      "id": "node/10831954194"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/10831985926",
+        "tourism": "viewpoint"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [18.7516754, 50.3618841]
+      },
+      "id": "node/10831985926"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/10831985927",
+        "tourism": "viewpoint"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [18.7514152, 50.3619285]
+      },
+      "id": "node/10831985927"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/10899320283",
+        "tourism": "viewpoint"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [19.4207034, 50.6608511]
+      },
+      "id": "node/10899320283"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/10956847335",
+        "tourism": "viewpoint"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [18.9071694, 50.3265693]
+      },
+      "id": "node/10956847335"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/11116544043",
+        "direction": "WNW-SE",
+        "tourism": "viewpoint"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [19.0525886, 50.3890555]
+      },
+      "id": "node/11116544043"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/11215618150",
+        "tourism": "viewpoint"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [19.4368599, 50.7138701]
+      },
+      "id": "node/11215618150"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/11227479085",
+        "direction": "NE",
+        "tourism": "viewpoint"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [19.5137189, 50.5175888]
+      },
+      "id": "node/11227479085"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/11428267322",
+        "tourism": "viewpoint"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [18.9908798, 50.6045843]
+      },
+      "id": "node/11428267322"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/11662814269",
+        "name": "Meandrująca Brynica z nieczynnego mostu",
+        "tourism": "viewpoint"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [18.9818531, 50.4483788]
+      },
+      "id": "node/11662814269"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/11668845670",
+        "name": "Punkt widokowy na Zalew Świerklaniec",
+        "tourism": "viewpoint"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [18.9829946, 50.4177393]
+      },
+      "id": "node/11668845670"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/11819578450",
+        "tourism": "viewpoint"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [19.2678781, 50.3907536]
+      },
+      "id": "node/11819578450"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/11874393446",
+        "tourism": "viewpoint"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [19.3965165, 50.6435146]
+      },
+      "id": "node/11874393446"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/12082784354",
+        "tourism": "viewpoint"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [19.4897639, 50.6142142]
+      },
+      "id": "node/12082784354"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/12222764195",
+        "tourism": "viewpoint"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [19.3859246, 50.6107735]
+      },
+      "id": "node/12222764195"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/12269405258",
+        "tourism": "viewpoint"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [19.0977207, 50.3508514]
+      },
+      "id": "node/12269405258"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/12496666130",
+        "direction": "315-0;0-135",
+        "name": "Górka widokowa",
+        "tourism": "viewpoint"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [18.9154541, 50.4866991]
+      },
+      "id": "node/12496666130"
+    }
+  ]
+}

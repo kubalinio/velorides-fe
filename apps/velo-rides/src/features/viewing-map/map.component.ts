@@ -1,13 +1,11 @@
 import { Component, inject } from '@angular/core';
 import {
   MapComponent,
-  ControlComponent,
-  MarkerComponent,
   LayerComponent,
   GeoJSONSourceComponent,
   FeatureComponent,
 } from '@velo/ngx-maplibre-gl';
-import { MapLayerMouseEvent, Marker } from 'maplibre-gl';
+import { LngLatBounds, Map, MapLayerMouseEvent, Marker } from 'maplibre-gl';
 import { MatCardModule } from '@angular/material/card';
 
 import { SidebarButtonComponent } from './sidebar-button.component';
@@ -17,13 +15,12 @@ import { ClickPopupComponent } from './popup-click.component';
 import { MapStore } from '@velo/maps/data-access';
 import { RouteStore } from '@velo/routes/data-access';
 import { FiltersRouteComponent } from './filters-route.component';
+import { ViewingMapViewpointsComponent } from './viewpoints.component';
 @Component({
   standalone: true,
   selector: 'app-viewing-map',
   imports: [
     MapComponent,
-    ControlComponent,
-    MarkerComponent,
     MatCardModule,
     LayerComponent,
     GeoJSONSourceComponent,
@@ -32,29 +29,22 @@ import { FiltersRouteComponent } from './filters-route.component';
     HoverPopupComponent,
     ClickPopupComponent,
     FiltersRouteComponent,
+    ViewingMapViewpointsComponent,
   ],
   template: `
     <section class="map-container relative">
       <mgl-map
         [style]="$mapTiles()"
-        [zoom]="[11.3]"
+        [zoom]="[11]"
         [center]="[18.966941330820333, 50.66308832195875]"
         [cursorStyle]="cursorStyle"
+        [fitBounds]="bounds"
+        [fitBoundsOptions]="{
+          padding: 10,
+        }"
+        [maxZoom]="18"
+        (mapLoad)="onMapReady($event)"
       >
-        <!-- <mgl-marker
-          [lngLat]="[18.966941330820333, 50.66308832195875]"
-          [draggable]="true"
-          (markerDragEnd)="onDragEnd($event)"
-        ></mgl-marker> -->
-        <!-- @if (coordinates) {
-          <mgl-control position="bottom-left">
-            <mat-card appearance="outlined">
-              <div>Longitude:&nbsp;{{ coordinates[0] }}</div>
-              <div>Latitude:&nbsp;{{ coordinates[1] }}</div>
-            </mat-card>
-          </mgl-control>
-        } -->
-
         <mgl-geojson-source id="routes">
           @for (
             route of $bicycleRoutes() ?? [];
@@ -66,6 +56,10 @@ import { FiltersRouteComponent } from './filters-route.component';
             ></mgl-feature>
           }
         </mgl-geojson-source>
+
+        <viewing-map-viewpoints
+          (centerMapToCluster)="centerMapToCluster($event)"
+        ></viewing-map-viewpoints>
 
         <mgl-layer
           id="route"
@@ -120,6 +114,7 @@ import { FiltersRouteComponent } from './filters-route.component';
         <map-click-popup
           [selectedRoute]="$selectedRoute()"
           [clickPopupFeature]="clickPopupFeature"
+          (closePopup)="clearSelectedRoute()"
         ></map-click-popup>
       </mgl-map>
       <sidebar-button></sidebar-button>
@@ -148,6 +143,9 @@ import { FiltersRouteComponent } from './filters-route.component';
   ],
 })
 export class DisplayMapComponent {
+  private map: Map;
+  bounds: LngLatBounds;
+
   private readonly mapStore = inject(MapStore);
   private readonly routeStore = inject(RouteStore);
 
@@ -156,7 +154,7 @@ export class DisplayMapComponent {
   hoverRoute: GeoJSON.Feature<GeoJSON.Point> | null;
   clickPopupFeature: GeoJSON.Feature<GeoJSON.Point> | null;
   cursorStyle: string = 'grab';
-
+  // private map: Map;
   $mapTiles = this.mapStore.mapTiles;
   $bicycleRoutes = this.mapStore.bicycleRoutes;
   $selectedRoute = this.routeStore.selectedRoute;
@@ -164,6 +162,10 @@ export class DisplayMapComponent {
   ngOnInit() {
     this.mapStore.getMapTiles('standard');
     this.mapStore.getBicycleRoutes();
+  }
+
+  onMapReady(map: Map) {
+    this.map = map;
   }
 
   onDragEnd(marker: Marker) {
@@ -213,5 +215,21 @@ export class DisplayMapComponent {
     this.routeStore.setSelectedRoute(
       route.properties as NonNullable<GeoJSON.Feature['properties']>,
     );
+  }
+
+  clearSelectedRoute() {
+    this.clickPopupFeature = null;
+    this.routeStore.clearSelectedRoute();
+  }
+
+  centerMapToCluster(event: { coords: number[] }) {
+    const coordinates = event.coords;
+
+    this.map.flyTo({
+      center: [coordinates[0], coordinates[1]],
+      zoom: this.map.getZoom() + 1.25,
+      bearing: 0,
+      pitch: 0,
+    });
   }
 }

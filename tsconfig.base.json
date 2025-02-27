@@ -12,13 +12,8 @@
     "target": "ES2022",
     "module": "ES2022",
     "resolveJsonModule": true,
-    "typeRoots": [
-      "node_modules/@types"
-    ],
-    "lib": [
-      "es2017",
-      "dom"
-    ],
+    "typeRoots": ["node_modules/@types"],
+    "lib": ["es2017", "dom"],
     "paths": {
       "@spartan-ng/ui-avatar-helm": [
         "libs/shared/ui/ui-avatar-helm/src/index.ts"
@@ -26,42 +21,27 @@
       "@spartan-ng/ui-button-helm": [
         "libs/shared/ui/ui-button-helm/src/index.ts"
       ],
-      "@spartan-ng/ui-icon-helm": [
-        "libs/shared/ui/ui-icon-helm/src/index.ts"
+      "@spartan-ng/ui-card-helm": ["libs/shared/ui/ui-card-helm/src/index.ts"],
+      "@spartan-ng/ui-icon-helm": ["libs/shared/ui/ui-icon-helm/src/index.ts"],
+      "@spartan-ng/ui-label-helm": [
+        "libs/shared/ui/ui-label-helm/src/index.ts"
       ],
-      "@spartan-ng/ui-menu-helm": [
-        "libs/shared/ui/ui-menu-helm/src/index.ts"
-      ],
-      "@velo/ngx-maplibre-gl": [
-        "dist/libs/ngx-maplibre-gl"
-      ],
-      "@velo/api-types": [
-        "libs/core/api-types/src/index.ts"
-      ],
-      "@velo/core/http-client": [
-        "libs/core/http-client/src/index.ts"
-      ],
-      "@velo/maps/data-access": [
-        "libs/maps/data-access/src/index.ts"
-      ],
-      "@velo/routes/data-access": [
-        "libs/routes/data-access/src/index.ts"
-      ],
-      "@spartan-ng/ui-card-helm": [
-        "libs/shared/ui/ui-card-helm/src/index.ts"
-      ],
-      "@spartan-ng/ui-typography-helm": [
-        "libs/shared/ui/ui-typography-helm/src/index.ts"
-      ],
+      "@spartan-ng/ui-menu-helm": ["libs/shared/ui/ui-menu-helm/src/index.ts"],
       "@spartan-ng/ui-popover-helm": [
         "libs/shared/ui/ui-popover-helm/src/index.ts"
       ],
       "@spartan-ng/ui-switch-helm": [
         "libs/shared/ui/ui-switch-helm/src/index.ts"
       ],
-      "@spartan-ng/ui-label-helm": [
-        "libs/shared/ui/ui-label-helm/src/index.ts"
-      ]
+      "@spartan-ng/ui-typography-helm": [
+        "libs/shared/ui/ui-typography-helm/src/index.ts"
+      ],
+      "@velo/api-types": ["libs/core/api-types/src/index.ts"],
+      "@velo/core/http-client": ["libs/core/http-client/src/index.ts"],
+      "@velo/maps/data-access": ["libs/maps/data-access/src/index.ts"],
+      "@velo/ngx-maplibre-gl": ["dist/libs/ngx-maplibre-gl"],
+      "@velo/routes/data-access": ["libs/routes/data-access/src/index.ts"],
+      "@velo/waypoints/data-access": ["libs/waypoints/data-access/src/index.ts"]
     },
     "strict": true,
     "skipLibCheck": true,

@@ -8,6 +8,15 @@ import { hlm } from '@spartan-ng/brain/core';
 import { SidebarComponent } from './sidebar.component';
 
 @Component({
+  standalone: true,
+  imports: [
+    MatSidenavModule,
+    MatListModule,
+    MatIconModule,
+    MatButtonModule,
+    RouterOutlet,
+    SidebarComponent,
+  ],
   template: `
     <mat-sidenav-container class="!h-[calc(100vh-64px)] !top-16">
       <mat-sidenav-content class="!bg-gray-200">
@@ -47,15 +56,6 @@ import { SidebarComponent } from './sidebar.component';
         height: 100%;
       }
     `,
-  ],
-  standalone: true,
-  imports: [
-    MatSidenavModule,
-    MatListModule,
-    MatIconModule,
-    MatButtonModule,
-    RouterOutlet,
-    SidebarComponent,
   ],
 })
 export class ViewingMapComponent {

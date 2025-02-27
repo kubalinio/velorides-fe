@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, output } from '@angular/core';
 import { PopupComponent } from '@velo/ngx-maplibre-gl';
 
 @Component({
@@ -11,7 +11,8 @@ import { PopupComponent } from '@velo/ngx-maplibre-gl';
         [feature]="clickPopupFeature"
         [offset]="12"
         [closeButton]="false"
-        [closeOnClick]="false"
+        [closeOnClick]="true"
+        (popupClose)="closePopupHandler()"
       >
         <div class="px-2">
           <h3 class="text-base font-semibold">{{ selectedRoute.name }}</h3>
@@ -44,4 +45,9 @@ import { PopupComponent } from '@velo/ngx-maplibre-gl';
 export class ClickPopupComponent {
   @Input() selectedRoute: any;
   @Input() clickPopupFeature: GeoJSON.Feature<GeoJSON.Point> | null;
+  closePopup = output<void>();
+
+  closePopupHandler() {
+    this.closePopup.emit();
+  }
 }

@@ -80,7 +80,7 @@ import { WaypointsStore } from '@velo/waypoints/data-access';
               target="_blank"
               class="${hlmMuted} text-xs flex items-center gap-x-1 whitespace-nowrap mt-4"
             >
-              Incorent data? You can update it here
+              Incorrect data? You can update it here
             </a>
           </div>
         </mgl-popup>

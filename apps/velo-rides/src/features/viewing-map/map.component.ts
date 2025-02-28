@@ -14,8 +14,9 @@ import { ClickPopupComponent } from './popup-click.component';
 
 import { MapStore } from '@velo/maps/data-access';
 import { RouteStore } from '@velo/routes/data-access';
-import { FiltersRouteComponent } from './filters-route.component';
+import { FiltersRouteComponent } from './filters/filters-route.component';
 import { ViewingMapViewpointsComponent } from './viewpoints.component';
+import { FiltersWaypointsComponent } from './filters/filters-waypoints.component';
 @Component({
   standalone: true,
   selector: 'app-viewing-map',
@@ -30,6 +31,7 @@ import { ViewingMapViewpointsComponent } from './viewpoints.component';
     ClickPopupComponent,
     FiltersRouteComponent,
     ViewingMapViewpointsComponent,
+    FiltersWaypointsComponent,
   ],
   template: `
     <section class="map-container relative">
@@ -121,6 +123,10 @@ import { ViewingMapViewpointsComponent } from './viewpoints.component';
 
       <div class="absolute bottom-4 left-4">
         <filters-route></filters-route>
+      </div>
+
+      <div class="absolute top-4 left-4">
+        <filters-waypoints></filters-waypoints>
       </div>
     </section>
   `,

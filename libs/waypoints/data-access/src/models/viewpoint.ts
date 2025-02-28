@@ -10,3 +10,12 @@ export interface Viewpoint {
   };
   id: string;
 }
+
+export const ViewpointType = {
+  VIEWPOINT: 'viewpoint',
+  ATTRACTION: 'attraction',
+} as const;
+
+export type ViewpointType = (typeof ViewpointType)[keyof typeof ViewpointType];
+
+export type WaypointsFilterType = ViewpointType[] | [];

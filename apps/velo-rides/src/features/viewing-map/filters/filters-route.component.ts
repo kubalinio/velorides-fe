@@ -3,13 +3,9 @@ import {
   BrnPopoverComponent,
   BrnPopoverContentDirective,
   BrnPopoverTriggerDirective,
-  // BrnPopoverCloseDirective,
 } from '@spartan-ng/brain/popover';
 import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
-import {
-  HlmPopoverContentDirective,
-  // HlmPopoverCloseDirective,
-} from '@spartan-ng/ui-popover-helm';
+import { HlmPopoverContentDirective } from '@spartan-ng/ui-popover-helm';
 
 import { NgIconComponent, provideIcons } from '@ng-icons/core';
 import { lucideRoute } from '@ng-icons/lucide';
@@ -26,10 +22,8 @@ import { RouteStore } from '@velo/routes/data-access';
     BrnPopoverComponent,
     BrnPopoverTriggerDirective,
     BrnPopoverContentDirective,
-    // BrnPopoverCloseDirective,
     HlmPopoverContentDirective,
     HlmButtonDirective,
-    // HlmPopoverCloseDirective,
     NgIconComponent,
 
     HlmSwitchComponent,

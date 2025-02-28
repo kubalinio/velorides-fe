@@ -17,12 +17,12 @@ import { ViewingMapComponent } from './viewing.component';
   template: `
     <button
       hlmBtn
-      variant="secondary"
+      variant="default"
       size="icon"
-      class="absolute top-6 right-6 shadow-z2"
+      class="absolute top-4 right-4 shadow-z2"
       (click)="toggleSidenav()"
     >
-      <ng-icon hlm name="lucidePanelRight" size="base" class="text-primary" />
+      <ng-icon hlm name="lucidePanelRight" size="base" class="text-white" />
     </button>
   `,
 })

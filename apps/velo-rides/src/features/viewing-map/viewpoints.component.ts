@@ -74,7 +74,7 @@ import { WaypointsStore } from '@velo/waypoints/data-access';
 
             <a
               [href]="
-                'https://www.openstreetmap.org/edit?' +
+                'https://www.openstreetmap.org/' +
                 selectedViewpointValue.properties['id']
               "
               target="_blank"

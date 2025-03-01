@@ -75,8 +75,6 @@ export class FiltersWaypointsComponent {
 
   setSelectedViewpoint(viewpoint: ViewpointType) {
     this.viewpointChecked.set(!this.viewpointChecked());
-
     this.waypointsStore.setSelectedViewpoint(viewpoint);
-    console.log('viewpoint', this.$selectedViewpoint());
   }
 }

@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, ViewChild } from '@angular/core';
 import {
   MapComponent,
   LayerComponent,
@@ -12,11 +12,12 @@ import { SidebarButtonComponent } from './sidebar-button.component';
 import { HoverPopupComponent } from './popup-hover.component';
 import { ClickPopupComponent } from './popup-click.component';
 
-import { MapStore } from '@velo/maps/data-access';
+import { MapStore, MapUrlService } from '@velo/maps/data-access';
 import { RouteStore } from '@velo/routes/data-access';
 import { FiltersRouteComponent } from './filters/filters-route.component';
 import { ViewingMapViewpointsComponent } from './viewpoints.component';
 import { FiltersWaypointsComponent } from './filters/filters-waypoints.component';
+
 @Component({
   standalone: true,
   selector: 'app-viewing-map',
@@ -36,9 +37,10 @@ import { FiltersWaypointsComponent } from './filters/filters-waypoints.component
   template: `
     <section class="map-container relative">
       <mgl-map
+        #mapInstance
         [style]="$mapTiles()"
-        [zoom]="[11]"
-        [center]="[18.966941330820333, 50.66308832195875]"
+        [zoom]="[initialZoom]"
+        [center]="initialCenter"
         [cursorStyle]="cursorStyle"
         [fitBounds]="bounds"
         [fitBoundsOptions]="{
@@ -46,6 +48,7 @@ import { FiltersWaypointsComponent } from './filters/filters-waypoints.component
         }"
         [maxZoom]="18"
         (mapLoad)="onMapReady($event)"
+        (moveEnd)="onMapMoveEnd()"
       >
         <mgl-geojson-source id="routes">
           @for (
@@ -119,6 +122,7 @@ import { FiltersWaypointsComponent } from './filters/filters-waypoints.component
           (closePopup)="clearSelectedRoute()"
         ></map-click-popup>
       </mgl-map>
+
       <sidebar-button></sidebar-button>
 
       <div class="absolute bottom-4 left-4">
@@ -149,21 +153,26 @@ import { FiltersWaypointsComponent } from './filters/filters-waypoints.component
   ],
 })
 export class DisplayMapComponent {
+  @ViewChild('mapInstance') mapInstance: MapComponent;
   private map: Map;
-  bounds: LngLatBounds;
-
   private readonly mapStore = inject(MapStore);
   private readonly routeStore = inject(RouteStore);
+  private readonly mapUrlService = inject(MapUrlService);
+
+  bounds: LngLatBounds;
+  initialCenter: [number, number];
+  initialZoom: number;
 
   coordinates: number[];
   points: GeoJSON.FeatureCollection<GeoJSON.Point>;
   hoverRoute: GeoJSON.Feature<GeoJSON.Point> | null;
   clickPopupFeature: GeoJSON.Feature<GeoJSON.Point> | null;
   cursorStyle: string = 'grab';
-  // private map: Map;
+
   $mapTiles = this.mapStore.mapTiles;
   $bicycleRoutes = this.mapStore.bicycleRoutes;
   $selectedRoute = this.routeStore.selectedRoute;
+  $mapPosition = this.mapUrlService.$mapPosition;
 
   ngOnInit() {
     this.mapStore.getMapTiles('standard');
@@ -171,7 +180,41 @@ export class DisplayMapComponent {
   }
 
   onMapReady(map: Map) {
+    const position = this.$mapPosition();
     this.map = map;
+    this.initialCenter = position.center;
+    this.initialZoom = position.zoom;
+
+    this.map.flyTo({
+      center: position.center,
+      zoom: position.zoom,
+      bearing: position.bearing || 0,
+      pitch: position.pitch || 0,
+      duration: 0, // No animation for URL-based updates
+    });
+
+    if (position.bearing) {
+      map.setBearing(position.bearing);
+    }
+    if (position.pitch) {
+      map.setPitch(position.pitch);
+    }
+  }
+
+  onMapMoveEnd() {
+    if (!this.map) return;
+
+    const center = this.map.getCenter();
+    const zoom = this.map.getZoom();
+    const bearing = this.map.getBearing();
+    const pitch = this.map.getPitch();
+
+    this.mapUrlService.updateUrl({
+      center: [center.lng, center.lat],
+      zoom,
+      bearing,
+      pitch,
+    });
   }
 
   onDragEnd(marker: Marker) {

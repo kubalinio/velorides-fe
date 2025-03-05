@@ -11,7 +11,7 @@ import { PopupComponent } from '@velo/ngx-maplibre-gl';
       <mgl-popup [feature]="hoverRoute" [offset]="12" [closeButton]="false">
         <div class="px-2 space-y-1">
           <h3 class="text-base font-semibold">
-            {{ hoverRoute.properties?.name }}
+            {{ hoverRoute.properties?.name ?? 'Unnamed Route' }}
           </h3>
 
           @if (hoverRoute.properties?.distance) {

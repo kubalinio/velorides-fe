@@ -1,4 +1,4 @@
-import { Component, inject, ViewChild } from '@angular/core';
+import { Component, effect, inject, ViewChild } from '@angular/core';
 import {
   MapComponent,
   LayerComponent,
@@ -17,6 +17,7 @@ import { RouteStore } from '@velo/routes/data-access';
 import { FiltersRouteComponent } from './filters/filters-route.component';
 import { ViewingMapViewpointsComponent } from './viewpoints.component';
 import { FiltersWaypointsComponent } from './filters/filters-waypoints.component';
+import { BBox } from 'geojson';
 
 @Component({
   standalone: true,
@@ -52,8 +53,8 @@ import { FiltersWaypointsComponent } from './filters/filters-waypoints.component
       >
         <mgl-geojson-source id="routes">
           @for (
-            route of $bicycleRoutes() ?? [];
-            track route.properties['@id']
+            route of $routesWithUncompletedData()?.features ?? [];
+            track route.properties['id']
           ) {
             <mgl-feature
               [geometry]="route.geometry"
@@ -75,16 +76,28 @@ import { FiltersWaypointsComponent } from './filters/filters-waypoints.component
             'line-cap': 'round',
           }"
           [paint]="{
-            'line-color': ['coalesce', ['get', 'colour'], '#1515fa'],
+            'line-color': [
+              'match',
+              ['get', 'network'],
+              'icn',
+              '#8b5cf6',
+              'ncn',
+              '#b91c1c',
+              'rcn',
+              '#f97316',
+              'lcn',
+              '#000000',
+              '#000000',
+            ],
             'line-width': [
               'case',
-              ['==', ['get', '@id'], $selectedRoute()?.['@id'] ?? ''],
+              ['==', ['get', 'id'], $selectedRoute()?.['id'] ?? ''],
               4,
               2,
             ],
             'line-opacity': [
               'case',
-              ['==', ['get', '@id'], $selectedRoute()?.['@id'] ?? ''],
+              ['==', ['get', 'id'], $selectedRoute()?.['id'] ?? ''],
               0.9,
               0.5,
             ],
@@ -120,6 +133,7 @@ import { FiltersWaypointsComponent } from './filters/filters-waypoints.component
           [selectedRoute]="$selectedRoute()"
           [clickPopupFeature]="clickPopupFeature"
           (closePopup)="clearSelectedRoute()"
+          (zoomToRoute)="zoomToRoute($event)"
         ></map-click-popup>
       </mgl-map>
 
@@ -170,13 +184,26 @@ export class DisplayMapComponent {
   cursorStyle: string = 'grab';
 
   $mapTiles = this.mapStore.mapTiles;
-  $bicycleRoutes = this.mapStore.bicycleRoutes;
-  $selectedRoute = this.routeStore.selectedRoute;
   $mapPosition = this.mapUrlService.$mapPosition;
+
+  $selectedRoute = this.routeStore.selectedRoute;
+  $routesWithUncompletedData = this.routeStore.routesOnArea;
+  $selectedRouteBounds = this.routeStore.selectedRouteBounds;
+
+  constructor() {
+    effect(() => {
+      const selectedRouteBounds = this.$selectedRouteBounds();
+
+      if (selectedRouteBounds) {
+        this.boundEntireRoute(
+          selectedRouteBounds as unknown as GeoJSON.Feature,
+        );
+      }
+    });
+  }
 
   ngOnInit() {
     this.mapStore.getMapTiles('standard');
-    this.mapStore.getBicycleRoutes();
   }
 
   onMapReady(map: Map) {
@@ -208,6 +235,15 @@ export class DisplayMapComponent {
     const zoom = this.map.getZoom();
     const bearing = this.map.getBearing();
     const pitch = this.map.getPitch();
+    const bounds = this.map.getBounds();
+
+    const bboxPayload = [
+      Number(bounds._sw.lat.toFixed(6)), // south
+      Number(bounds._sw.lng.toFixed(6)), // west
+      Number(bounds._ne.lat.toFixed(6)), // north
+      Number(bounds._ne.lng.toFixed(6)), // east
+    ] as BBox;
+    this.mapStore.setBbox(bboxPayload);
 
     this.mapUrlService.updateUrl({
       center: [center.lng, center.lat],
@@ -254,15 +290,9 @@ export class DisplayMapComponent {
       properties: evt.features[0].properties,
       type: 'Feature',
     };
+
     this.routeStore.setSelectedRoute(
       evt.features[0].properties as NonNullable<GeoJSON.Feature['properties']>,
-    );
-  }
-
-  selectRoute(event: MouseEvent, route: GeoJSON.Feature<GeoJSON.Point>) {
-    event.stopPropagation();
-    this.routeStore.setSelectedRoute(
-      route.properties as NonNullable<GeoJSON.Feature['properties']>,
     );
   }
 
@@ -280,5 +310,39 @@ export class DisplayMapComponent {
       bearing: 0,
       pitch: 0,
     });
+  }
+
+  zoomToRoute(element: GeoJSON.Feature) {
+    this.boundEntireRoute(element);
+  }
+
+  private boundEntireRoute(route: GeoJSON.Feature) {
+    const coordinates = JSON.parse(route.properties.bounds);
+    const bounds = new LngLatBounds();
+
+    if (
+      route.geometry.type === 'LineString' ||
+      route.geometry.type === 'Point'
+    ) {
+      coordinates.forEach((coord) => {
+        bounds.extend([coord[0], coord[1]]);
+      });
+
+      this.map.fitBounds(bounds, {
+        padding: 64,
+      });
+    }
+
+    if (route.geometry.type === 'MultiLineString') {
+      coordinates.forEach((lineString) => {
+        lineString.forEach((coord) => {
+          bounds.extend([coord[0], coord[1]]);
+        });
+      });
+
+      this.map.fitBounds(bounds, {
+        padding: 64,
+      });
+    }
   }
 }

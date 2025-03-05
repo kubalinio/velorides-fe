@@ -12,7 +12,7 @@ import { lucideRoute } from '@ng-icons/lucide';
 import { HlmSwitchComponent } from '@spartan-ng/ui-switch-helm';
 import { HlmLabelDirective } from '@spartan-ng/ui-label-helm';
 import { MapStore } from '@velo/maps/data-access';
-import { RouteType } from 'libs/maps/data-access/src/models/routes';
+import { RouteType } from 'libs/routes/data-access/src/models/routes';
 import { RouteStore } from '@velo/routes/data-access';
 
 @Component({
@@ -91,10 +91,14 @@ export class FiltersRouteComponent {
   private readonly mapStore = inject(MapStore);
   private readonly routeStore = inject(RouteStore);
 
-  $selectedRouteType = this.mapStore.selectedRouteType;
+  $selectedRouteType = this.routeStore.selectedRouteType;
 
   changeRouteType(routeType: RouteType) {
-    this.mapStore.changeRouteType(routeType);
+    this.routeStore.changeRouteType({
+      bbox: this.mapStore.bbox(),
+      routeType,
+    });
+
     const selectedRoute = this.routeStore.selectedRoute();
 
     if (

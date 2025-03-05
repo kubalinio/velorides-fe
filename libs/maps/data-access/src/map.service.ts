@@ -3,7 +3,8 @@ import { StyleSpecification } from 'maplibre-gl';
 import { of } from 'rxjs';
 import { Observable } from 'rxjs';
 import mockBicycleRoutes from './mocks/geo-bike-roads.json';
-import { RouteType } from './models/routes';
+import { RouteType } from '../../../routes/data-access/src/models/routes';
+import { BBox } from 'geojson';
 
 @Injectable({
   providedIn: 'root',
@@ -81,5 +82,9 @@ export class MapService {
           geometry: feature.geometry as GeoJSON.MultiLineString,
         })),
     );
+  }
+
+  setBbox(bbox: BBox): Observable<BBox> {
+    return of(bbox);
   }
 }

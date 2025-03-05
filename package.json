@@ -25,11 +25,13 @@
     "@angular/router": "^19.0.0",
     "@ng-icons/core": "^29.10.0",
     "@ng-icons/lucide": ">=29.0.0",
+    "@ngrx/operators": "^19.0.1",
     "@ngrx/signals": "^19.0.1",
     "@spartan-ng/brain": "0.0.1-alpha.401",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "maplibre-gl": "^5.0.0",
+    "osmtogeojson": "3.0.0-beta.5",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.15.0"

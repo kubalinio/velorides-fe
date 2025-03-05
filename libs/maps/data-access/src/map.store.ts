@@ -12,17 +12,17 @@ import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { MapService } from './map.service';
 import { StyleSpecification } from 'maplibre-gl';
 import { pipe, switchMap, tap } from 'rxjs';
-import { RouteType } from './models/routes';
+import { BBox } from 'geojson';
 
 export const MapStore = signalStore(
   { providedIn: 'root' },
   withState({
-    style: 'standard' as const,
-    mapTiles: undefined as StyleSpecification | undefined,
+    bbox: undefined as BBox | undefined,
     bicycleRoutes: undefined as
       | GeoJSON.FeatureCollection['features']
       | undefined,
-    selectedRouteType: ['lcn', 'rcn', 'ncn', 'icn'] as RouteType[],
+    mapTiles: undefined as StyleSpecification | undefined,
+    style: 'standard' as const,
   }),
   withProps(() => ({
     _mapService: inject(MapService),
@@ -37,41 +37,13 @@ export const MapStore = signalStore(
         ),
       ),
     ),
-    getBicycleRoutes: rxMethod<void>(
-      pipe(
-        switchMap(() =>
-          store._mapService
-            .getBicycleRoutes(store.selectedRouteType())
-            .pipe(
-              tap((routes: GeoJSON.FeatureCollection['features']) =>
-                patchState(store, { bicycleRoutes: routes }),
-              ),
-            ),
-        ),
-      ),
-    ),
-    changeRouteType: rxMethod<RouteType>(
-      pipe(
-        tap((routeType) => {
-          patchState(store, {
-            selectedRouteType: store.selectedRouteType().includes(routeType)
-              ? store.selectedRouteType().filter((type) => type !== routeType)
-              : [...store.selectedRouteType(), routeType],
-          });
-        }),
-        switchMap(() =>
-          store._mapService.getBicycleRoutes(store.selectedRouteType()),
-        ),
-        tap((routes: GeoJSON.FeatureCollection['features']) =>
-          patchState(store, { bicycleRoutes: routes }),
-        ),
-      ),
+    setBbox: rxMethod<BBox>(
+      pipe(tap((bbox: BBox) => patchState(store, { bbox }))),
     ),
   })),
   withHooks((store) => ({
     onInit() {
       store.getMapTiles('standard');
-      store.getBicycleRoutes();
     },
   })),
 );

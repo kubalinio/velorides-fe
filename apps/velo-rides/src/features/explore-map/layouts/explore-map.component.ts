@@ -5,7 +5,7 @@ import { MatListModule } from '@angular/material/list';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { RouterOutlet } from '@angular/router';
 import { hlm } from '@spartan-ng/brain/core';
-import { SidebarComponent } from './sidebar.component';
+import { ExploreMapComponent } from './module-map/map.component';
 
 @Component({
   standalone: true,
@@ -15,7 +15,7 @@ import { SidebarComponent } from './sidebar.component';
     MatIconModule,
     MatButtonModule,
     RouterOutlet,
-    SidebarComponent,
+    ExploreMapComponent,
   ],
   template: `
     <mat-sidenav-container class="!h-[calc(100vh-64px)] !top-16">
@@ -28,7 +28,7 @@ import { SidebarComponent } from './sidebar.component';
             )
           "
         >
-          <router-outlet></router-outlet>
+          <app-explore-map></app-explore-map>
         </section>
       </mat-sidenav-content>
       <mat-sidenav
@@ -40,7 +40,7 @@ import { SidebarComponent } from './sidebar.component';
         class="!bg-gray-200 !border-gray-200"
       >
         <mat-nav-list>
-          <sidebar-viewing-map></sidebar-viewing-map>
+          <router-outlet></router-outlet>
         </mat-nav-list>
       </mat-sidenav>
     </mat-sidenav-container>
@@ -58,7 +58,7 @@ import { SidebarComponent } from './sidebar.component';
     `,
   ],
 })
-export class ViewingMapComponent {
+export class ExploreMapViewComponent {
   protected readonly hlm = hlm;
   sidenavIsOpen = signal(true);
 

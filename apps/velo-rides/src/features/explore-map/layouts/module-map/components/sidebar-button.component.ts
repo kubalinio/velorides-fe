@@ -7,7 +7,7 @@ import { NgIconComponent } from '@ng-icons/core';
 import { lucidePanelRight } from '@ng-icons/lucide';
 import { HlmIconDirective } from '@spartan-ng/ui-icon-helm';
 
-import { ViewingMapComponent } from './viewing.component';
+import { ExploreMapViewComponent } from '../../explore-map.component';
 
 @Component({
   standalone: true,
@@ -27,9 +27,9 @@ import { ViewingMapComponent } from './viewing.component';
   `,
 })
 export class SidebarButtonComponent {
-  private viewingMapComponent = inject(ViewingMapComponent);
+  private exploreMapComponent = inject(ExploreMapViewComponent);
 
   toggleSidenav() {
-    this.viewingMapComponent.toggleSidenav();
+    this.exploreMapComponent.toggleSidenav();
   }
 }

@@ -49,9 +49,9 @@ import { BrnMenuTriggerDirective } from '@spartan-ng/brain/menu';
 export class LayoutComponent {
   links = [
     {
-      url: '/viewing-map',
+      url: '/explore-map',
       routerLink: false,
-      label: 'Viewing Map',
+      label: 'Explore Map',
     },
     {
       url: '/organise-ride',

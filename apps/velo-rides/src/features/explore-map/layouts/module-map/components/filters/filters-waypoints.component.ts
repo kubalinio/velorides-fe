@@ -28,36 +28,38 @@ import { ViewpointType } from 'libs/waypoints/data-access/src/models/viewpoint';
   ],
   providers: [provideIcons({ lucideBinoculars, lucideWaypoints })],
   template: `
-    <div class="flex w-full items-center justify-center">
-      <button
-        hlmBtn
-        variant="default"
-        align="center"
-        [brnMenuTriggerFor]="menu"
-      >
-        <ng-icon name="lucide:waypoints" hlmMenuIcon />
-        <span>Waypoints</span>
-      </button>
+    <div class="absolute top-4 left-4">
+      <div class="flex w-full items-center justify-center">
+        <button
+          hlmBtn
+          variant="default"
+          align="center"
+          [brnMenuTriggerFor]="menu"
+        >
+          <ng-icon name="lucide:waypoints" hlmMenuIcon />
+          <span>Waypoints</span>
+        </button>
+      </div>
+
+      <ng-template #menu>
+        <hlm-menu class="" variant="menubar">
+          <hlm-menu-group>
+            <button
+              hlmMenuItemCheckbox
+              class="pl-4 pr-1.5 justify-end"
+              [checked]="viewpointChecked()"
+              (triggered)="setSelectedViewpoint('viewpoint')"
+            >
+              <hlm-menu-item-check class="size-3 left-1" />
+
+              <ng-icon name="lucide:binoculars" hlmMenuIcon />
+
+              <span>Viewpoints</span>
+            </button>
+          </hlm-menu-group>
+        </hlm-menu>
+      </ng-template>
     </div>
-
-    <ng-template #menu>
-      <hlm-menu class="" variant="menubar">
-        <hlm-menu-group>
-          <button
-            hlmMenuItemCheckbox
-            class="pl-4 pr-1.5 justify-end"
-            [checked]="viewpointChecked()"
-            (triggered)="setSelectedViewpoint('viewpoint')"
-          >
-            <hlm-menu-item-check class="size-3 left-1" />
-
-            <ng-icon name="lucide:binoculars" hlmMenuIcon />
-
-            <span>Viewpoints</span>
-          </button>
-        </hlm-menu-group>
-      </hlm-menu>
-    </ng-template>
   `,
 })
 export class FiltersWaypointsComponent {

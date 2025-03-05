@@ -1,0 +1,61 @@
+@if ($viewpoints()) {
+  <mgl-geojson-source
+    id="viewpoints"
+    [data]="$viewpoints()"
+    [cluster]="true"
+    [clusterMaxZoom]="9"
+    [clusterRadius]="50"
+    [clusterMinPoints]="2"
+  ></mgl-geojson-source>
+
+  <mgl-markers-for-clusters source="viewpoints">
+    <ng-template mglPoint let-feature>
+      <div
+        class="size-5 rounded-full bg-gray-800 border-2 border-gray-600 text-white flex items-center justify-center font-semibold cursor-pointer"
+        [title]="feature.properties['name']"
+        (click)="setSelectedViewpoint($event, feature)"
+      ></div>
+    </ng-template>
+    <ng-template mglClusterPoint let-feature>
+      <div
+        class="size-9 rounded-full bg-gray-800 border-2 border-gray-600 text-white flex items-center justify-center font-semibold"
+        (click)="zoomToCluster($event, feature)"
+      >
+        {{ feature.properties?.point_count }}
+      </div>
+    </ng-template>
+  </mgl-markers-for-clusters>
+
+  @if (selectedViewpoint(); as selectedViewpointValue) {
+    <mgl-popup
+      [feature]="selectedViewpointValue"
+      (popupClose)="selectedViewpoint.set(null)"
+      [closeButton]="false"
+      [closeOnClick]="true"
+      [className]="'!max-w-[320px]'"
+    >
+      <div class="px-2">
+        <h3 hlmLarge class="text-sm">
+          {{ selectedViewpointValue.properties['name'] }}
+        </h3>
+
+        <p hlmP class="text-xs flex items-center gap-x-1 !mt-1">
+          <ng-icon name="lucide:map-pin" class="!size-4" />
+          {{ selectedViewpointValue.geometry.coordinates[0].toFixed(6) }}
+          {{ selectedViewpointValue.geometry.coordinates[1].toFixed(6) }}
+        </p>
+
+        <a
+          [href]="
+            'https://www.openstreetmap.org/' +
+            selectedViewpointValue.properties['id']
+          "
+          target="_blank"
+          hlmMuted class="text-xs flex items-center gap-x-1 whitespace-nowrap mt-4"
+        >
+          Incorrect data? You can update it here
+        </a>
+      </div>
+    </mgl-popup>
+  }
+}

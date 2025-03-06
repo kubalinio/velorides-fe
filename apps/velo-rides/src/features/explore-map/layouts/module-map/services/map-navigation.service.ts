@@ -2,11 +2,13 @@ import { effect, inject, Injectable } from '@angular/core';
 import { MapInitService } from './map-init.service';
 import { LngLatBounds } from 'maplibre-gl';
 import { RouteStore } from '@velo/routes/data-access';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
 })
 export class MapNavigationService {
+  private readonly router = inject(Router);
   private readonly mapInitService = inject(MapInitService);
   private readonly routeStore = inject(RouteStore);
 
@@ -32,6 +34,8 @@ export class MapNavigationService {
   clearSelectedRoute() {
     this.mapInitService.clickPopupFeature = null;
     this.routeStore.clearSelectedRoute();
+
+    this.router.navigate(['/explore-map']);
   }
 
   centerMapToCluster(event: { coords: number[] }) {

@@ -6,11 +6,14 @@ import { RouteStore } from '@velo/routes/data-access';
 import { MapInitService } from './map-init.service';
 import { Marker } from 'maplibre-gl';
 import { BBox } from 'geojson';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
 })
 export class MapInteractionService {
+  private readonly router = inject(Router);
+
   private readonly mapStore = inject(MapStore);
   private readonly routeStore = inject(RouteStore);
   private readonly mapUrlService = inject(MapUrlService);
@@ -98,5 +101,13 @@ export class MapInteractionService {
     this.routeStore.setSelectedRoute(
       evt.features[0].properties as NonNullable<GeoJSON.Feature['properties']>,
     );
+
+    // Also set the selected route bounds for GPX export
+    this.routeStore.setSelectedRouteBounds(evt.features[0] as GeoJSON.Feature);
+
+    this.router.navigate([
+      '/explore-map',
+      evt.features[0].properties.id.split('/')[1],
+    ]);
   }
 }

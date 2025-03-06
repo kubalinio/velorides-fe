@@ -51,7 +51,12 @@ export const RouteStore = signalStore(
       ),
     ),
     clearSelectedRoute: rxMethod<void>(
-      pipe(tap(() => patchState(store, { selectedRoute: undefined }))),
+      pipe(
+        tap(() => {
+          patchState(store, { selectedRoute: undefined });
+          patchState(store, { selectedRouteBounds: undefined });
+        }),
+      ),
     ),
     getRouteByArea: rxMethod<BBox>(
       pipe(

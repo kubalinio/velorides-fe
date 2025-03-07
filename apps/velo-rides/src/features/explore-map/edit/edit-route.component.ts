@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgIconComponent, provideIcons } from '@ng-icons/core';
 import {
@@ -254,7 +254,7 @@ import { GpxExportService, RouteStore } from '@velo/routes/data-access';
     </section>
   `,
 })
-export class EditRouteComponent {
+export class EditRouteComponent implements OnInit {
   protected readonly hlm = hlm;
   private readonly routeStore = inject(RouteStore);
   private readonly router = inject(Router);

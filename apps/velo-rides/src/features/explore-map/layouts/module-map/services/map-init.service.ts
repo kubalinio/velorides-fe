@@ -1,6 +1,6 @@
 import { inject, Injectable, signal } from '@angular/core';
 import { MapUrlService } from '@velo/maps/data-access';
-import { RouteStore } from '@velo/routes/data-access';
+import { RoutesStore } from '@velo/routes/data-access';
 import { Map } from 'maplibre-gl';
 import { BBox } from 'geojson';
 
@@ -9,7 +9,7 @@ import { BBox } from 'geojson';
 })
 export class MapInitService {
   private readonly mapUrlService = inject(MapUrlService);
-  private readonly routeStore = inject(RouteStore);
+  private readonly routesStore = inject(RoutesStore);
 
   private readonly _map = signal<Map | null>(null);
   readonly map$ = this._map.asReadonly();
@@ -19,7 +19,7 @@ export class MapInitService {
   clickPopupFeature: GeoJSON.Feature<GeoJSON.Point> | null;
 
   $mapPosition = this.mapUrlService.$mapPosition;
-  $routesWithUncompletedData = this.routeStore.routesOnArea;
+  $routesWithUncompletedData = this.routesStore.routesOnArea;
 
   constructor() {
     const position = this.$mapPosition();
@@ -54,7 +54,7 @@ export class MapInitService {
       Number(bounds._ne.lat.toFixed(6)), // north
       Number(bounds._ne.lng.toFixed(6)), // east
     ] as BBox;
-    this.routeStore.getRouteByArea(bboxPayload);
+    this.routesStore.getRouteByArea(bboxPayload);
   }
 
   getMap(): Map | null {

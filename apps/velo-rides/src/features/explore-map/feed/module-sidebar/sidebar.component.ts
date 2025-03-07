@@ -1,5 +1,5 @@
 import { Component, inject, effect } from '@angular/core';
-import { RouteStore } from '@velo/routes/data-access';
+import { RoutesStore, RouteStore } from '@velo/routes/data-access';
 import { HlmCardDirective } from '@spartan-ng/ui-card-helm';
 import { hlm } from '@spartan-ng/brain/core';
 
@@ -109,17 +109,19 @@ import { Router } from '@angular/router';
 })
 export class SidebarComponent {
   private readonly router = inject(Router);
+  private readonly routesStore = inject(RoutesStore);
   private readonly routeStore = inject(RouteStore);
+
   private readonly mapStore = inject(MapStore);
   protected readonly hlm = hlm;
 
-  $routesOnArea = this.routeStore.routesOnArea;
+  $routesOnArea = this.routesStore.routesOnArea;
   $bbox = this.mapStore.bbox;
 
   constructor() {
     effect(() => {
       const bbox = this.$bbox();
-      if (bbox) this.routeStore.getRouteByArea(bbox);
+      if (bbox) this.routesStore.getRouteByArea(bbox);
     });
   }
 

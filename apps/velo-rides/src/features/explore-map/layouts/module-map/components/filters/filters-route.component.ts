@@ -13,7 +13,7 @@ import { HlmSwitchComponent } from '@spartan-ng/ui-switch-helm';
 import { HlmLabelDirective } from '@spartan-ng/ui-label-helm';
 import { MapStore } from '@velo/maps/data-access';
 import { RouteType } from 'libs/routes/data-access/src/models/routes';
-import { RouteStore } from '@velo/routes/data-access';
+import { RoutesStore, RouteStore } from '@velo/routes/data-access';
 
 @Component({
   standalone: true,
@@ -91,12 +91,13 @@ import { RouteStore } from '@velo/routes/data-access';
 })
 export class FiltersRouteComponent {
   private readonly mapStore = inject(MapStore);
+  private readonly routesStore = inject(RoutesStore);
   private readonly routeStore = inject(RouteStore);
 
-  $selectedRouteType = this.routeStore.selectedRouteType;
+  $selectedRouteType = this.routesStore.selectedRouteType;
 
   changeRouteType(routeType: RouteType) {
-    this.routeStore.changeRouteType({
+    this.routesStore.changeRouteType({
       bbox: this.mapStore.bbox(),
       routeType,
     });

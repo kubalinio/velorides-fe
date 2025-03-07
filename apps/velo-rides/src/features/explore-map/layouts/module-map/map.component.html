@@ -110,6 +110,7 @@
     >
     </mgl-layer>
 
+  @if ($selectedRoute()) {
     <mgl-layer
       id="route-subway"
       type="line"
@@ -154,6 +155,7 @@
       (layerMouseLeave)="this.onMouseLeave()"
     >
     </mgl-layer>
+  }
 
     <map-hover-popup
       [hoverRoute]="$mapInteraction.hoverRoute"

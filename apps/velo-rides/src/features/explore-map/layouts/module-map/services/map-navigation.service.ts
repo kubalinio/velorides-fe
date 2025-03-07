@@ -1,7 +1,7 @@
 import { effect, inject, Injectable } from '@angular/core';
 import { MapInitService } from './map-init.service';
 import { LngLatBounds } from 'maplibre-gl';
-import { RouteStore } from '@velo/routes/data-access';
+import { RouteStore, RoutesStore } from '@velo/routes/data-access';
 import { Router } from '@angular/router';
 
 @Injectable({
@@ -10,11 +10,11 @@ import { Router } from '@angular/router';
 export class MapNavigationService {
   private readonly router = inject(Router);
   private readonly mapInitService = inject(MapInitService);
+  private readonly routesStore = inject(RoutesStore);
   private readonly routeStore = inject(RouteStore);
-
   readonly map$ = this.mapInitService.map$;
 
-  $routesWithUncompletedData = this.routeStore.routesOnArea;
+  $routesWithUncompletedData = this.routesStore.routesOnArea;
   $selectedRoute = this.routeStore.selectedRoute;
   $selectedRouteBounds = this.routeStore.selectedRouteBounds;
 
@@ -61,6 +61,11 @@ export class MapNavigationService {
   private boundEntireRoute(route: GeoJSON.Feature) {
     const map = this.mapInitService.getMap();
     if (!map) return;
+
+    if (!route.properties?.bounds) {
+      console.warn('Route bounds are undefined, cannot fit bounds to map');
+      return;
+    }
 
     const coordinates = JSON.parse(route.properties.bounds);
     const bounds = new LngLatBounds();

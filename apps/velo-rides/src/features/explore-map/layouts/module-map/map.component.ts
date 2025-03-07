@@ -19,7 +19,7 @@ import { FiltersWaypointsComponent } from './components/filters/filters-waypoint
 import { MapInitService } from './services/map-init.service';
 import { MapInteractionService } from './services/map-interaction.service';
 import { MapNavigationService } from './services/map-navigation.service';
-import { RouteStore } from '@velo/routes/data-access';
+import { RoutesStore, RouteStore } from '@velo/routes/data-access';
 
 @Component({
   standalone: true,
@@ -60,8 +60,9 @@ export class ExploreMapComponent {
   @ViewChild('mapInstance') mapInstance: MapComponent;
 
   private readonly mapStore = inject(MapStore);
-  private readonly routeStore = inject(RouteStore);
   private readonly mapUrlService = inject(MapUrlService);
+  private readonly routesStore = inject(RoutesStore);
+  private readonly routeStore = inject(RouteStore);
 
   private readonly mapInitService = inject(MapInitService);
   private readonly mapInteractionService = inject(MapInteractionService);
@@ -69,8 +70,9 @@ export class ExploreMapComponent {
 
   $hoverSubwayId = signal<string>('');
 
-  $routesWithUncompletedData = this.routeStore.routesOnArea;
+  $routesWithUncompletedData = this.routesStore.routesOnArea;
   $routeSubways = this.routeStore.routeSubways;
+  $selectedRoute = this.routeStore.selectedRoute;
 
   bounds: LngLatBounds;
   points: GeoJSON.FeatureCollection<GeoJSON.Point>;
@@ -87,7 +89,6 @@ export class ExploreMapComponent {
   }
 
   onMouseEnter(event: any) {
-    // if
     this.$hoverSubwayId.set(event.features[0].properties.id);
   }
 

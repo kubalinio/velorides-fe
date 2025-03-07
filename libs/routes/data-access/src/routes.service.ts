@@ -4,6 +4,7 @@ import { Observable, of, switchMap } from 'rxjs';
 import { BBox } from 'geojson';
 import osmtogeojson from 'osmtogeojson';
 import { RouteType } from './models/routes';
+import { RouteTypeResponse } from './models/route';
 
 interface RouteElement {
   type: 'relation' | 'way';
@@ -120,12 +121,56 @@ export class RoutesService {
       );
   }
 
-  getRouteById(id: number): Observable<GeoJSON.FeatureCollection> {
+  getRouteById(id: number): Observable<RouteTypeResponse> {
     const overpassUrl = 'https://overpass-api.de/api/interpreter';
 
     const overpassQuery = `
       [out:json][timeout:90];
-      rel(id:${id})
+      rel(${id});
+      out geom;
+      rel(${id});
+      way(r);
+      out geom;
+    `;
+
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/x-www-form-urlencoded',
+    });
+
+    return this.http
+      .post<OverpassResponse>(
+        overpassUrl,
+        'data=' + encodeURIComponent(overpassQuery),
+        { headers },
+      )
+      .pipe(
+        switchMap((response: OverpassResponse) => {
+          const { elements, ...rest } = response;
+
+          const route = osmtogeojson({
+            ...rest,
+            elements: [elements[0]],
+          });
+          const subways = osmtogeojson({
+            ...rest,
+            elements: elements.slice(1),
+          });
+
+          return of({
+            route,
+            subways,
+          });
+        }),
+      );
+  }
+
+  getRouteSubways(id: number): Observable<GeoJSON.FeatureCollection> {
+    const overpassUrl = 'https://overpass-api.de/api/interpreter';
+
+    const overpassQuery = `
+      [out:json][timeout:90];
+      rel(${id});
+      way(r);
       out geom;
     `;
 

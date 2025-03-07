@@ -1,6 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { Router } from '@angular/router';
-// import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NgIconComponent, provideIcons } from '@ng-icons/core';
 import {
   lucideArrowLeft,
@@ -8,13 +7,15 @@ import {
   lucideMapPin,
   lucideDownload,
 } from '@ng-icons/lucide';
+import { hlm } from '@spartan-ng/brain/core';
 import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
 import {
   HlmCardContentDirective,
+  HlmCardDirective,
   HlmCardHeaderDirective,
   HlmCardTitleDirective,
 } from '@spartan-ng/ui-card-helm';
-import { hlmLarge } from '@spartan-ng/ui-typography-helm';
+import { hlmLarge, HlmLargeDirective } from '@spartan-ng/ui-typography-helm';
 import { GpxExportService, RouteStore } from '@velo/routes/data-access';
 
 @Component({
@@ -34,10 +35,12 @@ import { GpxExportService, RouteStore } from '@velo/routes/data-access';
     HlmCardTitleDirective,
     HlmCardContentDirective,
     NgIconComponent,
+    HlmLargeDirective,
+    HlmCardDirective,
   ],
   template: `
     <section class="pl-1 pr-2.5">
-      <div class="relative flex items-center justify-center mt-2 mb-4">
+      <div class="relative flex items-center justify-center mt-2 mb-4 h-full">
         <button
           hlmBtn
           variant="secondary"
@@ -152,7 +155,77 @@ import { GpxExportService, RouteStore } from '@velo/routes/data-access';
             </li>
           </ul>
 
-          <div class="flex gap-2 mt-4 w-full justify-between">
+          @if ($routeSubways()) {
+            <div class="flex mt-4 w-full flex-col gap-4">
+              <h3 hlmLarge>Subways</h3>
+
+              <ul class="pb-20 overflow-y-auto flex flex-col gap-3">
+                @for (
+                  route of $routeSubways();
+                  let i = $index;
+                  track route.properties['id']
+                ) {
+                  <li
+                    class="flex gap-2 py-1.5 pr-2 pl-12 items-center justify-between relative overflow-hidden border-0"
+                    hlmCard
+                  >
+                    <div
+                      [class]="
+                        hlm(
+                          'flex left-0 items-center justify-center h-full w-9 absolute top-0 bottom-0 pr-1',
+                          !route.properties['surface'] && 'bg-red-600',
+                          route.properties['surface'] === 'paved' &&
+                            'bg-blue-500',
+                          route.properties['surface'] === 'asphalt' &&
+                            'bg-gray-700',
+                          route.properties['surface'] === 'gravel' &&
+                            'bg-yellow-500',
+                          route.properties['surface'] === 'ground' &&
+                            'bg-stone-500',
+                          route.properties['surface'] === 'unpaved' &&
+                            'bg-orange-500',
+                          route.properties['surface'] === 'wood' &&
+                            'bg-brown-500',
+                          route.properties['surface'] === 'compacted' &&
+                            'bg-yellow-500'
+                        )
+                      "
+                    >
+                      <span hlmLarge class="text-white w-full text-right">
+                        {{ i + 1 }}.
+                      </span>
+                    </div>
+
+                    <div
+                      class="flex gap-2 p-0 items-center justify-start"
+                      hlmCardContent
+                    >
+                      <span hlmLarge>
+                        {{ route.properties['surface'] ?? 'N/A' }}
+                      </span>
+                    </div>
+
+                    <div hlmCardFooter>
+                      <a
+                        [href]="
+                          'https://openstreetmap.org/' + route.properties['id']
+                        "
+                        target="_blank"
+                        class="flex items-center gap-2"
+                      >
+                        <span>Edit</span>
+                        <ng-icon name="lucide:external-link" class="!size-4" />
+                      </a>
+                    </div>
+                  </li>
+                }
+              </ul>
+            </div>
+          }
+
+          <div
+            class="bottom-0 right-4 py-4 px-6 bg-gray-300 flex gap-2 mt-4 w-[22rem] fixed justify-between"
+          >
             <button
               hlmBtn
               variant="outline"
@@ -182,17 +255,19 @@ import { GpxExportService, RouteStore } from '@velo/routes/data-access';
   `,
 })
 export class EditRouteComponent {
+  protected readonly hlm = hlm;
   private readonly routeStore = inject(RouteStore);
   private readonly router = inject(Router);
-  // private readonly activatedRoute = inject(ActivatedRoute);
+  private readonly activatedRoute = inject(ActivatedRoute);
   private readonly gpxExportService = inject(GpxExportService);
 
   $selectedRoute = this.routeStore.selectedRoute;
   $selectedRouteBounds = this.routeStore.selectedRouteBounds;
+  $routeSubways = this.routeStore.routeSubways;
 
   ngOnInit() {
-    if (!this.$selectedRoute()) {
-      this.router.navigate(['/explore-map']);
+    if (this.activatedRoute.snapshot.params['id']) {
+      this.routeStore.getRouteById(this.activatedRoute.snapshot.params['id']);
     }
   }
 

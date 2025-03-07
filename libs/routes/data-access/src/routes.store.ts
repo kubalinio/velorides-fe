@@ -13,14 +13,16 @@ import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { Feature, BBox } from 'geojson';
 import { tapResponse } from '@ngrx/operators';
 import { RouteType } from './models/routes';
+import { RouteTypeResponse } from './models/route';
 
 export const RouteStore = signalStore(
   { providedIn: 'root' },
   withState({
-    selectedRoute: undefined as NonNullable<Feature['properties']> | undefined,
     routesOnArea: undefined as GeoJSON.FeatureCollection | undefined,
     selectedRouteType: ['lcn', 'rcn', 'ncn', 'icn'] as RouteType[],
+    selectedRoute: undefined as NonNullable<Feature['properties']> | undefined,
     selectedRouteBounds: undefined as GeoJSON.Feature | undefined,
+    routeSubways: [] as GeoJSON.Feature[] | undefined,
   }),
   withProps(() => ({
     _routesService: inject(RoutesService),
@@ -45,16 +47,19 @@ export const RouteStore = signalStore(
     ),
     setSelectedRoute: rxMethod(
       pipe(
-        tap((route: NonNullable<Feature['properties']>) =>
-          patchState(store, { selectedRoute: route }),
-        ),
+        tap((route: NonNullable<Feature['properties']>) => {
+          patchState(store, { selectedRoute: route });
+        }),
       ),
     ),
     clearSelectedRoute: rxMethod<void>(
       pipe(
         tap(() => {
-          patchState(store, { selectedRoute: undefined });
-          patchState(store, { selectedRouteBounds: undefined });
+          patchState(store, {
+            selectedRoute: undefined,
+            selectedRouteBounds: undefined,
+            routeSubways: [],
+          });
         }),
       ),
     ),
@@ -79,7 +84,20 @@ export const RouteStore = signalStore(
         ),
       ),
     ),
-
+    getRouteById: rxMethod<number>(
+      pipe(
+        switchMap((id: number) => store._routesService.getRouteById(id)),
+        tap((route: RouteTypeResponse) => {
+          patchState(store, {
+            selectedRoute: route.route.features[0].properties as NonNullable<
+              Feature['properties']
+            >,
+            selectedRouteBounds: route.route.features[0],
+            routeSubways: route.subways.features,
+          });
+        }),
+      ),
+    ),
     setSelectedRouteBounds: rxMethod<GeoJSON.Feature>(
       pipe(
         tap((route) => {

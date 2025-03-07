@@ -24,6 +24,18 @@
       }
     </mgl-geojson-source>
 
+    <mgl-geojson-source id="route-subways">
+      @for (
+        route of $routeSubways() ?? [];
+        track route.properties['id']
+      ) {
+        <mgl-feature
+          [geometry]="route.geometry"
+          [properties]="route.properties"
+        ></mgl-feature>
+      }
+    </mgl-geojson-source>
+
     <viewing-map-viewpoints
       (centerMapToCluster)="
         $mapNavigationService.centerMapToCluster($event)
@@ -50,7 +62,7 @@
           '#f97316',
           'lcn',
           '#000000',
-          '#000000',
+          '#000000'
         ],
         'line-width': [
           'case',
@@ -95,6 +107,51 @@
       (layerMouseMove)="$mapInteraction.onMouseMove($event)"
       (layerMouseLeave)="$mapInteraction.onMouseLeave()"
       (layerClick)="$mapInteraction.onRouteClick($event)"
+    >
+    </mgl-layer>
+
+    <mgl-layer
+      id="route-subway"
+      type="line"
+      source="route-subways"
+      [layout]="{
+        'line-join': 'round',
+        'line-cap': 'round',
+      }"
+      [paint]="{
+        'line-color': [
+          'match',
+          ['get', 'surface'],
+          'asphalt',
+          '#646669',
+          'concrete',
+          '#ffffff',
+          '#dc2626'
+        ],
+        'line-width': [
+          'case',
+          [
+            'in',
+            ['get', 'surface'],
+            ['literal', ['asphalt', 'concrete', 'paved', 'unpaved', 'ground', 'wood', 'gravel']]
+          ],
+          6,
+          8,
+        ],
+        'line-opacity': [
+          'case',
+          [
+            '==',
+            ['get', 'id'],
+            $hoverSubwayId() ?? '',
+          ],
+          1,
+          0,
+        ],
+      }"
+      (layerMouseEnter)="this.onMouseEnter($event)"
+      (layerMouseMove)="this.onMouseEnter($event)"
+      (layerMouseLeave)="this.onMouseLeave()"
     >
     </mgl-layer>
 

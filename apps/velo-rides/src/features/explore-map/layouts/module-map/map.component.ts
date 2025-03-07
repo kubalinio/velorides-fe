@@ -1,4 +1,4 @@
-import { Component, inject, ViewChild } from '@angular/core';
+import { Component, inject, ViewChild, signal } from '@angular/core';
 import {
   MapComponent,
   LayerComponent,
@@ -67,7 +67,10 @@ export class ExploreMapComponent {
   private readonly mapInteractionService = inject(MapInteractionService);
   private readonly mapNavigationService = inject(MapNavigationService);
 
+  $hoverSubwayId = signal<string>('');
+
   $routesWithUncompletedData = this.routeStore.routesOnArea;
+  $routeSubways = this.routeStore.routeSubways;
 
   bounds: LngLatBounds;
   points: GeoJSON.FeatureCollection<GeoJSON.Point>;
@@ -81,5 +84,14 @@ export class ExploreMapComponent {
 
   ngOnInit() {
     this.mapStore.getMapTiles('standard');
+  }
+
+  onMouseEnter(event: any) {
+    // if
+    this.$hoverSubwayId.set(event.features[0].properties.id);
+  }
+
+  onMouseLeave() {
+    this.$hoverSubwayId.set('');
   }
 }

@@ -4,7 +4,7 @@
 
     <a routerLink="/" class="text-xl font-bold uppercase">Velo Rides</a>
 
-    <div class="menu-items">
+    <div class="menu-items ml-6 text-sm">
       @for (link of links; track link) {
         @if (link.routerLink) {
           <a mat-button [routerLink]="link.url">{{ link.label }}</a>
@@ -20,7 +20,7 @@
   </div>
 
   <div id="layout-right-custom-items">
-    <button hlmBtn variant="ghost" align="end" [brnMenuTriggerFor]="menu">
+    <button hlmBtn variant="ghost" align="end" [brnMenuTriggerFor]="menu" class="hidden">
       <hlm-avatar variant="medium">
         <img src="/assets/avatar.png" alt="spartan logo. Resembling a spartanic shield" hlmAvatarImage />
 

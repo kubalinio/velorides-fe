@@ -1,21 +1,21 @@
-<section class="pl-1 pr-2.5">
+<section class="pl-4 pr-2.5 overflow-hi">
   <div class="relative flex items-center justify-center mt-2 mb-4 h-full">
     <button
       hlmBtn
       variant="secondary"
       size="icon"
-      class="absolute left-0"
+      class="absolute left-0 size-8"
       (click)="clearSelectedRoute()"
     >
       <ng-icon name="lucide:arrow-left" class="!size-4"></ng-icon>
     </button>
 
-    <h2 class="${hlmLarge}">Selected Route</h2>
+    <h2 hlmLarge class="font-semibold">Selected Route</h2>
   </div>
 
   @defer (when $selectedRoute()) {
     <div class="overflow-x-hidden flex flex-col gap-2">
-      <div hlmCardHeader class="space-y-1">
+      <div hlmCardHeader class="space-y-1 pl-0">
           <h3 hlmCardTitle>
           {{ $selectedRoute()['name'] ?? 'Unnamed Route' }}
         </h3>
@@ -38,7 +38,7 @@
 
       <ul
         hlmCardContent
-        class="space-y-2 [&>li]:flex [&>li]:gap-2 [&>li]:items-center"
+        class="space-y-2 pl-0 [&>li]:flex [&>li]:gap-2 [&>li]:items-center"
       >
         <li>
           <span>Network:</span>
@@ -126,10 +126,10 @@
       <p>Loading...</p>
     </div>
   } @else {
-    <velo-route-subways [routeSubways]="$routeSubways()"></velo-route-subways>
+    <velo-route-ways [routeWays]="$routeWays()"></velo-route-ways>
   }
 
-  <div class="bottom-0 right-4 py-4 px-6 bg-gray-300 flex gap-2 mt-4 w-[22rem] fixed justify-between">
+  <div class="bottom-0 right-4 py-4 pl-3 pr-2 bg-gray-300 flex gap-2 mt-4 w-[22rem] fixed justify-between">
     <button
       hlmBtn
       variant="outline"

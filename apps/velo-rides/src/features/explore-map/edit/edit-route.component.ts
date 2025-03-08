@@ -15,8 +15,12 @@ import {
   HlmCardTitleDirective,
 } from '@spartan-ng/ui-card-helm';
 
-import { GpxExportService, RouteStore } from '@velo/routes/data-access';
-import { RouteSubwaysComponent } from './route-subways.component';
+import {
+  GpxExportService,
+  RoutesStore,
+  RouteStore,
+} from '@velo/routes/data-access';
+import { RouteWaysComponent } from './route-ways/route-ways.component';
 
 @Component({
   selector: 'app-edit-route',
@@ -35,21 +39,23 @@ import { RouteSubwaysComponent } from './route-subways.component';
     HlmCardTitleDirective,
     HlmCardContentDirective,
     NgIconComponent,
-    RouteSubwaysComponent,
+    RouteWaysComponent,
   ],
   templateUrl: './edit-route.component.html',
 })
 export class EditRouteComponent {
   protected readonly hlm = hlm;
-  private readonly routeStore = inject(RouteStore);
   private readonly router = inject(Router);
+  private readonly routeStore = inject(RouteStore);
+  private readonly routesStore = inject(RoutesStore);
   private readonly activatedRoute = inject(ActivatedRoute);
   private readonly gpxExportService = inject(GpxExportService);
 
   $selectedRoute = this.routeStore.selectedRoute;
   $selectedRouteBounds = this.routeStore.selectedRouteBounds;
-  $routeSubways = this.routeStore.routeSubways;
+  $routeWays = this.routeStore.routeSubways;
   $isRouteLoading = this.routeStore.isRouteLoading;
+
   constructor() {
     this.activatedRoute.paramMap.subscribe((params) => {
       const routeId = params.get('id');
@@ -61,6 +67,7 @@ export class EditRouteComponent {
 
   clearSelectedRoute() {
     this.routeStore.clearSelectedRoute();
+    this.routesStore.setHoveredRouteFeedId(null);
     this.router.navigate(['/explore-map']);
   }
 

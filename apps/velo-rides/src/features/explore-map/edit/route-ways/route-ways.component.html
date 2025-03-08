@@ -1,14 +1,14 @@
 <div class="flex mt-4 w-full flex-col gap-4">
-  <h3 hlmLarge>Subways</h3>
+  <h3 hlmLarge class="font-semibold">Route Surfaces</h3>
 
   <ul class="pb-20 overflow-y-auto flex flex-col gap-3">
     @for (
-      route of routeSubways();
+      route of routeWays();
       let i = $index;
       track route.properties['id']
     ) {
       <li
-        class="flex gap-2 py-1.5 pr-2 pl-12 items-center justify-between relative overflow-hidden border-0 hover:bg-gray-100"
+        class="flex gap-2 py-1.5 pr-2 pl-6 items-center justify-between relative overflow-hidden border-0 hover:bg-gray-100"
         hlmCard
         (mouseenter)="selectSubway(route.properties['id'])"
         (mouseleave)="selectSubway(null)"
@@ -16,7 +16,7 @@
         <div
           [class]="
             hlm(
-              'flex left-0 items-center justify-center h-full w-9 absolute top-0 bottom-0 pr-1',
+              'flex left-0 items-center justify-center h-full w-4 absolute top-0 bottom-0 pr-1',
               !route.properties['surface'] && 'bg-red-600',
               route.properties['surface'] === 'paved' &&
                 'bg-blue-500',
@@ -35,9 +35,6 @@
             )
           "
         >
-          <span hlmLarge class="text-white w-full text-right">
-            {{ i + 1 }}.
-          </span>
         </div>
 
         <div

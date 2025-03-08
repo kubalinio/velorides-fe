@@ -8,7 +8,7 @@ import { HlmCardContentDirective } from '@spartan-ng/ui-card-helm';
 import { RouteStore } from '@velo/routes/data-access';
 
 @Component({
-  selector: 'velo-route-subways',
+  selector: 'velo-route-ways',
   standalone: true,
   imports: [HlmCardDirective, HlmCardContentDirective, NgIconComponent],
   providers: [
@@ -16,11 +16,11 @@ import { RouteStore } from '@velo/routes/data-access';
       lucideExternalLink,
     }),
   ],
-  templateUrl: './route-subways.component.html',
+  templateUrl: './route-ways.component.html',
 })
-export class RouteSubwaysComponent {
+export class RouteWaysComponent {
   private readonly routeStore = inject(RouteStore);
-  readonly routeSubways = input<GeoJSON.Feature[]>([]);
+  readonly routeWays = input<GeoJSON.Feature[]>([]);
   readonly hlm = hlm;
 
   selectSubway(id: string | null) {

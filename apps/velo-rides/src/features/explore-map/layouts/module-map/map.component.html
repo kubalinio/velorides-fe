@@ -69,7 +69,7 @@
           [
             '==',
             ['get', 'id'],
-            $mapNavigationService.$selectedRoute()?.['id'] ?? '',
+            $mapNavigationService.$selectedRoute()?.['id'] || $hoveredRouteFeedId() || '',
           ],
           4,
           2,
@@ -79,7 +79,7 @@
           [
             '==',
             ['get', 'id'],
-            $mapNavigationService.$selectedRoute()?.['id'] ?? '',
+            $mapNavigationService.$selectedRoute()?.['id'] || $hoveredRouteFeedId() || '',
           ],
           0.9,
           0.5,
@@ -144,7 +144,7 @@
           [
             '==',
             ['get', 'id'],
-            $hoverSubwayId() ?? '',
+            $hoveredSubwayId() ?? '',
           ],
           1,
           0,
@@ -164,7 +164,6 @@
     <map-click-popup
       [selectedRoute]="$mapNavigationService.$selectedRoute()"
       [clickPopupFeature]="$mapInteraction.clickPopupFeature"
-      (closePopup)="$mapNavigationService.clearSelectedRoute()"
       (zoomToRoute)="$mapNavigationService.zoomToRoute($event)"
     ></map-click-popup>
   </mgl-map>

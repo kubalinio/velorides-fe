@@ -74,8 +74,12 @@ import { Router } from '@angular/router';
                   element.properties.network === 'lcn' && 'border-l-black'
                 )
               "
-              (click)="selectRoute(element)"
               hlmCard
+              (click)="selectRoute(element)"
+              (mouseenter)="
+                routesStore.setHoveredRouteFeedId(element.properties.id)
+              "
+              (mouseleave)="routesStore.setHoveredRouteFeedId(null)"
             >
               <h4 class="font-semibold">
                 {{ element.properties.name || 'Unnamed Route' }}
@@ -109,14 +113,15 @@ import { Router } from '@angular/router';
 })
 export class SidebarComponent {
   private readonly router = inject(Router);
-  private readonly routesStore = inject(RoutesStore);
-  private readonly routeStore = inject(RouteStore);
+  readonly routesStore = inject(RoutesStore);
+  readonly routeStore = inject(RouteStore);
 
-  private readonly mapStore = inject(MapStore);
+  readonly mapStore = inject(MapStore);
   protected readonly hlm = hlm;
 
   $routesOnArea = this.routesStore.routesOnArea;
   $bbox = this.mapStore.bbox;
+  $hoveredRouteFeedId = this.routesStore.hoveredRouteFeedId;
 
   constructor() {
     effect(() => {

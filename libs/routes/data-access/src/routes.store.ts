@@ -19,6 +19,7 @@ export const RoutesStore = signalStore(
   withState({
     routesOnArea: undefined as GeoJSON.FeatureCollection | undefined,
     selectedRouteType: ['lcn', 'rcn', 'ncn', 'icn'] as RouteType[],
+    hoveredRouteFeedId: null as string | null,
   }),
   withProps(() => ({
     _routesService: inject(RoutesService),
@@ -60,6 +61,9 @@ export const RoutesStore = signalStore(
             ),
         ),
       ),
+    ),
+    setHoveredRouteFeedId: rxMethod<string>(
+      pipe(tap((id: string) => patchState(store, { hoveredRouteFeedId: id }))),
     ),
   })),
 );

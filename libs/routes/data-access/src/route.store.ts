@@ -11,7 +11,8 @@ import { pipe, switchMap } from 'rxjs';
 import { tap } from 'rxjs';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { Feature } from 'geojson';
-import { RouteTypeResponse } from './models/route';
+
+import { tapResponse } from '@ngrx/operators';
 
 export const RouteStore = signalStore(
   { providedIn: 'root' },
@@ -19,6 +20,8 @@ export const RouteStore = signalStore(
     selectedRoute: undefined as NonNullable<Feature['properties']> | undefined,
     selectedRouteBounds: undefined as GeoJSON.Feature | undefined,
     routeSubways: [] as GeoJSON.Feature[] | undefined,
+    isRouteLoading: false as boolean,
+    hoveredSubwayId: null as string | null,
   }),
   withProps(() => ({
     _routeService: inject(RouteService),
@@ -29,7 +32,6 @@ export const RouteStore = signalStore(
         tap((route: NonNullable<Feature['properties']>) => {
           patchState(store, {
             selectedRoute: route,
-            routeSubways: [],
           });
         }),
       ),
@@ -55,17 +57,29 @@ export const RouteStore = signalStore(
     ),
     getRouteById: rxMethod<number>(
       pipe(
-        switchMap((id: number) => store._routeService.getRouteById(id)),
-        tap((route: RouteTypeResponse) => {
-          patchState(store, {
-            selectedRoute: route.route.features[0].properties as NonNullable<
-              Feature['properties']
-            >,
-            selectedRouteBounds: route.route.features[0],
-            routeSubways: route.subways.features,
-          });
-        }),
+        tap(() => patchState(store, { isRouteLoading: true })),
+        switchMap((id: number) =>
+          store._routeService.getRouteById(id).pipe(
+            tapResponse(
+              (route) => {
+                patchState(store, {
+                  selectedRoute: route.route.features[0]
+                    .properties as NonNullable<Feature['properties']>,
+                  selectedRouteBounds: route.route.features[0],
+                  routeSubways: route.subways.features,
+                });
+              },
+              (error) => {
+                console.error(error);
+              },
+            ),
+          ),
+        ),
+        tap(() => patchState(store, { isRouteLoading: false })),
       ),
+    ),
+    setHoveredSubwayId: rxMethod<string>(
+      pipe(tap((id: string) => patchState(store, { hoveredSubwayId: id }))),
     ),
   })),
 );

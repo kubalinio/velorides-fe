@@ -84,15 +84,18 @@ export class ExploreMapComponent {
   $mapInteraction = this.mapInteractionService;
   $mapNavigationService = this.mapNavigationService;
 
+  $hoveredRouteFeedId = this.routesStore.hoveredRouteFeedId;
+  $hoveredSubwayId = this.routeStore.hoveredSubwayId;
+
   ngOnInit() {
     this.mapStore.getMapTiles('standard');
   }
 
   onMouseEnter(event: any) {
-    this.$hoverSubwayId.set(event.features[0].properties.id);
+    this.routeStore.setHoveredSubwayId(event.features[0].properties.id);
   }
 
   onMouseLeave() {
-    this.$hoverSubwayId.set('');
+    this.routeStore.setHoveredSubwayId(null);
   }
 }

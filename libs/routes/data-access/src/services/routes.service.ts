@@ -19,7 +19,7 @@ export class RoutesService {
     const overpassUrl = 'https://overpass-api.de/api/interpreter';
 
     const overpassQuery = `
-      [bbox:${bbox[0]},${bbox[1]},${bbox[2]},${bbox[3]}][out:json][timeout:90];
+      [bbox:${bbox[0]},${bbox[1]},${bbox[2]},${bbox[3]}][out:json][timeout:120];
       (
         relation["route"="bicycle"][network~"^(${routeTypes.join('|')})$"][!distance];
         way["route"="bicycle"][network~"^(${routeTypes.join('|')})$"][!distance];

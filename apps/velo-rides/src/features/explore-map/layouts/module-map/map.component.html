@@ -26,7 +26,7 @@
 
     <mgl-geojson-source id="route-subways">
       @for (
-        route of $routeSubways() ?? [];
+        route of $routeWays() ?? [];
         track route.properties['id']
       ) {
         <mgl-feature

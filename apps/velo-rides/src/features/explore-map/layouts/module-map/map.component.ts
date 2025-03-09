@@ -70,8 +70,8 @@ export class ExploreMapComponent {
 
   $hoverSubwayId = signal<string>('');
 
-  $routesWithUncompletedData = this.routesStore.routesOnArea;
-  $routeSubways = this.routeStore.routeSubways;
+  $routesWithUncompletedData = this.routesStore.routes;
+  $routeWays = this.routeStore.routeWays;
   $selectedRoute = this.routeStore.selectedRoute;
 
   bounds: LngLatBounds;

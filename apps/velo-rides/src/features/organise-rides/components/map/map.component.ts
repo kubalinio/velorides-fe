@@ -19,7 +19,7 @@ import type { MultiLineString } from 'geojson';
         [style]="
           'https://api.maptiler.com/maps/streets-v2/style.json?key=iN0x5siUbfUDS0mUgjGr'
         "
-        [zoom]="[12]"
+        [zoom]="[9]"
         [center]="[19.00799715919041, 50.72680756975865]"
       >
         <mgl-marker

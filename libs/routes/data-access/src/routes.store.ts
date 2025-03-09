@@ -7,20 +7,32 @@ import {
   withProps,
   withState,
 } from '@ngrx/signals';
+
 import { pipe, switchMap } from 'rxjs';
 import { tap } from 'rxjs';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { BBox } from 'geojson';
 import { tapResponse } from '@ngrx/operators';
-import { RouteType } from './models/routes';
+
+import type {
+  RoutesListState,
+  RouteType,
+  RoutesInteractionState,
+} from './models/routes';
+import {
+  routesInitialState,
+  routesInteractionInitialState,
+} from './models/routes';
+import {
+  setLoaded,
+  setLoading,
+  withCallState,
+} from '@angular-architects/ngrx-toolkit';
 
 export const RoutesStore = signalStore(
   { providedIn: 'root' },
-  withState({
-    routesOnArea: undefined as GeoJSON.FeatureCollection | undefined,
-    selectedRouteType: ['lcn', 'rcn', 'ncn', 'icn'] as RouteType[],
-    hoveredRouteFeedId: null as string | null,
-  }),
+  withState<RoutesListState>(routesInitialState),
+  withState<RoutesInteractionState>(routesInteractionInitialState),
   withProps(() => ({
     _routesService: inject(RoutesService),
   })),
@@ -38,32 +50,40 @@ export const RoutesStore = signalStore(
           store._routesService.getRouteByArea(bbox, store.selectedRouteType()),
         ),
         tap((routes: GeoJSON.FeatureCollection) =>
-          patchState(store, { routesOnArea: routes }),
+          patchState(store, { routes: routes }),
         ),
       ),
     ),
     getRouteByArea: rxMethod<BBox>(
       pipe(
-        switchMap((bbox: BBox) =>
-          store._routesService
+        switchMap((bbox: BBox) => {
+          return store._routesService
             .getRouteByArea(bbox, store.selectedRouteType())
             .pipe(
+              tap(() => setLoading('getRoutes')),
               tapResponse({
                 next(routes: GeoJSON.FeatureCollection) {
                   patchState(store, {
-                    routesOnArea: routes,
+                    routes: routes,
+                    ...setLoaded('getRoutes'),
                   });
                 },
                 error(error) {
                   console.error(error);
+                  patchState(store, {
+                    ...routesInitialState,
+                    ...setLoaded('getRoutes'),
+                    // ...setError('getRoutes'),
+                  });
                 },
               }),
-            ),
-        ),
+            );
+        }),
       ),
     ),
     setHoveredRouteFeedId: rxMethod<string>(
       pipe(tap((id: string) => patchState(store, { hoveredRouteFeedId: id }))),
     ),
   })),
+  withCallState({ collection: 'getRoutes' }),
 );

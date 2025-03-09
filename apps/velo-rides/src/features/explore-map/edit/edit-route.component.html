@@ -121,7 +121,7 @@
     </div>
   }
 
-  @if ($isRouteLoading()) {
+  @if (!$isLoadedWays()) {
     <div class="p-4 text-center">
       <p>Loading...</p>
     </div>

@@ -14,7 +14,7 @@ export class MapNavigationService {
   private readonly routeStore = inject(RouteStore);
   readonly map$ = this.mapInitService.map$;
 
-  $routesWithUncompletedData = this.routesStore.routesOnArea;
+  $routesWithUncompletedData = this.routesStore.routes;
   $selectedRoute = this.routeStore.selectedRoute;
   $selectedRouteBounds = this.routeStore.selectedRouteBounds;
 

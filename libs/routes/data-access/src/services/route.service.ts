@@ -68,7 +68,7 @@ export class RouteService {
       );
   }
 
-  getRouteSubways(id: number): Observable<GeoJSON.FeatureCollection> {
+  getrouteWays(id: number): Observable<GeoJSON.FeatureCollection> {
     const overpassUrl = 'https://overpass-api.de/api/interpreter';
 
     const overpassQuery = `

@@ -19,7 +19,7 @@ export class MapInitService {
   clickPopupFeature: GeoJSON.Feature<GeoJSON.Point> | null;
 
   $mapPosition = this.mapUrlService.$mapPosition;
-  $routesWithUncompletedData = this.routesStore.routesOnArea;
+  $routesWithUncompletedData = this.routesStore.routes;
 
   constructor() {
     const position = this.$mapPosition();

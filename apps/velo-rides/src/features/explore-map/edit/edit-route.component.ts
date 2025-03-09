@@ -53,8 +53,9 @@ export class EditRouteComponent {
 
   $selectedRoute = this.routeStore.selectedRoute;
   $selectedRouteBounds = this.routeStore.selectedRouteBounds;
-  $routeWays = this.routeStore.routeSubways;
-  $isRouteLoading = this.routeStore.isRouteLoading;
+  $routeWays = this.routeStore.routeWays;
+
+  $isLoadedWays = this.routeStore.getRouteLoaded;
 
   constructor() {
     this.activatedRoute.paramMap.subscribe((params) => {

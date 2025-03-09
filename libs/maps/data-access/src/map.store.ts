@@ -30,9 +30,9 @@ export const MapStore = signalStore(
   withMethods((store) => ({
     getMapTiles: rxMethod<string>(
       pipe(
-        switchMap((styleType) =>
+        switchMap((style) =>
           store._mapService
-            .getMapTiles(styleType)
+            .getMapTiles(style as 'standard' | 'satellite')
             .pipe(tap((style) => patchState(store, { mapTiles: style }))),
         ),
       ),

@@ -13,20 +13,59 @@ import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { Feature } from 'geojson';
 
 import { tapResponse } from '@ngrx/operators';
+import type { RouteDetailsState, RouteInteractionState } from './models/route';
+import {
+  routeInitialState,
+  routeInteractionInitialState,
+} from './models/route';
+import {
+  setLoaded,
+  setLoading,
+  withCallState,
+} from '@angular-architects/ngrx-toolkit';
 
 export const RouteStore = signalStore(
   { providedIn: 'root' },
-  withState({
-    selectedRoute: undefined as NonNullable<Feature['properties']> | undefined,
-    selectedRouteBounds: undefined as GeoJSON.Feature | undefined,
-    routeSubways: [] as GeoJSON.Feature[] | undefined,
-    isRouteLoading: false as boolean,
-    hoveredSubwayId: null as string | null,
-  }),
+  withState<RouteDetailsState>(routeInitialState),
+  withState<RouteInteractionState>(routeInteractionInitialState),
   withProps(() => ({
     _routeService: inject(RouteService),
   })),
   withMethods((store) => ({
+    getRouteById: rxMethod<number>(
+      pipe(
+        tap(() =>
+          patchState(store, {
+            ...routeInitialState,
+            ...setLoading('getRoute'),
+          }),
+        ),
+        switchMap((id: number) =>
+          store._routeService.getRouteById(id).pipe(
+            tapResponse(
+              (route) => {
+                patchState(store, {
+                  selectedRoute: route.route.features[0]
+                    .properties as NonNullable<Feature['properties']>,
+                  selectedRouteBounds: route.route.features[0],
+                  routeWays: route.subways.features,
+                  ...setLoaded('getRoute'),
+                });
+              },
+              (error) => {
+                console.error(error);
+                patchState(store, {
+                  ...routeInitialState,
+                  ...setLoaded('getRoute'),
+                  // ...setError('getRoute', error),
+                });
+              },
+            ),
+          ),
+        ),
+        tap(() => setLoaded('getRoute')),
+      ),
+    ),
     setSelectedRoute: rxMethod(
       pipe(
         tap((route: NonNullable<Feature['properties']>) => {
@@ -55,31 +94,9 @@ export const RouteStore = signalStore(
         }),
       ),
     ),
-    getRouteById: rxMethod<number>(
-      pipe(
-        tap(() => patchState(store, { isRouteLoading: true })),
-        switchMap((id: number) =>
-          store._routeService.getRouteById(id).pipe(
-            tapResponse(
-              (route) => {
-                patchState(store, {
-                  selectedRoute: route.route.features[0]
-                    .properties as NonNullable<Feature['properties']>,
-                  selectedRouteBounds: route.route.features[0],
-                  routeSubways: route.subways.features,
-                });
-              },
-              (error) => {
-                console.error(error);
-              },
-            ),
-          ),
-        ),
-        tap(() => patchState(store, { isRouteLoading: false })),
-      ),
-    ),
     setHoveredSubwayId: rxMethod<string>(
       pipe(tap((id: string) => patchState(store, { hoveredSubwayId: id }))),
     ),
   })),
+  withCallState({ collection: 'getRoute' }),
 );

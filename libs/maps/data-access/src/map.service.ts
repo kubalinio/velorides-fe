@@ -46,11 +46,11 @@ export class MapService {
     },
   };
 
-  getMapTiles(styleType: string): Observable<StyleSpecification> {
+  getMapTiles(style: 'standard' | 'satellite'): Observable<StyleSpecification> {
     return of({
       version: 8 as const,
       sources: {
-        'osm-tiles': this.OSM_STYLES[styleType as keyof typeof this.OSM_STYLES],
+        'osm-tiles': this.OSM_STYLES[style as keyof typeof this.OSM_STYLES],
       },
       layers: [
         {

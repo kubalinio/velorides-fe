@@ -27,12 +27,18 @@ import { Router } from '@angular/router';
 
     <section class="p-4">
       <h2 class="${hlmLarge} mb-4">
-        Routes in area ({{ $routesOnArea()?.features?.length || 0 }})
+        Routes in area ({{ $routes()?.features?.length || 0 }})
       </h2>
 
-      @if ($routesOnArea()) {
+      @if (!$routesLoaded()) {
+        <div class="flex items-center justify-center h-full">
+          Loading routes...
+        </div>
+      }
+
+      @if ($routesLoaded()) {
         <sidebar-routes-feed
-          [routes]="$routesOnArea().features"
+          [routes]="$routes().features"
           [hoveredRouteFeedId]="$hoveredRouteFeedId()"
           (onSelectRoute)="onSelectRoute($event)"
           (onHoverRoute)="onHoverRoute($event)"
@@ -49,8 +55,9 @@ export class SidebarComponent {
   readonly mapStore = inject(MapStore);
 
   $bbox = this.mapStore.bbox;
-  $routesOnArea = this.routesStore.routesOnArea;
+  $routes = this.routesStore.routes;
   $hoveredRouteFeedId = this.routesStore.hoveredRouteFeedId;
+  $routesLoaded = this.routesStore.getRoutesLoaded;
 
   constructor() {
     effect(() => {

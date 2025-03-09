@@ -11,7 +11,7 @@ import { PopupComponent } from '@velo/ngx-maplibre-gl';
       <mgl-popup [feature]="hoverRoute" [offset]="12" [closeButton]="false">
         <div class="px-2 space-y-1">
           <h3 class="text-base font-semibold">
-            {{ hoverRoute.properties?.name ?? 'Unnamed Route' }}
+            {{ getPopupTitle() }}
           </h3>
 
           @if (hoverRoute.properties?.distance) {
@@ -23,6 +23,15 @@ import { PopupComponent } from '@velo/ngx-maplibre-gl';
               }}
             </p>
           }
+
+          @if (hoverRoute.properties?.surface) {
+            <p class="${hlmMuted}">
+              <span>Surface: </span>
+              <span class="font-semibold">{{
+                hoverRoute.properties?.surface
+              }}</span>
+            </p>
+          }
         </div>
       </mgl-popup>
     }
@@ -30,4 +39,18 @@ import { PopupComponent } from '@velo/ngx-maplibre-gl';
 })
 export class HoverPopupComponent {
   @Input() hoverRoute: GeoJSON.Feature<GeoJSON.Point> | null;
+
+  getPopupTitle() {
+    if (!this.hoverRoute?.properties?.name) {
+      if (this.hoverRoute.properties?.type !== 'way') {
+        return 'Unnamed Route';
+      }
+
+      if (this.hoverRoute.properties?.type === 'way') {
+        return 'Unnamed Way';
+      }
+    }
+
+    return this.hoverRoute.properties?.name ?? 'Unnamed';
+  }
 }

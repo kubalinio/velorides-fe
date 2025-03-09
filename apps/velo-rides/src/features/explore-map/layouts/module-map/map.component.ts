@@ -91,11 +91,8 @@ export class ExploreMapComponent {
     this.mapStore.getMapTiles('standard');
   }
 
-  onMouseEnter(event: any) {
-    this.routeStore.setHoveredSubwayId(event.features[0].properties.id);
-  }
-
-  onMouseLeave() {
+  onMouseLeaveWay() {
     this.routeStore.setHoveredSubwayId(null);
+    this.$mapInteraction.onMouseLeave();
   }
 }

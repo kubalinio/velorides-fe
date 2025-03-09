@@ -83,12 +83,35 @@ export class MapInteractionService {
     };
   }
 
+  onMouseMoveWay(evt: MapLayerMouseEvent) {
+    this.routeStore.setHoveredSubwayId(evt.features[0].properties.id);
+
+    this.hoverRoute = {
+      geometry: {
+        coordinates: [evt.lngLat.lng, evt.lngLat.lat],
+        type: 'Point',
+      },
+      properties: {
+        type: 'way',
+        surface: evt.features[0].properties.surface ?? 'N/A',
+      },
+      id: evt.features[0].properties['@id'],
+      type: 'Feature',
+    };
+  }
+
   onMouseLeave() {
     this.cursorStyle = 'grab';
     this.hoverRoute = null;
   }
 
   onRouteClick(evt: MapLayerMouseEvent) {
+    if (
+      this.routeStore.selectedRoute()?.['id'] === evt.features[0].properties.id
+    ) {
+      return;
+    }
+
     this.clickPopupFeature = {
       geometry: {
         coordinates: [evt.lngLat.lng, evt.lngLat.lat],
@@ -102,7 +125,6 @@ export class MapInteractionService {
       evt.features[0].properties as NonNullable<GeoJSON.Feature['properties']>,
     );
 
-    // Also set the selected route bounds for GPX export
     this.routeStore.setSelectedRouteBounds(evt.features[0] as GeoJSON.Feature);
 
     this.router.navigate([

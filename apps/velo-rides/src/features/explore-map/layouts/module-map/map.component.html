@@ -150,9 +150,9 @@
           0,
         ],
       }"
-      (layerMouseEnter)="this.onMouseEnter($event)"
-      (layerMouseMove)="this.onMouseEnter($event)"
-      (layerMouseLeave)="this.onMouseLeave()"
+      (layerMouseEnter)="this.$mapInteraction.onMouseMoveWay($event)"
+      (layerMouseMove)="this.$mapInteraction.onMouseMoveWay($event)"
+      (layerMouseLeave)="this.onMouseLeaveWay()"
     >
     </mgl-layer>
   }

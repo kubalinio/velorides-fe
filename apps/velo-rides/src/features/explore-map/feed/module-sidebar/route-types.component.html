@@ -2,26 +2,41 @@
   <h2 hlmLarge class="font-semibold">Route Types</h2>
 
     <ul
-      class="flex flex-col gap-3 [&>li]:flex [&>li]:gap-2 [&>li]:items-center"
+      class="flex items-center gap-3 [&>li]:flex [&>li]:gap-2 [&>li]:items-center"
     >
       <li>
-        <span class="inline-block size-5 rounded-full bg-violet-500"></span>
-        <span>Route International</span>
+        <brn-hover-card>
+          <button hlmBtn class="inline-block size-5 p-3 rounded-full bg-violet-500 hover:bg-violet-600" brnHoverCardTrigger></button>
+          <hlm-hover-card-content *brnHoverCardContent class="w-fit py-2 px-3 text-sm">International</hlm-hover-card-content>
+        </brn-hover-card>
       </li>
 
       <li>
-        <span class="inline-block size-5 rounded-full bg-red-700"></span>
-        <span>Route National</span>
+        <brn-hover-card>
+          <button hlmBtn class="inline-block size-5 p-3 rounded-full bg-red-700 hover:bg-red-800" brnHoverCardTrigger></button>
+          <hlm-hover-card-content *brnHoverCardContent class="w-fit py-2 px-3 text-sm">National</hlm-hover-card-content>
+        </brn-hover-card>
       </li>
 
       <li>
-        <span class="inline-block size-5 rounded-full bg-orange-500"></span>
-        <span>Route Regional</span>
+        <brn-hover-card>
+          <button hlmBtn class="inline-block size-5 p-3 rounded-full bg-orange-500 hover:bg-orange-600" brnHoverCardTrigger></button>
+          <hlm-hover-card-content *brnHoverCardContent class="w-fit py-2 px-3 text-sm">Regional</hlm-hover-card-content>
+        </brn-hover-card>
       </li>
 
       <li>
-        <span class="inline-block size-5 rounded-full bg-black"></span>
-        <span>Route Local</span>
+        <brn-hover-card>
+          <button hlmBtn class="inline-block size-5 p-3 rounded-full bg-black hover:bg-gray-800" brnHoverCardTrigger></button>
+          <hlm-hover-card-content *brnHoverCardContent class="w-fit py-2 px-3 text-sm">Local</hlm-hover-card-content>
+        </brn-hover-card>
+      </li>
+
+      <li>
+        <brn-hover-card>
+          <button hlmBtn class="inline-block size-5 p-3 rounded-full bg-gray-100 hover:bg-gray-100/50" brnHoverCardTrigger></button>
+          <hlm-hover-card-content *brnHoverCardContent class="w-fit py-2 px-3 text-sm">Unknown</hlm-hover-card-content>
+        </brn-hover-card>
       </li>
     </ul>
 </section>

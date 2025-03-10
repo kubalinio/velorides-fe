@@ -22,7 +22,7 @@ import { RouterOutlet } from '@angular/router';
         class="!bg-gray-200 !border-gray-200"
       >
         <mat-nav-list>
-          <h3 matSubheader>Organise rides</h3>
+          <h3 matSubheader>Upload ride</h3>
         </mat-nav-list>
       </mat-sidenav>
     </mat-sidenav-container>
@@ -48,7 +48,7 @@ import { RouterOutlet } from '@angular/router';
     RouterOutlet,
   ],
 })
-export class OrganiseRidesComponent {
+export class UploadRideComponent {
   sidenavIsOpen = true;
 
   toggleSidenav() {

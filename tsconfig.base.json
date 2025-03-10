@@ -15,7 +15,6 @@
     "typeRoots": ["node_modules/@types"],
     "lib": ["es2017", "dom"],
     "paths": {
-      // Spartan UI
       "@spartan-ng/ui-avatar-helm": [
         "libs/shared/ui/ui-avatar-helm/src/index.ts"
       ],
@@ -37,7 +36,9 @@
       "@spartan-ng/ui-typography-helm": [
         "libs/shared/ui/ui-typography-helm/src/index.ts"
       ],
-      // Velo
+      "@spartan-ng/ui-hovercard-helm": [
+        "libs/shared/ui/ui-hovercard-helm/src/index.ts"
+      ],
       "@velo/api-types": ["libs/core/api-types/src/index.ts"],
       "@velo/core/http-client": ["libs/core/http-client/src/index.ts"],
       "@velo/maps/data-access": ["libs/maps/data-access/src/index.ts"],

@@ -15,7 +15,6 @@ import {
 import {
   HlmAvatarComponent,
   HlmAvatarFallbackDirective,
-  HlmAvatarImageDirective,
 } from '@spartan-ng/ui-avatar-helm';
 import { HlmMenuModule, HlmMenuItemModule } from '@spartan-ng/ui-menu-helm';
 import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
@@ -33,7 +32,6 @@ import { BrnMenuTriggerDirective } from '@spartan-ng/brain/menu';
 
     RouterOutlet,
     MatMenuModule,
-    HlmAvatarImageDirective,
     HlmAvatarComponent,
     HlmAvatarFallbackDirective,
     HlmMenuModule,
@@ -54,9 +52,9 @@ export class LayoutComponent {
       label: 'Explore Map',
     },
     {
-      url: '/organise-ride',
+      url: '/upload-ride',
       routerLink: false,
-      label: 'Organise Ride',
+      label: 'Upload Ride & Contribute',
       disabled: true,
     },
   ];

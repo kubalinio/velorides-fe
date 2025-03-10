@@ -1,17 +1,17 @@
 import { Routes } from '@angular/router';
 import { DisplayMapComponent } from './components/map/map.component';
 
-export const ORGANISE_MAP_ROUTES: Routes = [
+export const UPLOAD_RIDE_ROUTES: Routes = [
   {
     path: '',
     loadComponent: () =>
-      import('./organise.component').then((m) => m.OrganiseRidesComponent),
+      import('./upload-ride.component').then((m) => m.UploadRideComponent),
     children: [
       {
-        path: 'organise-ride',
+        path: 'upload-ride',
         component: DisplayMapComponent,
       },
-      { path: 'routes', redirectTo: 'display-map' },
+      { path: 'routes', redirectTo: 'upload-ride' },
     ],
   },
 ];

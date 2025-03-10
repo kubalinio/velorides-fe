@@ -2,9 +2,11 @@
   <div>
     <div id="layout-left-custom-items"></div>
 
-    <a routerLink="/" class="text-xl font-bold uppercase">Velo Rides</a>
+    <a routerLink="/" class="text-xl font-bold uppercase">
+      <img src="/logo-white.png" alt="Velo Rides" class="h-12 -ml-1" />
+    </a>
 
-    <div class="menu-items ml-6 text-sm">
+    <div class="menu-items ml-4 text-sm">
       @for (link of links; track link) {
         @if (link.routerLink) {
           <a mat-button [routerLink]="link.url">{{ link.label }}</a>
@@ -22,7 +24,7 @@
   <div id="layout-right-custom-items">
     <button hlmBtn variant="ghost" align="end" [brnMenuTriggerFor]="menu" class="hidden">
       <hlm-avatar variant="medium">
-        <img src="/assets/avatar.png" alt="spartan logo. Resembling a spartanic shield" hlmAvatarImage />
+        <!-- <img src="/assets/avatar.png" alt="spartan logo. Resembling a spartanic shield" hlmAvatarImage /> -->
 
         <span class="bg-white text-primary" hlmAvatarFallback>RG</span>
       </hlm-avatar>
@@ -38,7 +40,7 @@
 
           <button hlmMenuItem>
             <ng-icon hlm name="lucideLayers" hlmMenuIcon />
-            <span>Organise Ride</span>
+            <span>Upload Ride</span>
           </button>
 
         </hlm-menu-group>

@@ -4,16 +4,16 @@
     track element.properties.id
   ) {
     <li
+    hlmCard
       [class]="
         hlm(
-          'p-3 cursor-pointer border-l-4',
-          element.properties.network === 'icn' && 'border-l-violet-500',
-          element.properties.network === 'ncn' && 'border-l-red-700',
-          element.properties.network === 'rcn' && 'border-l-orange-500',
-          element.properties.network === 'lcn' && 'border-l-black'
+          'p-3 cursor-pointer overflow-hidden relative after:absolute after:-inset-y-1 after:-left-1 after:w-3 after:bg-primary after:rounded-l-md border-none pl-4',
+          element.properties.network === 'icn' && 'after:bg-violet-500',
+          element.properties.network === 'ncn' && 'after:bg-red-700',
+          element.properties.network === 'rcn' && 'after:bg-orange-500',
+          element.properties.network === 'lcn' && 'after:bg-black'
         )
       "
-      hlmCard
       (click)="this.onSelectRoute.emit(element)"
       (mouseenter)="
         this.onHoverRoute.emit(element.properties.id)
@@ -37,7 +37,7 @@
         <a
           [href]="element.properties.website"
           target="_blank"
-          class="text-sm text-primary flex items-center gap-1 mt-1"
+          class="text-sm text-primary flex items-center gap-1 mt-1 w-fit"
         >
           <ng-icon name="lucide:external-link" class="!size-3" />
           Website

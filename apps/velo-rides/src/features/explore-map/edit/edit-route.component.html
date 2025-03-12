@@ -1,4 +1,4 @@
-<section class="pl-4 pr-2.5 overflow-hi">
+<section class="pl-2.5 pr-4 overflow-hi">
   <div class="relative flex items-center justify-center mt-2 mb-4 h-full">
     <button
       hlmBtn
@@ -15,11 +15,12 @@
 
   @defer (when $selectedRoute()) {
     <div class="overflow-x-hidden flex flex-col gap-2">
-      <div hlmCardHeader class="space-y-1 pl-0">
+      <div hlmCardHeader class="space-y-1 pl-0 py-2">
           <h3 hlmCardTitle>
           {{ $selectedRoute()['name'] ?? 'Unnamed Route' }}
         </h3>
 
+        @if ($selectedRoute()['from'] || $selectedRoute()['description']) {
         <div class="flex items-center gap-2">
           @if (
             $selectedRoute()['from'] || $selectedRoute()['description']
@@ -34,11 +35,12 @@
             }
           </span>
         </div>
+        }
       </div>
 
       <ul
         hlmCardContent
-        class="space-y-2 pl-0 [&>li]:flex [&>li]:gap-2 [&>li]:items-center"
+        class="space-y-2 pl-0 [&>li]:flex [&>li]:gap-2 [&>li]:items-center pb-4"
       >
         <li>
           <span>Network:</span>
@@ -129,7 +131,7 @@
     <velo-route-ways [routeWays]="$routeWays()"></velo-route-ways>
   }
 
-  <div class="bottom-0 right-4 py-4 pl-3 pr-2 bg-gray-300 flex gap-2 mt-4 w-[22rem] fixed justify-between">
+  <div class="bottom-0 right-4 py-4 pl-5 pr-3.5 bg-gray-300 flex gap-2 mt-4 w-[22rem] fixed justify-between">
     <button
       hlmBtn
       variant="outline"

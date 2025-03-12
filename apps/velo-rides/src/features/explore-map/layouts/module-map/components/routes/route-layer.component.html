@@ -25,9 +25,15 @@ source="routes"
     [
       '==',
       ['get', 'id'],
-      $mapNavigationService.$selectedRoute()?.['id'] || $hoveredRouteFeedId() || '',
+      $selectedRoute()?.['id'] || '',
     ],
     4,
+    [
+      '==',
+      ['get', 'id'],
+      $hoveredRouteFeedId() || '',
+    ],
+    6,
     2,
   ],
   'line-opacity': [
@@ -35,7 +41,13 @@ source="routes"
     [
       '==',
       ['get', 'id'],
-      $mapNavigationService.$selectedRoute()?.['id'] || $hoveredRouteFeedId() || '',
+      $selectedRoute()?.['id'] || '',
+    ],
+    0.7,
+    [
+      '==',
+      ['get', 'id'],
+      $hoveredRouteFeedId() || '',
     ],
     0.8,
     0.5

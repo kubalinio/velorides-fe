@@ -17,6 +17,8 @@ export class MapNavigationService {
   $routesWithUncompletedData = this.routesStore.routes;
   $selectedRoute = this.routeStore.selectedRoute;
   $selectedRouteBounds = this.routeStore.selectedRouteBounds;
+  $hoveredSubwayId = this.routeStore.hoveredSubwayId;
+  $hoveredRouteFeedId = this.routesStore.hoveredRouteFeedId;
 
   constructor() {
     effect(() => {

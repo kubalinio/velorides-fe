@@ -46,12 +46,6 @@ export const RoutesStore = signalStore(
               : [...store.selectedRouteType(), routeType],
           });
         }),
-        switchMap(({ bbox }) =>
-          store._routesService.getRouteByArea(bbox, store.selectedRouteType()),
-        ),
-        tap((routes: GeoJSON.FeatureCollection) =>
-          patchState(store, { routes: routes }),
-        ),
       ),
     ),
     getRouteByArea: rxMethod<BBox>(

@@ -25,7 +25,7 @@ import { Router } from '@angular/router';
   template: `
     <sidebar-route-types></sidebar-route-types>
 
-    <section class="p-4">
+    <section class="pl-2.5 pr-4">
       <h2 class="${hlmLarge} mb-4">
         Routes in area ({{ $routes()?.features?.length || 0 }})
       </h2>

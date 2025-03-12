@@ -1,7 +1,7 @@
-<div class="flex mt-4 w-full flex-col gap-4">
+<div class="flex mt-4 w-full flex-col gap-4 h-1/2 overflow-hidden">
   <h3 hlmLarge class="font-semibold">Route Surfaces</h3>
 
-  <ul class="pb-20 overflow-y-auto flex flex-col gap-3">
+  <ul class="pb-20 overflow-y-auto flex flex-col gap-3 h-full">
     @for (
       route of routeWays();
       let i = $index;
@@ -42,9 +42,9 @@
               'https://openstreetmap.org/' + route.properties['id']
             "
             target="_blank"
-            class="flex items-center gap-2 text-sm"
+            class="flex items-center justify-center gap-2 text-sm"
           >
-            <span>Edit</span>
+            <span class="mt-px">Edit</span>
             <ng-icon name="lucide:external-link" class="!size-4" />
           </a>
         </div>

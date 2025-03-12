@@ -93,8 +93,6 @@ export class ExploreMapComponent {
   $mapInteraction = this.mapInteractionService;
   $mapNavigationService = this.mapNavigationService;
 
-  $hoveredSubwayId = this.routeStore.hoveredSubwayId;
-
   ngOnInit() {
     this.mapStore.getMapTiles('standard');
   }

@@ -24,11 +24,8 @@
       }
     </mgl-geojson-source>
 
-    <mgl-geojson-source id="route-subways">
-      @for (
-        route of $routeWays() ?? [];
-        track route.properties['id']
-      ) {
+    <mgl-geojson-source id="route-way">
+      @for (route of $routeWays() ?? []; track route.properties['id']) {
         <mgl-feature
           [geometry]="route.geometry"
           [properties]="route.properties"
@@ -36,143 +33,17 @@
       }
     </mgl-geojson-source>
 
+
     <viewing-map-viewpoints
       (centerMapToCluster)="
         $mapNavigationService.centerMapToCluster($event)
       "
     ></viewing-map-viewpoints>
 
-    <mgl-layer
-      id="route"
-      type="line"
-      source="routes"
-      [layout]="{
-        'line-join': 'round',
-        'line-cap': 'round',
-      }"
-      [paint]="{
-        'line-color': [
-          'match',
-          ['get', 'network'],
-          'icn',
-          '#8b5cf6',
-          'ncn',
-          '#b91c1c',
-          'rcn',
-          '#f97316',
-          'lcn',
-          '#000000',
-          '#000000'
-        ],
-        'line-width': [
-          'case',
-          [
-            '==',
-            ['get', 'id'],
-            $mapNavigationService.$selectedRoute()?.['id'] || $hoveredRouteFeedId() || '',
-          ],
-          4,
-          2,
-        ],
-        'line-opacity': [
-          'case',
-          [
-            '==',
-            ['get', 'id'],
-            $mapNavigationService.$selectedRoute()?.['id'] || $hoveredRouteFeedId() || '',
-          ],
-          0.9,
-          0.5
-        ],
-        'line-gap-width': 0,
-        'line-blur': 0,
-        'line-translate': [0, 0],
-      }"
-    >
-    </mgl-layer>
-    <mgl-layer
-      id="route-hover"
-      type="line"
-      source="routes"
-      [layout]="{
-        'line-join': 'round',
-        'line-cap': 'round',
-      }"
-      [paint]="{
-        'line-color': '#888',
-        'line-width': 16,
-        'line-opacity': 0,
-      }"
-      (layerMouseEnter)="$mapInteraction.onMouseEnter($event)"
-      (layerMouseMove)="$mapInteraction.onMouseMove($event)"
-      (layerMouseLeave)="$mapInteraction.onMouseLeave()"
-      (layerClick)="$mapInteraction.onRouteClick($event)"
-    >
-    </mgl-layer>
+    <map-route-layer></map-route-layer>
 
   @if ($selectedRoute()) {
-    <mgl-layer
-      id="route-subway"
-      type="line"
-      source="route-subways"
-      [layout]="{
-        'line-join': 'round',
-        'line-cap': 'round',
-      }"
-      [paint]="{
-        'line-color': [
-          'match',
-          ['get', 'surface'],
-          'paved',
-          '#3b82f6',
-          'asphalt',
-          '#374151',
-          'gravel',
-          '#eab308',
-          'ground',
-          '#78716c',
-          'unpaved',
-          '#f97316',
-          'wood',
-          '#262626',
-          'compacted',
-          '#f59e0b',
-          'paving_stones',
-          '#3b82f6',
-          'unhewn_cobblestone',
-          '#374151',
-          'cobblestone',
-          '#78716c',
-          'concrete',
-          '#dc2626',
-          '#dc2626'
-        ],
-        'line-width': [
-          'case',
-          [
-            'in',
-            ['get', 'surface'],
-            ['literal', ['asphalt', 'concrete', 'paved', 'unpaved', 'ground', 'wood', 'gravel', 'compacted', 'paving_stones', 'unhewn_cobblestone', 'cobblestone']]
-          ],
-          6,
-          8,
-        ],
-        'line-opacity': [
-          'case',
-          [
-            '==',
-            ['get', 'id'],
-            $hoveredSubwayId() ?? '',
-          ],
-          1,
-          0,
-        ],
-      }"
-      (layerMouseEnter)="this.$mapInteraction.onMouseMoveWay($event)"
-      (layerMouseMove)="this.$mapInteraction.onMouseMoveWay($event)"
-      (layerMouseLeave)="this.onMouseLeaveWay()"
-    >
-    </mgl-layer>
+    <map-way-layer></map-way-layer>
   }
 
     <map-hover-popup

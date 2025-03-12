@@ -35,29 +35,29 @@ export class RouteWaysService {
   getSurfaceColor(surface: string) {
     switch (surface) {
       case 'paved':
-        return 'bg-blue-500';
+        return '#3b82f6';
       case 'asphalt':
-        return 'bg-gray-700';
+        return '#374151';
       case 'gravel':
-        return 'bg-yellow-500';
+        return '#eab308';
       case 'ground':
-        return 'bg-stone-500';
+        return '#78716c';
       case 'unpaved':
-        return 'bg-orange-500';
+        return '#f97316';
       case 'wood':
-        return 'bg-neutral-800';
+        return '#262626';
       case 'compacted':
-        return 'bg-yellow-500';
+        return '#f59e0b';
       case 'paving_stones':
-        return 'bg-blue-500';
+        return '#3b82f6';
       case 'unhewn_cobblestone':
-        return 'bg-gray-700';
+        return '#374151';
       case 'cobblestone':
-        return 'bg-stone-500';
+        return '#78716c';
       case 'concrete':
-        return 'bg-red-600';
+        return '#dc2626';
       default:
-        return 'bg-red-600';
+        return '#dc2626';
     }
   }
 }

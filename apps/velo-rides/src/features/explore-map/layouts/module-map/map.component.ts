@@ -1,7 +1,6 @@
-import { Component, inject, ViewChild, signal } from '@angular/core';
+import { Component, inject, ViewChild } from '@angular/core';
 import {
   MapComponent,
-  LayerComponent,
   GeoJSONSourceComponent,
   FeatureComponent,
 } from '@velo/ngx-maplibre-gl';
@@ -24,6 +23,9 @@ import {
   RouteStore,
   RouteWaysService,
 } from '@velo/routes/data-access';
+import { MapStylesService } from './services/map-styles.service';
+import { WayLayerComponent } from './components/routes/way-layer.component';
+import { RouteLayerComponent } from './components/routes/route-layer.component';
 
 @Component({
   standalone: true,
@@ -31,7 +33,6 @@ import {
   imports: [
     MapComponent,
     MatCardModule,
-    LayerComponent,
     GeoJSONSourceComponent,
     FeatureComponent,
     SidebarButtonComponent,
@@ -40,6 +41,8 @@ import {
     FiltersRouteComponent,
     FiltersWaypointsComponent,
     ViewingMapViewpointsComponent,
+    WayLayerComponent,
+    RouteLayerComponent,
   ],
   templateUrl: './map.component.html',
   styles: [
@@ -72,9 +75,9 @@ export class ExploreMapComponent {
 
   private readonly mapInitService = inject(MapInitService);
   private readonly mapInteractionService = inject(MapInteractionService);
-  private readonly mapNavigationService = inject(MapNavigationService);
 
-  $hoverSubwayId = signal<string>('');
+  private readonly mapNavigationService = inject(MapNavigationService);
+  readonly mapStylesService = inject(MapStylesService);
 
   $routesWithUncompletedData = this.routesStore.routes;
   $routeWays = this.routeStore.routeWays;
@@ -90,15 +93,9 @@ export class ExploreMapComponent {
   $mapInteraction = this.mapInteractionService;
   $mapNavigationService = this.mapNavigationService;
 
-  $hoveredRouteFeedId = this.routesStore.hoveredRouteFeedId;
   $hoveredSubwayId = this.routeStore.hoveredSubwayId;
 
   ngOnInit() {
     this.mapStore.getMapTiles('standard');
-  }
-
-  onMouseLeaveWay() {
-    this.routeStore.setHoveredSubwayId(null);
-    this.$mapInteraction.onMouseLeave();
   }
 }

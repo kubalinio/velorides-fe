@@ -82,7 +82,7 @@
             $mapNavigationService.$selectedRoute()?.['id'] || $hoveredRouteFeedId() || '',
           ],
           0.9,
-          0.5,
+          0.5
         ],
         'line-gap-width': 0,
         'line-blur': 0,
@@ -123,10 +123,28 @@
         'line-color': [
           'match',
           ['get', 'surface'],
+          'paved',
+          '#3b82f6',
           'asphalt',
-          '#646669',
+          '#374151',
+          'gravel',
+          '#eab308',
+          'ground',
+          '#78716c',
+          'unpaved',
+          '#f97316',
+          'wood',
+          '#262626',
+          'compacted',
+          '#f59e0b',
+          'paving_stones',
+          '#3b82f6',
+          'unhewn_cobblestone',
+          '#374151',
+          'cobblestone',
+          '#78716c',
           'concrete',
-          '#ffffff',
+          '#dc2626',
           '#dc2626'
         ],
         'line-width': [
@@ -134,7 +152,7 @@
           [
             'in',
             ['get', 'surface'],
-            ['literal', ['asphalt', 'concrete', 'paved', 'unpaved', 'ground', 'wood', 'gravel']]
+            ['literal', ['asphalt', 'concrete', 'paved', 'unpaved', 'ground', 'wood', 'gravel', 'compacted', 'paving_stones', 'unhewn_cobblestone', 'cobblestone']]
           ],
           6,
           8,

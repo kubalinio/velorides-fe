@@ -5,7 +5,7 @@ import { MatListModule } from '@angular/material/list';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { RouterOutlet } from '@angular/router';
 import { hlm } from '@spartan-ng/brain/core';
-import { ExploreMapComponent } from './module-map/map.component';
+import { ExploreMapComponent } from './layouts/module-map/map.component';
 
 @Component({
   standalone: true,

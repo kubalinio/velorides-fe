@@ -8,7 +8,10 @@
       track route.properties['id']
     ) {
       <li
-        class="flex gap-2 py-1.5 pr-2 pl-4 items-center justify-between relative overflow-hidden border-0 hover:bg-gray-100"
+        [class]="hlm(
+          'flex gap-2 py-2.5 pr-2 pl-4 items-center justify-between relative overflow-hidden border-0 hover:bg-gray-100',
+          $hoveredSubwayId() === route.properties['id'] && 'bg-gray-100'
+        )"
         hlmCard
         (mouseenter)="selectSubway(route.properties['id'])"
         (mouseleave)="selectSubway(null)"
@@ -17,21 +20,7 @@
           [class]="
             hlm(
               'flex -left-1 items-center justify-center h-full w-3 absolute top-0 bottom-0 pr-1',
-              !route.properties['surface'] && 'bg-red-600',
-              route.properties['surface'] === 'paved' &&
-                'bg-blue-500',
-              route.properties['surface'] === 'asphalt' &&
-                'bg-gray-700',
-              route.properties['surface'] === 'gravel' &&
-                'bg-yellow-500',
-              route.properties['surface'] === 'ground' &&
-                'bg-stone-500',
-              route.properties['surface'] === 'unpaved' &&
-                'bg-orange-500',
-              route.properties['surface'] === 'wood' &&
-                'bg-brown-500',
-              route.properties['surface'] === 'compacted' &&
-                'bg-yellow-500'
+              getSurfaceColor(route.properties['surface'])
             )
           "
         >
@@ -42,7 +31,7 @@
           hlmCardContent
         >
           <span hlmLarge>
-            {{ route.properties['surface'] ?? 'N/A' }}
+            {{ formatSufaceName(route.properties['surface']) ?? 'N/A' }}
           </span>
         </div>
 
@@ -52,7 +41,7 @@
               'https://openstreetmap.org/' + route.properties['id']
             "
             target="_blank"
-            class="flex items-center gap-2"
+            class="flex items-center gap-2 text-sm"
           >
             <span>Edit</span>
             <ng-icon name="lucide:external-link" class="!size-4" />

@@ -93,6 +93,7 @@ export class MapInteractionService {
       },
       properties: {
         type: 'way',
+        name: evt.features[0].properties.name,
         surface: evt.features[0].properties.surface ?? 'N/A',
       },
       id: evt.features[0].properties['@id'],

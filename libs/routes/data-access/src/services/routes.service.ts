@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Observable, of, switchMap } from 'rxjs';
-import { BBox } from 'geojson';
+import { BBox, Feature } from 'geojson';
 import osmtogeojson from 'osmtogeojson';
 import { RouteType } from '../models/routes';
 import { OverpassResponse } from '../models/overpass-api';
@@ -49,7 +49,9 @@ export class RoutesService {
               feature.id?.toString().includes('relation'),
           );
 
-          const routesWithBounds = routeFeatures.map((feature) => {
+          const sortedRoutes = this.sortRoutesByNetwork(routeFeatures);
+
+          const routesWithBounds = sortedRoutes.map((feature) => {
             const route = feature as GeoJSON.Feature<GeoJSON.LineString>;
 
             const bounds = this.boundEntireRouteCoordinates(route);
@@ -71,6 +73,27 @@ export class RoutesService {
           return of(routes as unknown as GeoJSON.FeatureCollection);
         }),
       );
+  }
+
+  private sortRoutesByNetwork(routes: GeoJSON.Feature[]) {
+    const networkPriority = {
+      icn: 0,
+      ncn: 1,
+      rcn: 2,
+      lcn: 3,
+    };
+
+    return routes.sort((a: Feature, b: Feature) => {
+      const aNetwork = (a.properties?.['network'] as string)?.toLowerCase();
+      const bNetwork = (b.properties?.['network'] as string)?.toLowerCase();
+
+      const aPriority =
+        networkPriority[aNetwork as keyof typeof networkPriority] ?? 4;
+      const bPriority =
+        networkPriority[bNetwork as keyof typeof networkPriority] ?? 4;
+
+      return aPriority - bPriority;
+    });
   }
 
   private boundEntireRouteCoordinates(route: GeoJSON.Feature) {

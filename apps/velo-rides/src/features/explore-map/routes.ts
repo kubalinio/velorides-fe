@@ -5,9 +5,7 @@ export const EXPLORE_MAP_ROUTES: Routes = [
   {
     path: '',
     loadComponent: () =>
-      import('./layouts/explore-map.component').then(
-        (m) => m.ExploreMapViewComponent,
-      ),
+      import('./explore-map.component').then((m) => m.ExploreMapViewComponent),
     children: [
       {
         path: 'explore-map',

@@ -1,26 +1,15 @@
-# Angular Project Setup
+# Velo Rides
+
+Velo Rides is a web application that allows users to explore and fill out the bike route information from OpenStreetMap.
 
 ## Installation
 
-```bash
-pnpm create @angular@latest -s -t -S --experimental-zoneless --ssr false --style scss [yourProjectName]
-```
-
 Manually add the following props to the angular.json.
-The path is `projects.[yourProjectName].schematics.@schematics/angular:component`
 
 - "changeDetection": "OnPush"
 - "flat": true
 
 ## UI
-
-```bash
-pnpm ng add @angular/material
-pnpm install -D tailwindcss postcss autoprefixer
-pnpm tailwindcss init
-```
-
-Open `tailwind.config.js` and add the following code to `module.exports`:
 
 ```javascript
 module.exports = {
@@ -155,7 +144,3 @@ module.exports = tseslint.config(
   },
 );
 ```
-
----
-
-**Enjoy your new Angular project setup! 🚀**

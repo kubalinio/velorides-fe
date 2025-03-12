@@ -19,7 +19,11 @@ import { FiltersWaypointsComponent } from './components/filters/filters-waypoint
 import { MapInitService } from './services/map-init.service';
 import { MapInteractionService } from './services/map-interaction.service';
 import { MapNavigationService } from './services/map-navigation.service';
-import { RoutesStore, RouteStore } from '@velo/routes/data-access';
+import {
+  RoutesStore,
+  RouteStore,
+  RouteWaysService,
+} from '@velo/routes/data-access';
 
 @Component({
   standalone: true,
@@ -63,6 +67,8 @@ export class ExploreMapComponent {
   private readonly mapUrlService = inject(MapUrlService);
   private readonly routesStore = inject(RoutesStore);
   private readonly routeStore = inject(RouteStore);
+
+  readonly routeWaysService = inject(RouteWaysService);
 
   private readonly mapInitService = inject(MapInitService);
   private readonly mapInteractionService = inject(MapInteractionService);

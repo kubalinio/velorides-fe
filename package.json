@@ -1,6 +1,6 @@
 {
-  "name": "angular-starter",
-  "version": "0.0.0",
+  "name": "velo-rides",
+  "version": "0.1.0",
   "scripts": {
     "ng": "ng",
     "start": "nx serve velo-rides",
@@ -10,7 +10,6 @@
     "lint": "nx lint",
     "prepare": "husky"
   },
-  "private": true,
   "dependencies": {
     "@angular-architects/ngrx-toolkit": "^19.1.0",
     "@angular/animations": "^19.0.0",

@@ -5,7 +5,7 @@ import { hlm } from '@spartan-ng/brain/core';
 import { HlmCardDirective } from '@spartan-ng/ui-card-helm';
 import { HlmCardContentDirective } from '@spartan-ng/ui-card-helm';
 
-import { RouteStore } from '@velo/routes/data-access';
+import { RouteStore, RouteWaysService } from '@velo/routes/data-access';
 
 @Component({
   selector: 'velo-route-ways',
@@ -20,10 +20,17 @@ import { RouteStore } from '@velo/routes/data-access';
 })
 export class RouteWaysComponent {
   private readonly routeStore = inject(RouteStore);
+  private readonly routeWaysService = inject(RouteWaysService);
   readonly routeWays = input<GeoJSON.Feature[]>([]);
   readonly hlm = hlm;
+
+  $hoveredSubwayId = this.routeStore.hoveredSubwayId;
 
   selectSubway(id: string | null) {
     this.routeStore.setHoveredSubwayId(id);
   }
+
+  readonly getSurfaceColor = this.routeWaysService.getSurfaceColor;
+
+  readonly formatSufaceName = this.routeWaysService.formatSufaceName;
 }

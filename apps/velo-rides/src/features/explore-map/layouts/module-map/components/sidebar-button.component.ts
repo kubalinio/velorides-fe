@@ -7,7 +7,7 @@ import { NgIconComponent } from '@ng-icons/core';
 import { lucidePanelRight } from '@ng-icons/lucide';
 import { HlmIconDirective } from '@spartan-ng/ui-icon-helm';
 
-import { ExploreMapViewComponent } from '../../explore-map.component';
+import { ExploreMapViewComponent } from '../../../explore-map.component';
 
 @Component({
   standalone: true,

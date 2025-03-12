@@ -41,10 +41,13 @@ export class RouteService {
             ...rest,
             elements: [elements[0]],
           });
-          const subways = osmtogeojson({
-            ...rest,
-            elements: elements.slice(1),
-          });
+          const subways = osmtogeojson(
+            {
+              ...rest,
+              elements: elements.slice(1),
+            },
+            {},
+          );
 
           if (routeGeoJson.features && routeGeoJson.features.length > 0) {
             const routeFeature = routeGeoJson

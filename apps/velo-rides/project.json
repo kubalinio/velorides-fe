@@ -2,8 +2,8 @@
   "name": "velo-rides",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "projectType": "application",
-  "prefix": "app",
-  "sourceRoot": "apps/velo-rides/src",
+  "prefix": "velo",
+  "sourceRoot": "src",
   "tags": [],
   "targets": {
     "build": {

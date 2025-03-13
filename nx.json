@@ -1,5 +1,6 @@
 {
   "$schema": "./node_modules/nx/schemas/nx-schema.json",
+  "defaultProject": "velo-rides-workspace",
   "targetDefaults": {
     "build": {
       "cache": true,

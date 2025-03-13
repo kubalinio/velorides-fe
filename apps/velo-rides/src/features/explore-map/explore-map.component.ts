@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
@@ -6,6 +6,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { RouterOutlet } from '@angular/router';
 import { hlm } from '@spartan-ng/brain/core';
 import { ExploreMapComponent } from './layouts/module-map/map.component';
+import { RouteStore } from '@velo/routes/data-access';
 
 @Component({
   standalone: true,
@@ -22,12 +23,17 @@ import { ExploreMapComponent } from './layouts/module-map/map.component';
       class="!h-[calc(100vh-64px)] !top-16 !bg-sidebar-background"
     >
       <mat-sidenav-content
-        class="!bg-gradient-map !border-sidebar-background !border-0"
+        [class]="
+          hlm(
+            '!bg-sidebar-background !border-sidebar-background !border-0',
+            $selectedRoute() && '!bg-gradient-map'
+          )
+        "
       >
         <section
           [class]="
             hlm(
-              'h-full rounded-r-2xl overflow-hidden shadow-md mr-2 ',
+              'h-full rounded-r-2xl overflow-hidden shadow-md mr-2',
               !sidenavIsOpen() && 'mr-0'
             )
           "
@@ -64,7 +70,11 @@ import { ExploreMapComponent } from './layouts/module-map/map.component';
 })
 export class ExploreMapViewComponent {
   protected readonly hlm = hlm;
+  private readonly routeStore = inject(RouteStore);
+
   sidenavIsOpen = signal(true);
+
+  $selectedRoute = this.routeStore.selectedRoute;
 
   toggleSidenav() {
     this.sidenavIsOpen.update((isOpen) => !isOpen);

@@ -123,11 +123,27 @@
     </div>
   }
 
-  @if (!$isLoadedWays()) {
+  @if ($isLoadingWays()) {
     <div class="p-4 text-center">
-      <p>Loading...</p>
+      <p>Loading Ways...</p>
     </div>
-  } @else {
+  }
+
+  @if ($isErrorWays()) {
+    <div class="p-4 text-center flex flex-col gap-2">
+      <p>Error loading route ways. Please try again.</p>
+
+      <button
+        hlmBtn
+        variant="default"
+        (click)="retryLoadingRoute()"
+      >
+        Retry
+      </button>
+    </div>
+  }
+
+  @if (!$isLoadingWays()) {
     <velo-route-ways [routeWays]="$routeWays()"></velo-route-ways>
   }
 
@@ -135,7 +151,7 @@
     <button
       hlmBtn
       variant="outline"
-      (click)="exportRouteAsGpx()"
+      (click)="exportRouteToGpx()"
       class="flex items-center gap-2"
     >
       <ng-icon name="lucide:download" class="!size-4"></ng-icon>

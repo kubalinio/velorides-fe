@@ -345,7 +345,7 @@ export class GpxExportService {
       : 'unnamed_route';
 
     const date = new Date().toISOString().split('T')[0];
-    return `velo_route_${sanitizedName}_${date}.gpx`;
+    return `velo_rides_${sanitizedName}_${date}.gpx`;
   }
 
   /**

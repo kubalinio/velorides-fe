@@ -55,7 +55,8 @@ export class EditRouteComponent {
   $selectedRouteBounds = this.routeStore.selectedRouteBounds;
   $routeWays = this.routeStore.routeWays;
 
-  $isLoadedWays = this.routeStore.getRouteLoaded;
+  $isLoadingWays = this.routeStore.getRouteLoading;
+  $isErrorWays = this.routeStore.getRouteError;
 
   constructor() {
     this.activatedRoute.paramMap.subscribe((params) => {
@@ -72,7 +73,7 @@ export class EditRouteComponent {
     this.router.navigate(['/explore-map']);
   }
 
-  exportRouteAsGpx() {
+  exportRouteToGpx() {
     const selectedRoute = this.$selectedRoute();
     const selectedRouteBounds = this.$selectedRouteBounds();
 
@@ -96,5 +97,9 @@ export class EditRouteComponent {
     } catch (error) {
       console.error('Error exporting route as GPX:', error);
     }
+  }
+
+  retryLoadingRoute() {
+    this.routeStore.getRouteById(this.$selectedRoute()['id']);
   }
 }

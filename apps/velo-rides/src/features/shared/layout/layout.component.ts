@@ -48,7 +48,7 @@ export class LayoutComponent {
   links = [
     {
       url: '/explore-map',
-      routerLink: false,
+      routerLink: true,
       label: 'Explore Map',
     },
     {

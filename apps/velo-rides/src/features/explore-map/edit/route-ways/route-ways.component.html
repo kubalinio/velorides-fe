@@ -1,9 +1,45 @@
 <div class="flex mt-4 w-full flex-col gap-4 h-1/2 overflow-hidden">
-  <h3 hlmLarge class="font-semibold">Route Surfaces</h3>
+  <div class="flex items-center justify-between">
+    <h3 hlmLarge class="font-semibold">
+      Route Surfaces ({{ $surfacesCheckedCount() }})
+    </h3>
+
+    <div>
+      <div class="flex w-full items-center justify-center">
+        <button
+          hlmBtn
+          variant="outline"
+          align="center"
+          [brnMenuTriggerFor]="menu"
+        >
+          <ng-icon name="lucide:grid-2x2" hlmMenuIcon />
+          <span>Surfaces</span>
+        </button>
+      </div>
+
+      <ng-template #menu>
+        <hlm-menu variant="menubar" class="min-w-[9rem] max-h-[16rem] overflow-y-auto">
+          <hlm-menu-group>
+            @for (surface of surfaceTypesAvailable(); track surface) {
+              <button
+                hlmMenuItemCheckbox
+                class="pl-4 pr-1.5 justify-end text-xs whitespace-nowrap"
+                [checked]="$surfacesChecked().includes(surface.name)"
+                (triggered)="onSelectSurface(surface.name)"
+              >
+                <hlm-menu-item-check class="size-3 left-1" />
+                <span>{{ surface.title }}</span>
+              </button>
+            }
+          </hlm-menu-group>
+        </hlm-menu>
+      </ng-template>
+    </div>
+  </div>
 
   <ul class="pb-20 overflow-y-auto flex flex-col gap-3 h-full">
     @for (
-      route of routeWays();
+      route of $filteredRouteWays();
       let i = $index;
       track route.properties['id']
     ) {
@@ -32,7 +68,8 @@
           hlmCardContent
         >
           <span hlmLarge>
-            {{ formatSufaceName(route.properties['surface']) ?? 'N/A' }}
+            {{ getSurfaceName(route.properties['surface']) ?? 'N/A' }}
+              <!-- {{route.properties['surface'] ?? 'N/A'}} -->
           </span>
         </div>
 

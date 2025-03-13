@@ -5,7 +5,13 @@ import { Injectable } from '@angular/core';
 })
 export class RouteWaysService {
   formatSufaceName(surface: string) {
+    // const surfacePrimitive = surface.replace('_', ':');
+    // console.log('surfacePrimitive', surfacePrimitive.toUpperCase());
+    // return surface;
+
     switch (surface) {
+      case 'n/a':
+        return 'N/A';
       case 'paved':
         return 'Paved';
       case 'asphalt':
@@ -26,6 +32,22 @@ export class RouteWaysService {
         return 'Unhewn Cobblestone';
       case 'cobblestone':
         return 'Cobblestone';
+      case 'sand':
+        return 'Sand';
+      case 'fine_gravel':
+        return 'Fine Gravel';
+      case 'concrete:plates':
+        return 'Concrete Plates';
+      case 'set':
+        return 'Set';
+      case 'grass':
+        return 'Grass';
+      case 'concrete':
+        return 'Concrete';
+      case 'grass_paver':
+        return 'Grass Paver';
+      case 'dirt':
+        return 'Dirt';
 
       default:
         return surface;
@@ -50,12 +72,15 @@ export class RouteWaysService {
         return '#f59e0b';
       case 'paving_stones':
         return '#3b82f6';
-      case 'unhewn_cobblestone':
-        return '#374151';
       case 'cobblestone':
         return '#78716c';
+      case 'unhewn_cobblestone':
       case 'concrete':
-        return '#dc2626';
+      case 'fine_gravel':
+      case 'sand':
+      case 'concrete:plates':
+        return '#374151';
+
       default:
         return '#dc2626';
     }

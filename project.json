@@ -38,6 +38,12 @@
   "targets": {
     "build": {
       "executor": "@angular-devkit/build-angular:application",
+      "dependsOn": [
+        {
+          "target": "build",
+          "projects": "ngx-maplibre-gl"
+        }
+      ],
       "options": {
         "outputPath": "dist/velo-rides",
         "index": "apps/velo-rides/src/index.html",

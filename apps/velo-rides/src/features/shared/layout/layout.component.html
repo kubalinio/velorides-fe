@@ -9,13 +9,13 @@
     <div class="menu-items ml-4 text-sm">
       @for (link of links; track link) {
         @if (link.routerLink) {
-          <a mat-button [routerLink]="link.url">{{ link.label }}</a>
+          <a hlmBtn variant="ghost" [routerLink]="link.url">{{ link.label }}</a>
         } @else if (!link.disabled) {
-          <a mat-button [href]="link.url">{{ link.label }}</a>
+          <a hlmBtn variant="ghost" [href]="link.url">{{ link.label }}</a>
         } @else {
-          <a mat-button [href]="link.url" disabled class="!text-gray-400 !cursor-not-allowed !pointer-events-auto">{{
+          <button hlmBtn variant="ghost"disabled class="!text-gray-400 !cursor-not-allowed !pointer-events-auto">{{
             link.label
-          }}</a>
+          }}</button>
         }
       }
     </div>

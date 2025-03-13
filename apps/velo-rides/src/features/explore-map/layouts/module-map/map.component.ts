@@ -29,7 +29,7 @@ import { RouteLayerComponent } from './components/routes/route-layer.component';
 
 @Component({
   standalone: true,
-  selector: 'app-explore-map',
+  selector: 'velo-explore-map',
   imports: [
     MapComponent,
     MatCardModule,

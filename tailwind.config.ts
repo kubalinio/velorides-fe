@@ -116,6 +116,7 @@ const config: Config = {
         },
 
         'sidebar-background': 'hsl(var(--sidebar-background))',
+        'sidebar-background-footer': 'hsl(var(--sidebar-background-footer))',
         'sidebar-foreground': 'hsl(var(--sidebar-foreground))',
         'sidebar-primary': 'hsl(var(--sidebar-primary))',
         'sidebar-primary-foreground': 'hsl(var(--sidebar-primary-foreground))',
@@ -157,6 +158,8 @@ const config: Config = {
           'linear-gradient(45deg, #FF414Be6 0%, #FF7A81e6 100%)',
         'gradient-warning': 'linear-gradient(45deg, #FFAE41 0%, #FFC06A 100%)',
         'gradient-info': 'linear-gradient(45deg, #4ABDE8 0%, #77DAFF 100%)',
+        'gradient-map':
+          'linear-gradient(to bottom, #D3D3D4 0%, #D3D3D4 90%, #BBBEBF 100%)',
       },
       keyframes: {
         'accordion-down': {

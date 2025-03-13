@@ -18,17 +18,21 @@ import { ExploreMapComponent } from './layouts/module-map/map.component';
     ExploreMapComponent,
   ],
   template: `
-    <mat-sidenav-container class="!h-[calc(100vh-64px)] !top-16">
-      <mat-sidenav-content class="!bg-gray-200">
+    <mat-sidenav-container
+      class="!h-[calc(100vh-64px)] !top-16 !bg-sidebar-background"
+    >
+      <mat-sidenav-content
+        class="!bg-gradient-map !border-sidebar-background !border-0"
+      >
         <section
           [class]="
             hlm(
-              'h-full rounded-r-2xl overflow-hidden shadow-md mr-2',
+              'h-full rounded-r-2xl overflow-hidden shadow-md mr-2 ',
               !sidenavIsOpen() && 'mr-0'
             )
           "
         >
-          <app-explore-map></app-explore-map>
+          <velo-explore-map></velo-explore-map>
         </section>
       </mat-sidenav-content>
       <mat-sidenav
@@ -37,7 +41,7 @@ import { ExploreMapComponent } from './layouts/module-map/map.component';
         position="end"
         [opened]="sidenavIsOpen()"
         (openedChange)="onSidenavChange()"
-        class="!bg-gray-200 !border-gray-200"
+        class="!bg-sidebar-background !border-sidebar-background !border-0 !-ml-1"
       >
         <mat-nav-list>
           <router-outlet></router-outlet>

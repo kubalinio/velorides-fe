@@ -11,7 +11,7 @@ import type {
   MapLayerTouchEvent,
   MapMouseEvent,
   MapSourceDataEvent,
-  mapTilesDataEvent,
+  MapStyleDataEvent,
   MapTouchEvent,
   MapWheelEvent,
 } from 'maplibre-gl';
@@ -90,10 +90,10 @@ export interface MapEvent {
   render: OutputEmitterRef<MapLibreEvent & EventData>;
   mapError: OutputEmitterRef<ErrorEvent & EventData>;
   data: OutputEmitterRef<MapDataEvent & EventData>;
-  styleData: OutputEmitterRef<mapTilesDataEvent & EventData>;
+  styleData: OutputEmitterRef<MapStyleDataEvent & EventData>;
   sourceData: OutputEmitterRef<MapSourceDataEvent & EventData>;
   dataLoading: OutputEmitterRef<MapDataEvent & EventData>;
-  styleDataLoading: OutputEmitterRef<mapTilesDataEvent & EventData>;
+  styleDataLoading: OutputEmitterRef<MapStyleDataEvent & EventData>;
   sourceDataLoading: OutputEmitterRef<MapSourceDataEvent & EventData>;
   styleImageMissing: OutputEmitterRef<{ id: string } & EventData>;
   idle: OutputEmitterRef<MapLibreEvent & EventData>;

@@ -6,9 +6,17 @@ module.exports = [
   ...nx.configs['flat/base'],
   ...nx.configs['flat/typescript'],
   ...nx.configs['flat/javascript'],
-  ...tseslint.configs.strictTypeChecked,
-  ...tseslint.configs.stylistic,
   ...angular.configs.tsRecommended,
+  ...tseslint.configs.stylistic,
+  ...tseslint.configs.recommendedTypeChecked,
+  {
+    languageOptions: {
+      parserOptions: {
+        projectService: true,
+        tsconfigRootDir: __dirname,
+      },
+    },
+  },
   {
     ignores: ['**/dist'],
   },

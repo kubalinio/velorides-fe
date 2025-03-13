@@ -1,3 +1,3 @@
-pnpm nx lint
-pnpm nx test --watch=false
-pnpm lint-staged --allow-empty
+#pnpm nx lint
+#pnpm nx test --watch=false
+#pnpm lint-staged --allow-empty

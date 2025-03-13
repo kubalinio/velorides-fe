@@ -45,7 +45,7 @@
         }
       ],
       "options": {
-        "outputPath": "dist/velo-rides",
+        "outputPath": "dist/velorides",
         "index": "apps/velo-rides/src/index.html",
         "browser": "apps/velo-rides/src/main.ts",
         "polyfills": [],

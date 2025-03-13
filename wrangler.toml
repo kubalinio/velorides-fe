@@ -1,4 +1,4 @@
 #:schema node_modules/wrangler/config-schema.json
 name = "velorides-fe"
 compatibility_date = "2025-03-13"
-pages_build_output_dir = "./dist/velo-rides"
+pages_build_output_dir = "./dist"

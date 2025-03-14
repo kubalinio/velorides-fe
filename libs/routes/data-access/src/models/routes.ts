@@ -15,6 +15,7 @@ interface RoutesListState {
 interface RoutesInteractionState {
   selectedRouteType: RouteType[];
   hoveredRouteFeedId: string | null;
+  isSidebarOpen: boolean;
 }
 
 interface RoutesListConfig {
@@ -36,6 +37,7 @@ const routesInitialState: RoutesListState = {
 const routesInteractionInitialState: RoutesInteractionState = {
   selectedRouteType: ['lcn', 'rcn', 'ncn', 'icn'] as RouteType[],
   hoveredRouteFeedId: null,
+  isSidebarOpen: true,
 };
 
 export type {

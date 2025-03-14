@@ -147,12 +147,13 @@
     <velo-route-ways [routeWays]="$routeWays()"></velo-route-ways>
   }
 
-  <div class="bottom-0 right-4 py-4 pl-5 pr-3.5 bg-gray-300 flex gap-2 mt-4 w-[22rem] fixed justify-between">
-    <button
-      hlmBtn
+  @if (!$isLoadingWays()) {
+    <div class="bottom-0 right-1 md:right-4 py-4 pl-5 pr-3.5 bg-gray-300 flex gap-2 mt-4 w-[283px] md:w-[412px] fixed justify-between">
+      <button
+        hlmBtn
       variant="outline"
       (click)="exportRouteToGpx()"
-      class="flex items-center gap-2"
+      class="flex items-center gap-2 text-sm md:text-base px-3 md:px-4"
     >
       <ng-icon name="lucide:download" class="!size-4"></ng-icon>
 
@@ -165,7 +166,7 @@
         target="_blank"
         hlmBtn
         variant="default"
-        class="flex items-center gap-2"
+        class="flex items-center gap-2 text-sm md:text-base px-3 md:px-4"
       >
         Update Route
       </a>
@@ -178,5 +179,6 @@
         Update Route
       </button>
     }
-  </div>
+    </div>
+  }
 </section>

@@ -12,6 +12,8 @@ import {
 } from '@spartan-ng/ui-menu-helm';
 import { WaypointsStore } from '@velo/waypoints/data-access';
 import { ViewpointType } from 'libs/waypoints/data-access/src/models/viewpoint';
+import { hlm } from '@spartan-ng/brain/core';
+import { RoutesStore } from '@velo/routes/data-access';
 
 @Component({
   selector: 'filters-waypoints',
@@ -28,7 +30,7 @@ import { ViewpointType } from 'libs/waypoints/data-access/src/models/viewpoint';
   ],
   providers: [provideIcons({ lucideBinoculars, lucideWaypoints })],
   template: `
-    <div class="absolute top-4 left-4">
+    <div [class]="hlm('absolute top-4 left-4', $isSidebarOpen() && 'hidden')">
       <div class="flex w-full items-center justify-center">
         <button
           hlmBtn
@@ -63,8 +65,11 @@ import { ViewpointType } from 'libs/waypoints/data-access/src/models/viewpoint';
   `,
 })
 export class FiltersWaypointsComponent {
+  readonly hlm = hlm;
   private readonly waypointsStore = inject(WaypointsStore);
+  private readonly routesStore = inject(RoutesStore);
 
+  $isSidebarOpen = this.routesStore.isSidebarOpen;
   $selectedViewpoint = this.waypointsStore.selectedViewpoint;
 
   viewpointChecked = signal(

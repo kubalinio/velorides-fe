@@ -78,6 +78,11 @@ export const RoutesStore = signalStore(
     setHoveredRouteFeedId: rxMethod<string>(
       pipe(tap((id: string) => patchState(store, { hoveredRouteFeedId: id }))),
     ),
+    toggleSidebar: rxMethod<void>(
+      pipe(
+        tap(() => patchState(store, { isSidebarOpen: !store.isSidebarOpen() })),
+      ),
+    ),
   })),
   withCallState({ collection: 'getRoutes' }),
 );

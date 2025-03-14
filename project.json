@@ -45,10 +45,10 @@
         }
       ],
       "options": {
-        "outputPath": "dist/velorides",
+        "outputPath": "dist/velo-rides",
         "index": "apps/velo-rides/src/index.html",
         "browser": "apps/velo-rides/src/main.ts",
-        "polyfills": [],
+        "polyfills": ["zone.js"],
         "tsConfig": "apps/velo-rides/tsconfig.app.json",
         "inlineStyleLanguage": "scss",
         "assets": [
@@ -91,7 +91,6 @@
         },
         "development": {
           "optimization": false,
-          "vendorChunk": true,
           "extractLicenses": false,
           "sourceMap": true,
           "namedChunks": true

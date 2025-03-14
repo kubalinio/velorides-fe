@@ -30,7 +30,11 @@ import { RoutesStore } from '@velo/routes/data-access';
   ],
   providers: [provideIcons({ lucideBinoculars, lucideWaypoints })],
   template: `
-    <div [class]="hlm('absolute top-4 left-4', $isSidebarOpen() && 'hidden')">
+    <div
+      [class]="
+        hlm('absolute top-4 left-4', $isSidebarOpen() && 'max-sm:hidden')
+      "
+    >
       <div class="flex w-full items-center justify-center">
         <button
           hlmBtn

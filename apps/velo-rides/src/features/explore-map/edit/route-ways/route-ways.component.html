@@ -67,13 +67,35 @@
           class="flex gap-2 p-0 items-center justify-start"
           hlmCardContent
         >
-          <span hlmLarge>
+          <p class="flex flex-col items-start justify-start">
+            <span class="text-[0.6rem]/3 uppercase text-gray-500">Surface</span>
+
+            <span hlmLarge class="line-clamp-1 w-28 text-sm">
             {{ getSurfaceName(route.properties['surface']) ?? 'N/A' }}
-              <!-- {{route.properties['surface'] ?? 'N/A'}} -->
           </span>
+        </p>
+
+        <p class="flex flex-col items-start justify-start">
+          <span class="text-[0.6rem]/3 uppercase text-gray-500">Name</span>
+
+          <span hlmLarge class="line-clamp-1 text-sm">
+          {{ route.properties['name'] ?? 'N/A' }}
+        </span>
+      </p>
         </div>
 
-        <div hlmCardFooter>
+        <div hlmCardFooter class="flex gap-2">
+          <button
+            hlmBtn
+            variant="ghost"
+            (click)="selectWayZoom(route)"
+            class="p-1.5 h-auto flex items-center justify-center gap-1 hover:scale-105 hover:text-foreground text-sm data-[active=true]:bg-gray-200/80 data-[active=true]:cursor-not-allowed data-[active=true]:pointer-events-none"
+            [disabled]="route.properties['id'] === $selectedWay()?.properties['id']"
+            [attr.data-active]="route.properties['id'] === $selectedWay()?.properties['id']"
+          >
+          <ng-icon name="lucide:locate-fixed" class="!size-[1.1rem]" />
+          </button>
+
           <a
             [href]="
               'https://openstreetmap.org/' + route.properties['id']

@@ -97,6 +97,21 @@ export const RouteStore = signalStore(
     setHoveredSubwayId: rxMethod<string>(
       pipe(tap((id: string) => patchState(store, { hoveredSubwayId: id }))),
     ),
+    setSelectedWay: rxMethod<GeoJSON.Feature<GeoJSON.LineString>>(
+      pipe(
+        tap((way: GeoJSON.Feature<GeoJSON.LineString>) =>
+          patchState(store, {
+            selectedWay: {
+              ...way,
+              properties: {
+                ...way.properties,
+                bounds: JSON.stringify(way.geometry.coordinates),
+              },
+            },
+          }),
+        ),
+      ),
+    ),
   })),
   withCallState({ collection: 'getRoute' }),
 );

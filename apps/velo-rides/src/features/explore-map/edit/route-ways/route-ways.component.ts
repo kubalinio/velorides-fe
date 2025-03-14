@@ -4,6 +4,7 @@ import {
   lucideBinoculars,
   lucideExternalLink,
   lucideGrid2x2,
+  lucideLocateFixed,
 } from '@ng-icons/lucide';
 import { hlm } from '@spartan-ng/brain/core';
 import { BrnMenuTriggerDirective } from '@spartan-ng/brain/menu';
@@ -40,6 +41,7 @@ import { RouteStore, RouteWaysService } from '@velo/routes/data-access';
       lucideExternalLink,
       lucideBinoculars,
       lucideGrid2x2,
+      lucideLocateFixed,
     }),
   ],
   templateUrl: './route-ways.component.html',
@@ -51,8 +53,8 @@ export class RouteWaysComponent {
   readonly routeWays = input<GeoJSON.Feature[]>([]);
 
   $surfacesChecked = signal<string[]>([]);
-
   surfaceTypesAvailable = computed(() => this.getAvailableSurfaces());
+  readonly $selectedWay = this.routeStore.selectedWay;
 
   readonly $filteredRouteWays = computed(() => {
     if (this.$surfacesChecked().length === 0) {
@@ -76,6 +78,12 @@ export class RouteWaysComponent {
 
   selectSubway(id: string | null) {
     this.routeStore.setHoveredSubwayId(id);
+  }
+
+  selectWayZoom(way: GeoJSON.Feature) {
+    this.routeStore.setSelectedWay(
+      way as unknown as GeoJSON.Feature<GeoJSON.LineString>,
+    );
   }
 
   readonly getSurfaceColor = this.routeWaysService.getSurfaceColor;

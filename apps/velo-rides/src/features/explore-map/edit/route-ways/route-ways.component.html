@@ -64,13 +64,13 @@
         </div>
 
         <div
-          class="flex gap-2 p-0 items-center justify-start"
+          class="flex md:flex-row flex-col gap-2 p-0 md:items-center justify-start"
           hlmCardContent
         >
           <p class="flex flex-col items-start justify-start">
             <span class="text-[0.6rem]/3 uppercase text-gray-500">Surface</span>
 
-            <span hlmLarge class="line-clamp-1 w-28 text-sm">
+            <span hlmLarge class="line-clamp-1 w-20 md:w-28 text-sm">
             {{ getSurfaceName(route.properties['surface']) ?? 'N/A' }}
           </span>
         </p>

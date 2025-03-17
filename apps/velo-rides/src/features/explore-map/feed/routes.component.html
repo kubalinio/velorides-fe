@@ -1,0 +1,49 @@
+<velo-route-types></velo-route-types>
+
+<section class="pl-2.5 pr-4">
+  <h2 hlmLarge class="mb-4">
+    Routes in area
+    @if ($routesLoaded() && !$routesError()) {
+      ({{ $routes()?.features?.length || 0 }})
+    }
+  </h2>
+
+  @if ($routesLoading()) {
+    <div class="flex flex-col gap-3">
+      @for (i of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]; track i) {
+        <velo-route-skeleton></velo-route-skeleton>
+      }
+    </div>
+  }
+
+  @if ($routesLoaded() && !$routesError()) {
+    <velo-routes-feed
+      [routes]="$routes().features"
+      [hoveredRouteFeedId]="$hoveredRouteFeedId()"
+      (onSelectRoute)="onSelectRoute($event)"
+      (onHoverRoute)="onHoverRoute($event)"
+      (onZoomToRoute)="zoomToRoute($event)"
+    ></velo-routes-feed>
+  }
+
+  @if ($routesError()) {
+    <div hlmAlert variant="destructive" class="flex flex-col">
+      <ng-icon hlm hlmAlertIcon name="lucideTriangleAlert" />
+
+      <h4 hlmAlertTitle>Unexpected Error</h4>
+
+      <p hlmAlertDesc>External API could be overloaded. Please try again.</p>
+
+      <button
+        hlmBtn
+        variant="default"
+        class="!pl-4 gap-x-2 mx-auto mt-4"
+        (click)="refreshRoutes()"
+      >
+        <ng-icon name="lucideRefreshCw" />
+
+        <span>Refresh</span>
+      </button>
+    </div>
+  }
+</section>

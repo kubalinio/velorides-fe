@@ -16,7 +16,7 @@ export class RoutesService {
     bbox: BBox,
     routeTypes: RouteType[],
   ): Observable<GeoJSON.FeatureCollection> {
-    const overpassUrl = 'https://overpass-api.de/api/interpreter1';
+    const overpassUrl = 'https://overpass-api.de/api/interpreter';
 
     const overpassQuery = `
       [bbox:${bbox[0]},${bbox[1]},${bbox[2]},${bbox[3]}][out:json][timeout:120];

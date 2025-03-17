@@ -58,14 +58,14 @@ export class EditRouteComponent {
   $isLoadingWays = this.routeStore.getRouteLoading;
   $isErrorWays = this.routeStore.getRouteError;
 
-  constructor() {
-    this.activatedRoute.paramMap.subscribe((params) => {
+  readonly getRouteOnChangeId = this.activatedRoute.paramMap.subscribe(
+    (params) => {
       const routeId = params.get('id');
       if (routeId) {
         this.routeStore.getRouteById(Number(routeId));
       }
-    });
-  }
+    },
+  );
 
   clearSelectedRoute() {
     this.routeStore.clearSelectedRoute();

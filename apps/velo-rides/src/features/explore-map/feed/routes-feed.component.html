@@ -1,0 +1,64 @@
+<ul class="space-y-3 mt-4">
+  @for (element of routes() || []; track element.properties.id) {
+    <li
+      hlmCard
+      [class]="
+        hlm(
+          'p-3 overflow-hidden relative after:absolute after:-inset-y-1 after:-left-1 after:w-3 after:bg-primary after:rounded-l-md border-none pl-4 flex items-center justify-between gap-2',
+          element.properties.network === 'icn' && 'after:bg-violet-500',
+          element.properties.network === 'ncn' && 'after:bg-red-700',
+          element.properties.network === 'rcn' && 'after:bg-orange-500',
+          element.properties.network === 'lcn' && 'after:bg-black'
+        )
+      "
+      (mouseenter)="this.onHoverRoute.emit(element.properties.id)"
+      (mouseleave)="this.onHoverRoute.emit(null)"
+    >
+      <div class="space-y-1">
+        <button
+          class="flex flex-col items-start justify-start cursor-pointer group"
+          (click)="this.onSelectRoute.emit(element)"
+        >
+          <span class="text-[0.6rem]/3 uppercase text-gray-500">Name</span>
+
+          <span
+            title="{{ element.properties.name ?? 'Unnamed Route' }}"
+            hlmLarge
+            class="line-clamp-1 text-sm font-semibold group-hover:underline underline-offset-2"
+          >
+            {{ element.properties.name ?? 'Unnamed Route' }}
+          </span>
+        </button>
+
+        <p class="flex flex-col items-start justify-start">
+          <span class="text-[0.6rem]/3 uppercase text-gray-500">Distance</span>
+
+          <span hlmLarge class="line-clamp-1 text-sm font-semibold">
+            {{ element.properties.distance ?? 'N/A' }}
+          </span>
+        </p>
+
+        @if (element.properties.description) {
+          <p class="flex flex-col items-start justify-start">
+            <span class="text-[0.6rem]/3 uppercase text-gray-500"
+              >Description</span
+            >
+
+            <span hlmLarge class="line-clamp-1 text-sm">
+              {{ element.properties.description ?? 'N/A' }}
+            </span>
+          </p>
+        }
+      </div>
+
+      <!-- <button
+        hlmBtn
+        variant="ghost"
+        class="text-sm text-primary w-fit p-1.5 h-auto flex items-center justify-center gap-1 hover:scale-105 hover:text-foreground z-10"
+        (click)="this.onZoomToRoute.emit(element)"
+      >
+        <ng-icon name="lucide:locate-fixed" class="!size-[1.1rem]" />
+      </button> -->
+    </li>
+  }
+</ul>

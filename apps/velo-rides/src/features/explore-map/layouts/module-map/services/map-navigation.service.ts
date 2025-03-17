@@ -69,6 +69,7 @@ export class MapNavigationService {
   zoomToRoute(element: GeoJSON.Feature) {
     const map = this.mapInitService.getMap();
     if (!map) return;
+
     this.boundEntireRoute(element);
   }
 
@@ -100,7 +101,7 @@ export class MapNavigationService {
 
       map.fitBounds(bounds, {
         padding: options?.padding ?? 64,
-        maxZoom: options?.maxZoom ?? undefined,
+        maxZoom: options?.maxZoom ?? 17,
       });
     }
 

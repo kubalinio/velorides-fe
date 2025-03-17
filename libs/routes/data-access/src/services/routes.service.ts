@@ -12,11 +12,11 @@ import { OverpassResponse } from '../models/overpass-api';
 export class RoutesService {
   private readonly http = inject(HttpClient);
 
-  getRouteByArea(
+  getRoutesByArea(
     bbox: BBox,
     routeTypes: RouteType[],
   ): Observable<GeoJSON.FeatureCollection> {
-    const overpassUrl = 'https://overpass-api.de/api/interpreter';
+    const overpassUrl = 'https://overpass-api.de/api/interpreter1';
 
     const overpassQuery = `
       [bbox:${bbox[0]},${bbox[1]},${bbox[2]},${bbox[3]}][out:json][timeout:120];

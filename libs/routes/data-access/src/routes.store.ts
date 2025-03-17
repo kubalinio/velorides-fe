@@ -20,10 +20,11 @@ import type {
   RoutesInteractionState,
 } from './models/routes';
 import {
-  routesInitialState,
+  routesDataState,
   routesInteractionInitialState,
 } from './models/routes';
 import {
+  setError,
   setLoaded,
   setLoading,
   withCallState,
@@ -31,7 +32,7 @@ import {
 
 export const RoutesStore = signalStore(
   { providedIn: 'root' },
-  withState<RoutesListState>(routesInitialState),
+  withState<RoutesListState>(routesDataState),
   withState<RoutesInteractionState>(routesInteractionInitialState),
   withProps(() => ({
     _routesService: inject(RoutesService),
@@ -48,13 +49,18 @@ export const RoutesStore = signalStore(
         }),
       ),
     ),
-    getRouteByArea: rxMethod<BBox>(
+    getRoutesByArea: rxMethod<BBox>(
       pipe(
+        tap(() =>
+          patchState(store, {
+            ...routesDataState,
+            ...setLoading('getRoutes'),
+          }),
+        ),
         switchMap((bbox: BBox) => {
           return store._routesService
-            .getRouteByArea(bbox, store.selectedRouteType())
+            .getRoutesByArea(bbox, store.selectedRouteType())
             .pipe(
-              tap(() => setLoading('getRoutes')),
               tapResponse({
                 next(routes: GeoJSON.FeatureCollection) {
                   patchState(store, {
@@ -62,12 +68,11 @@ export const RoutesStore = signalStore(
                     ...setLoaded('getRoutes'),
                   });
                 },
-                error(error) {
-                  console.error(error);
+                error(error: { message: string }) {
                   patchState(store, {
-                    ...routesInitialState,
+                    ...routesDataState,
                     ...setLoaded('getRoutes'),
-                    // ...setError('getRoutes'),
+                    ...setError(error.message, 'getRoutes'),
                   });
                 },
               }),

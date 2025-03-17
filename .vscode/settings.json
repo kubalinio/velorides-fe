@@ -8,5 +8,12 @@
     ".ng_build": true
   },
   "typescript.tsdk": "node_modules/typescript/lib",
-  "eslint.enable": false
+  "eslint.enable": false,
+  "[html]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true,
+    "editor.formatOnPaste": true
+  },
+  "html.format.wrapAttributes": "force-aligned",
+  "html.format.wrapLineLength": 120
 }

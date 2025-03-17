@@ -23,7 +23,7 @@ interface RoutesListConfig {
   currentPage: number;
 }
 
-const routesInitialState: RoutesListState = {
+const routesDataState: RoutesListState = {
   listConfig: {
     type: 'ALL',
     currentPage: 1,
@@ -46,4 +46,4 @@ export type {
   RoutesInteractionState,
   RoutesListConfig,
 };
-export { RouteTypes, routesInitialState, routesInteractionInitialState };
+export { RouteTypes, routesDataState, routesInteractionInitialState };

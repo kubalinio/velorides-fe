@@ -40,13 +40,15 @@ import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
     RouteTypesComponent,
     RoutesFeedComponent,
     RouteSkeletonComponent,
+
     HlmAlertDirective,
     HlmAlertDescriptionDirective,
     HlmAlertIconDirective,
     HlmAlertTitleDirective,
     HlmLargeDirective,
-    NgIconComponent,
     HlmButtonDirective,
+
+    NgIconComponent,
   ],
   templateUrl: './routes.component.html',
 })
@@ -62,10 +64,9 @@ export class RoutesComponent {
   $routes = this.routesStore.routes;
   $hoveredRouteFeedId = this.routesStore.hoveredRouteFeedId;
 
-  $routesLoading = this.routesStore.getRoutesLoading;
-  $routesLoaded = this.routesStore.getRoutesLoaded;
-  $routesError = this.routesStore.getRoutesError;
-  $routeCallState = this.routesStore.getRoutesCallState;
+  $isRoutesLoading = this.routesStore.getRoutesLoading;
+  $isRoutesLoaded = this.routesStore.getRoutesLoaded;
+  $isRoutesError = this.routesStore.getRoutesError;
 
   readonly refreshRoutesOnChangePosition =
     this.activatedRoute.queryParams.subscribe(() => {
@@ -92,7 +93,7 @@ export class RoutesComponent {
     this.routeStore.setSelectedRouteBounds(element);
   }
 
-  refreshRoutes() {
+  retryLoadingRoutes() {
     this.routesStore.getRoutesByArea(this.$bbox());
   }
 }

@@ -7,11 +7,11 @@ import { HlmSkeletonComponent } from '@spartan-ng/ui-skeleton-helm';
   imports: [HlmSkeletonComponent],
   template: `
     <hlm-skeleton
-      [class]="hlm('h-[5.75rem] w-full bg-white', classNames())"
+      [class]="hlm('h-[5.75rem] w-full bg-white', class())"
     ></hlm-skeleton>
   `,
 })
 export class RouteSkeletonComponent {
   protected readonly hlm = hlm;
-  classNames = input<string>('');
+  class = input<string>('');
 }

@@ -1,0 +1,99 @@
+<div class="overflow-x-hidden flex flex-col gap-2">
+  <div hlmCardHeader class="space-y-1 pl-0 py-2">
+    <h3 hlmCardTitle>
+      {{ $selectedRoute()['name'] ?? 'Unnamed Route' }}
+    </h3>
+
+    @if ($selectedRoute()['from'] || $selectedRoute()['description']) {
+      <div class="flex items-center gap-2">
+        @if ($selectedRoute()['from'] || $selectedRoute()['description']) {
+          <ng-icon name="lucide:map-pin" class="!size-4"></ng-icon>
+        }
+        <span>
+          @if ($selectedRoute()['from']) {
+            {{ $selectedRoute()['from'] }}
+          } @else if ($selectedRoute()['description']) {
+            {{ $selectedRoute()['description'].split(' - ')[0] }}
+          }
+        </span>
+      </div>
+    }
+  </div>
+
+  <ul
+    hlmCardContent
+    class="space-y-2 pl-0 [&>li]:flex [&>li]:gap-2 [&>li]:items-center pb-4"
+  >
+    <li>
+      <span>Network:</span>
+      @if ($selectedRoute()['network']) {
+        <span class="font-semibold">{{ $selectedRoute()['network'] }}</span>
+      } @else {
+        <span class="font-semibold">N/A</span>
+      }
+    </li>
+
+    <li>
+      <span>Distance:</span>
+      @if ($selectedRoute()['distance']) {
+        <span class="font-semibold">{{
+          $selectedRoute()['distance'].includes('km')
+            ? $selectedRoute()['distance']
+            : $selectedRoute()['distance'] + ' km'
+        }}</span>
+      } @else {
+        <span class="font-semibold">N/A</span>
+      }
+    </li>
+
+    <li>
+      <span>Route:</span>
+      @if ($selectedRoute()['route']) {
+        <span class="line-clamp-1 font-semibold">{{
+          $selectedRoute()['route']
+        }}</span>
+      } @else {
+        <span class="font-semibold">N/A</span>
+      }
+    </li>
+
+    @if ($selectedRoute()['website']) {
+      <li>
+        <span>Website:</span>
+        <a
+          [href]="$selectedRoute()['website']"
+          target="_blank"
+          class="text-primary font-semibold line-clamp-1"
+        >
+          {{ $selectedRoute()['website'] }}
+        </a>
+      </li>
+    }
+
+    @if ($selectedRoute()['wikipedia']) {
+      <li class="cursor-pointer">
+        <a
+          [href]="$selectedRoute()['wikipedia']"
+          target="_blank"
+          class="flex items-center gap-2"
+        >
+          <ng-icon name="lucide:external-link" class="!size-4"></ng-icon>
+          <span>Wikipedia</span>
+        </a>
+      </li>
+    }
+
+    @if ($selectedRoute() && $selectedRoute()['id']) {
+      <li class="cursor-pointer">
+        <a
+          [href]="'https://openstreetmap.org/' + $selectedRoute()['id']"
+          target="_blank"
+          class="flex items-center gap-2"
+        >
+          <ng-icon name="lucide:external-link" class="!size-4"></ng-icon>
+          <span>OpenStreetMap</span>
+        </a>
+      </li>
+    }
+  </ul>
+</div>

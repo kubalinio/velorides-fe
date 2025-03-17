@@ -19,6 +19,7 @@ import {
   routeInteractionInitialState,
 } from './models/route';
 import {
+  setError,
   setLoaded,
   setLoading,
   withCallState,
@@ -52,12 +53,11 @@ export const RouteStore = signalStore(
                   ...setLoaded('getRoute'),
                 });
               },
-              (error) => {
-                console.error(error);
+              (error: { message: string }) => {
                 patchState(store, {
                   ...routeInitialState,
                   ...setLoaded('getRoute'),
-                  // ...setError('getRoute', error),
+                  ...setError(error.message, 'getRoute'),
                 });
               },
             ),

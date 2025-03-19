@@ -1,5 +1,7 @@
 <section class="pl-2.5 pr-4">
-  <velo-edit-header></velo-edit-header>
+  <velo-edit-header
+    (clearSelectedRoute)="clearSelectedRoute()"
+  ></velo-edit-header>
 
   @defer (when $selectedRoute()) {
     <velo-route-details

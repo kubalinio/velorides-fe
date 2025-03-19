@@ -12,7 +12,7 @@ import { OverpassResponse } from '../models/overpass-api';
 export class RoutesService {
   private readonly http = inject(HttpClient);
 
-  getRouteByArea(
+  getRoutesByArea(
     bbox: BBox,
     routeTypes: RouteType[],
   ): Observable<GeoJSON.FeatureCollection> {

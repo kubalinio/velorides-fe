@@ -19,6 +19,7 @@ import {
   routeInteractionInitialState,
 } from './models/route';
 import {
+  setError,
   setLoaded,
   setLoading,
   withCallState,
@@ -52,12 +53,11 @@ export const RouteStore = signalStore(
                   ...setLoaded('getRoute'),
                 });
               },
-              (error) => {
-                console.error(error);
+              (error: { message: string }) => {
                 patchState(store, {
                   ...routeInitialState,
                   ...setLoaded('getRoute'),
-                  // ...setError('getRoute', error),
+                  ...setError(error.message, 'getRoute'),
                 });
               },
             ),
@@ -96,6 +96,21 @@ export const RouteStore = signalStore(
     ),
     setHoveredSubwayId: rxMethod<string>(
       pipe(tap((id: string) => patchState(store, { hoveredSubwayId: id }))),
+    ),
+    setSelectedWay: rxMethod<GeoJSON.Feature<GeoJSON.LineString>>(
+      pipe(
+        tap((way: GeoJSON.Feature<GeoJSON.LineString>) =>
+          patchState(store, {
+            selectedWay: {
+              ...way,
+              properties: {
+                ...way.properties,
+                bounds: JSON.stringify(way.geometry.coordinates),
+              },
+            },
+          }),
+        ),
+      ),
     ),
   })),
   withCallState({ collection: 'getRoute' }),

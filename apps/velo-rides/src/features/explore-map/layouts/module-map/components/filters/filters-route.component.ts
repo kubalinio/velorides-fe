@@ -14,6 +14,7 @@ import { HlmLabelDirective } from '@spartan-ng/ui-label-helm';
 import { MapStore } from '@velo/maps/data-access';
 import { RouteType } from 'libs/routes/data-access/src/models/routes';
 import { RoutesStore, RouteStore } from '@velo/routes/data-access';
+import { hlm } from '@spartan-ng/brain/core';
 
 @Component({
   standalone: true,
@@ -31,7 +32,9 @@ import { RoutesStore, RouteStore } from '@velo/routes/data-access';
   ],
   providers: [provideIcons({ lucideRoute })],
   template: `
-    <div class="absolute bottom-4 left-4">
+    <div
+      [class]="hlm('absolute bottom-4 left-4', $isSidebarOpen() && 'left-4')"
+    >
       <brn-popover sideOffset="12" closeDelay="100" align="start">
         <button
           id="edit-profile"
@@ -90,10 +93,12 @@ import { RoutesStore, RouteStore } from '@velo/routes/data-access';
   `,
 })
 export class FiltersRouteComponent {
+  readonly hlm = hlm;
   private readonly mapStore = inject(MapStore);
   private readonly routesStore = inject(RoutesStore);
   private readonly routeStore = inject(RouteStore);
 
+  $isSidebarOpen = this.routesStore.isSidebarOpen;
   $selectedRouteType = this.routesStore.selectedRouteType;
 
   changeRouteType(routeType: RouteType) {

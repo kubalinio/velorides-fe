@@ -39,6 +39,12 @@
       "@spartan-ng/ui-hovercard-helm": [
         "libs/shared/ui/ui-hovercard-helm/src/index.ts"
       ],
+      "@spartan-ng/ui-skeleton-helm": [
+        "libs/shared/ui/ui-skeleton-helm/src/index.ts"
+      ],
+      "@spartan-ng/ui-alert-helm": [
+        "libs/shared/ui/ui-alert-helm/src/index.ts"
+      ],
       "@velo/api-types": ["libs/core/api-types/src/index.ts"],
       "@velo/core/http-client": ["libs/core/http-client/src/index.ts"],
       "@velo/maps/data-access": ["libs/maps/data-access/src/index.ts"],

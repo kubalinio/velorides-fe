@@ -1,4 +1,3 @@
-const eslint = require('@eslint/js');
 const tseslint = require('typescript-eslint');
 const angular = require('angular-eslint');
 const nx = require('@nx/eslint-plugin');
@@ -7,17 +6,22 @@ module.exports = [
   ...nx.configs['flat/base'],
   ...nx.configs['flat/typescript'],
   ...nx.configs['flat/javascript'],
+  ...angular.configs.tsRecommended,
+  ...tseslint.configs.stylistic,
+  ...tseslint.configs.recommendedTypeChecked,
+  {
+    languageOptions: {
+      parserOptions: {
+        projectService: true,
+        tsconfigRootDir: __dirname,
+      },
+    },
+  },
   {
     ignores: ['**/dist'],
   },
   {
     files: ['**/*.ts', '**/*.js'],
-    extends: [
-      eslint.configs.recommended,
-      tseslint.configs.recommended,
-      tseslint.configs.stylistic,
-      angular.configs.tsRecommended,
-    ],
     processor: angular.processInlineTemplates,
     rules: {
       '@nx/enforce-module-boundaries': [

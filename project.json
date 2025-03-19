@@ -1,6 +1,6 @@
 {
   "$schema": "node_modules/nx/schemas/project-schema.json",
-  "name": "angular-starter",
+  "name": "velo-rides",
   "projectType": "application",
   "generators": {
     "@schematics/angular:component": {
@@ -33,62 +33,80 @@
       "skipTests": true
     }
   },
-  "sourceRoot": "src",
-  "prefix": "app",
+  "sourceRoot": "apps/velo-rides/src",
+  "prefix": "velo",
   "targets": {
     "build": {
       "executor": "@angular-devkit/build-angular:application",
+      "dependsOn": [
+        {
+          "target": "build",
+          "projects": "ngx-maplibre-gl"
+        }
+      ],
       "options": {
-        "outputPath": "dist/angular-starter",
-        "index": "src/index.html",
-        "browser": "src/main.ts",
-        "polyfills": [],
-        "tsConfig": "tsconfig.app.json",
+        "outputPath": "dist/velo-rides",
+        "index": "apps/velo-rides/src/index.html",
+        "browser": "apps/velo-rides/src/main.ts",
+        "polyfills": ["zone.js"],
+        "tsConfig": "apps/velo-rides/tsconfig.app.json",
         "inlineStyleLanguage": "scss",
         "assets": [
           {
             "glob": "**/*",
-            "input": "public"
+            "input": "apps/velo-rides/public"
           }
         ],
         "styles": [
           "@angular/material/prebuilt-themes/azure-blue.css",
-          "src/styles.scss"
+          "apps/velo-rides/src/styles.scss"
         ],
         "scripts": []
       },
       "configurations": {
         "production": {
+          "fileReplacements": [
+            {
+              "replace": "apps/velo-rides/src/environments/environment.ts",
+              "with": "apps/velo-rides/src/environments/environment.prod.ts"
+            }
+          ],
+          "optimization": true,
+          "outputHashing": "all",
+          "sourceMap": false,
+          "namedChunks": false,
+          "extractLicenses": true,
           "budgets": [
             {
               "type": "initial",
-              "maximumWarning": "500kB",
-              "maximumError": "1MB"
+              "maximumWarning": "2mb",
+              "maximumError": "5mb"
             },
             {
               "type": "anyComponentStyle",
-              "maximumWarning": "4kB",
-              "maximumError": "8kB"
+              "maximumWarning": "6kb",
+              "maximumError": "10kb"
             }
-          ],
-          "outputHashing": "all"
+          ]
         },
         "development": {
           "optimization": false,
           "extractLicenses": false,
-          "sourceMap": true
+          "sourceMap": true,
+          "namedChunks": true
         }
       },
+      "outputs": ["{options.outputPath}"],
       "defaultConfiguration": "production"
     },
     "serve": {
       "executor": "@angular-devkit/build-angular:dev-server",
       "configurations": {
         "production": {
-          "buildTarget": "angular-starter:build:production"
+          "buildTarget": "velo-rides:build:production"
         },
         "development": {
-          "buildTarget": "angular-starter:build:development"
+          "buildTarget": "velo-rides:build:development"
         }
       },
       "defaultConfiguration": "development"
@@ -119,13 +137,11 @@
       "executor": "@angular-eslint/builder:lint",
       "options": {
         "lintFilePatterns": [
-          "src/**/*.ts",
-          "src/**/*.html"
+          "apps/velo-rides/src/**/*.ts",
+          "apps/velo-rides/src/**/*.html"
         ]
       },
-      "outputs": [
-        "{options.outputFile}"
-      ]
+      "outputs": ["{options.outputFile}"]
     }
   }
 }

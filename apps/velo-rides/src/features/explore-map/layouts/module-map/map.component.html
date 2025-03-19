@@ -33,18 +33,15 @@
       }
     </mgl-geojson-source>
 
-
     <viewing-map-viewpoints
-      (centerMapToCluster)="
-        $mapNavigationService.centerMapToCluster($event)
-      "
+      (centerMapToCluster)="$mapNavigationService.centerMapToCluster($event)"
     ></viewing-map-viewpoints>
 
     <map-route-layer></map-route-layer>
 
-  @if ($selectedRoute()) {
-    <map-way-layer></map-way-layer>
-  }
+    @if ($selectedRoute()) {
+      <map-way-layer></map-way-layer>
+    }
 
     <map-hover-popup
       [hoverRoute]="$mapInteraction.hoverRoute"

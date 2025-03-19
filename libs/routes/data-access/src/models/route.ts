@@ -13,6 +13,13 @@ type RouteInteractionState = {
   hoveredSubwayId: string | null;
   selectedRoute: NonNullable<Feature['properties']> | undefined;
   selectedRouteBounds: GeoJSON.Feature | undefined;
+  selectedWay:
+    | (GeoJSON.Feature<GeoJSON.LineString> & {
+        properties: GeoJSON.Feature<GeoJSON.LineString>['properties'] & {
+          bounds: string;
+        };
+      })
+    | undefined;
 };
 
 const routeInitialState: RouteDetailsState = {
@@ -23,6 +30,7 @@ const routeInteractionInitialState: RouteInteractionState = {
   hoveredSubwayId: null,
   selectedRoute: undefined,
   selectedRouteBounds: undefined,
+  selectedWay: undefined,
 };
 
 export type { RouteTypeResponse, RouteDetailsState, RouteInteractionState };

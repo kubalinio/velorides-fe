@@ -15,23 +15,35 @@ export class MapNavigationService {
   readonly map$ = this.mapInitService.map$;
 
   $routesWithUncompletedData = this.routesStore.routes;
+
   $selectedRoute = this.routeStore.selectedRoute;
   $selectedRouteBounds = this.routeStore.selectedRouteBounds;
+  $selectedWay = this.routeStore.selectedWay;
+
   $hoveredSubwayId = this.routeStore.hoveredSubwayId;
   $hoveredRouteFeedId = this.routesStore.hoveredRouteFeedId;
 
-  constructor() {
-    effect(() => {
-      const selectedRouteBounds = this.$selectedRouteBounds();
-      const map = this.mapInitService.getMap();
+  readonly onSelectedRouteChange = effect(() => {
+    const selectedRouteBounds = this.$selectedRouteBounds();
+    const map = this.mapInitService.getMap();
 
-      if (selectedRouteBounds && map) {
-        this.boundEntireRoute(
-          selectedRouteBounds as unknown as GeoJSON.Feature,
-        );
-      }
-    });
-  }
+    if (selectedRouteBounds && map) {
+      this.boundEntireRoute(selectedRouteBounds as unknown as GeoJSON.Feature);
+    }
+  });
+
+  readonly onSelectedWayChange = effect(() => {
+    const selectedWay =
+      this.$selectedWay() as GeoJSON.Feature<GeoJSON.LineString>;
+    const map = this.mapInitService.getMap();
+
+    if (selectedWay && map) {
+      this.boundEntireRoute(selectedWay, {
+        padding: 256,
+        maxZoom: 15.5,
+      });
+    }
+  });
 
   clearSelectedRoute() {
     this.mapInitService.clickPopupFeature = null;
@@ -57,10 +69,17 @@ export class MapNavigationService {
   zoomToRoute(element: GeoJSON.Feature) {
     const map = this.mapInitService.getMap();
     if (!map) return;
+
     this.boundEntireRoute(element);
   }
 
-  private boundEntireRoute(route: GeoJSON.Feature) {
+  private boundEntireRoute(
+    route: GeoJSON.Feature,
+    options?: {
+      padding?: number;
+      maxZoom?: number;
+    },
+  ) {
     const map = this.mapInitService.getMap();
     if (!map) return;
 
@@ -81,7 +100,8 @@ export class MapNavigationService {
       });
 
       map.fitBounds(bounds, {
-        padding: 64,
+        padding: options?.padding ?? 64,
+        maxZoom: options?.maxZoom ?? 17,
       });
     }
 
@@ -93,7 +113,8 @@ export class MapNavigationService {
       });
 
       map.fitBounds(bounds, {
-        padding: 64,
+        padding: options?.padding ?? 64,
+        maxZoom: options?.maxZoom ?? 17,
       });
     }
   }

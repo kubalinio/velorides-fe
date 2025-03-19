@@ -4,11 +4,15 @@
   "scripts": {
     "ng": "ng",
     "start": "nx serve velo-rides",
-    "build": "nx build",
+    "start:cloudflare": "pnpm run build:cloudflare && wrangler pages dev dist/velo-rides/cloudflare --compatibility-date=2025-03-13",
+    "build": "nx build --c production",
+    "build:cloudflare": "nx build --configuration production && pnpm run process",
+    "process": "node ./tools/copy-files.mjs",
     "watch": "nx build --watch --configuration development",
     "test": "nx test",
     "lint": "nx lint",
-    "prepare": "husky"
+    "prepare": "husky",
+    "deploy": "pnpm run build:cloudflare && wrangler pages deploy dist/velo-rides/cloudflare"
   },
   "dependencies": {
     "@angular-architects/ngrx-toolkit": "^19.1.0",
@@ -97,7 +101,8 @@
     "ts-jest": "^29.1.0",
     "ts-node": "10.9.1",
     "typescript": "~5.6.2",
-    "typescript-eslint": "8.18.0"
+    "typescript-eslint": "8.18.0",
+    "wrangler": "^4.0.0"
   },
   "nx": {}
 }

@@ -71,7 +71,11 @@ import { RouteStore } from '@velo/routes/data-access';
         ],
         'line-opacity': [
           'case',
-          ['==', ['get', 'id'], $hoverWayId() ?? ''],
+          [
+            '==',
+            ['get', 'id'],
+            $hoverWayId() || $selectedWay()?.properties['id'] || '',
+          ],
           1,
           0,
         ],
@@ -90,6 +94,7 @@ export class WayLayerComponent {
   $routeWays = this.routeStore.routeWays;
   $hoverWayId = this.routeStore.hoveredSubwayId;
   $mapInteraction = this.mapInteractionService;
+  $selectedWay = this.routeStore.selectedWay;
 
   onMouseLeaveWay() {
     this.routeStore.setHoveredSubwayId(null);

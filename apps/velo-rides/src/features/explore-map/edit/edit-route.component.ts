@@ -1,19 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { NgIconComponent, provideIcons } from '@ng-icons/core';
-import {
-  lucideArrowLeft,
-  lucideExternalLink,
-  lucideMapPin,
-  lucideDownload,
-} from '@ng-icons/lucide';
+
 import { hlm } from '@spartan-ng/brain/core';
-import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
-import {
-  HlmCardContentDirective,
-  HlmCardHeaderDirective,
-  HlmCardTitleDirective,
-} from '@spartan-ng/ui-card-helm';
 
 import {
   GpxExportService,
@@ -21,34 +9,35 @@ import {
   RouteStore,
 } from '@velo/routes/data-access';
 import { RouteWaysComponent } from './route-ways/route-ways.component';
+import { RouteSkeletonComponent } from '../../shared/components/route-skeleton.component';
+
+import { HlmLargeDirective } from '@spartan-ng/ui-typography-helm';
+import { RouteAlertErrorComponent } from './route-alert-error/route-alert-error.component';
+import { RouteDetailsComponent } from './route-details/route-details.component';
+import { RouteFooterComponent } from './route-footer/route-footer.component';
+import { EditHeaderComponent } from './header/header.component';
 
 @Component({
   selector: 'app-edit-route',
   standalone: true,
-  providers: [
-    provideIcons({
-      lucideArrowLeft,
-      lucideMapPin,
-      lucideExternalLink,
-      lucideDownload,
-    }),
-  ],
   imports: [
-    HlmButtonDirective,
-    HlmCardHeaderDirective,
-    HlmCardTitleDirective,
-    HlmCardContentDirective,
-    NgIconComponent,
+    EditHeaderComponent,
     RouteWaysComponent,
+    RouteDetailsComponent,
+    RouteSkeletonComponent,
+    RouteAlertErrorComponent,
+    RouteFooterComponent,
+
+    HlmLargeDirective,
   ],
   templateUrl: './edit-route.component.html',
 })
 export class EditRouteComponent {
   protected readonly hlm = hlm;
   private readonly router = inject(Router);
+  private readonly activatedRoute = inject(ActivatedRoute);
   private readonly routeStore = inject(RouteStore);
   private readonly routesStore = inject(RoutesStore);
-  private readonly activatedRoute = inject(ActivatedRoute);
   private readonly gpxExportService = inject(GpxExportService);
 
   $selectedRoute = this.routeStore.selectedRoute;
@@ -56,16 +45,17 @@ export class EditRouteComponent {
   $routeWays = this.routeStore.routeWays;
 
   $isLoadingWays = this.routeStore.getRouteLoading;
+  $isLoadedWays = this.routeStore.getRouteLoaded;
   $isErrorWays = this.routeStore.getRouteError;
 
-  constructor() {
-    this.activatedRoute.paramMap.subscribe((params) => {
+  readonly getRouteOnChangeId = this.activatedRoute.paramMap.subscribe(
+    (params) => {
       const routeId = params.get('id');
       if (routeId) {
         this.routeStore.getRouteById(Number(routeId));
       }
-    });
-  }
+    },
+  );
 
   clearSelectedRoute() {
     this.routeStore.clearSelectedRoute();
@@ -99,7 +89,9 @@ export class EditRouteComponent {
     }
   }
 
-  retryLoadingRoute() {
-    this.routeStore.getRouteById(this.$selectedRoute()['id']);
+  retryLoadingWays() {
+    this.routeStore.getRouteById(
+      Number(this.activatedRoute.snapshot.params['id']),
+    );
   }
 }

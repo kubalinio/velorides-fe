@@ -1,0 +1,24 @@
+<div
+  class="bottom-0 right-1 md:right-4 py-4 pl-5 pr-3.5 bg-gray-300 flex gap-2 mt-4 w-[283px] md:w-[412px] fixed justify-between"
+>
+  <button
+    hlmBtn
+    variant="outline"
+    (click)="onClickExportRouteToGpx()"
+    class="flex items-center gap-2 text-sm md:text-base px-3 md:px-4"
+  >
+    <ng-icon name="lucide:download" class="!size-4"></ng-icon>
+
+    <span>Export GPX</span>
+  </button>
+
+  <a
+    [href]="'https://openstreetmap.org/' + routeId()"
+    target="_blank"
+    hlmBtn
+    variant="default"
+    class="flex items-center gap-2 text-sm md:text-base px-3 md:px-4"
+  >
+    Update Route
+  </a>
+</div>

@@ -1,4 +1,4 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
@@ -6,7 +6,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { RouterOutlet } from '@angular/router';
 import { hlm } from '@spartan-ng/brain/core';
 import { ExploreMapComponent } from './layouts/module-map/map.component';
-import { RouteStore } from '@velo/routes/data-access';
+import { RoutesStore, RouteStore } from '@velo/routes/data-access';
 
 @Component({
   standalone: true,
@@ -20,7 +20,7 @@ import { RouteStore } from '@velo/routes/data-access';
   ],
   template: `
     <mat-sidenav-container
-      class="!h-[calc(100vh-64px)] !top-16 !bg-sidebar-background"
+      class="md:!h-[calc(100vh-64px)] !h-[calc(100vh-56px)] md:!top-16 !top-14 !bg-sidebar-background"
     >
       <mat-sidenav-content
         [class]="
@@ -34,51 +34,39 @@ import { RouteStore } from '@velo/routes/data-access';
           [class]="
             hlm(
               'h-full rounded-r-2xl overflow-hidden shadow-md mr-2',
-              !sidenavIsOpen() && 'mr-0'
+              !$isSidebarOpen() && 'mr-0'
             )
           "
         >
           <velo-explore-map></velo-explore-map>
         </section>
       </mat-sidenav-content>
+
       <mat-sidenav
         #sidenav
         mode="side"
         position="end"
-        [opened]="sidenavIsOpen()"
-        (openedChange)="onSidenavChange()"
-        class="!bg-sidebar-background !border-sidebar-background !border-0 !-ml-1"
+        [opened]="$isSidebarOpen()"
+        class="velo-sidenav"
       >
-        <mat-nav-list>
+        <mat-nav-list class="velo-nav-list">
           <router-outlet></router-outlet>
         </mat-nav-list>
       </mat-sidenav>
     </mat-sidenav-container>
   `,
-  styles: [
-    `
-      :host {
-        display: block;
-        height: 100vh;
-        width: 100%;
-      }
-      mat-sidenav-container {
-        height: 100%;
-      }
-    `,
-  ],
+  styleUrls: ['./explore-map.component.scss'],
 })
 export class ExploreMapViewComponent {
   protected readonly hlm = hlm;
+
+  private readonly routesStore = inject(RoutesStore);
   private readonly routeStore = inject(RouteStore);
 
-  sidenavIsOpen = signal(true);
-
   $selectedRoute = this.routeStore.selectedRoute;
+  $isSidebarOpen = this.routesStore.isSidebarOpen;
 
   toggleSidenav() {
-    this.sidenavIsOpen.update((isOpen) => !isOpen);
+    this.routesStore.toggleSidebar();
   }
-
-  onSidenavChange() {}
 }

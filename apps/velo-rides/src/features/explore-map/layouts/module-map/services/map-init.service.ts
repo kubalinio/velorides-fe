@@ -54,7 +54,7 @@ export class MapInitService {
       Number(bounds._ne.lat.toFixed(6)), // north
       Number(bounds._ne.lng.toFixed(6)), // east
     ] as BBox;
-    this.routesStore.getRouteByArea(bboxPayload);
+    this.routesStore.getRoutesByArea(bboxPayload);
   }
 
   getMap(): Map | null {

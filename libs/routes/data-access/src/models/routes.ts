@@ -15,6 +15,7 @@ interface RoutesListState {
 interface RoutesInteractionState {
   selectedRouteType: RouteType[];
   hoveredRouteFeedId: string | null;
+  isSidebarOpen: boolean;
 }
 
 interface RoutesListConfig {
@@ -22,7 +23,7 @@ interface RoutesListConfig {
   currentPage: number;
 }
 
-const routesInitialState: RoutesListState = {
+const routesDataState: RoutesListState = {
   listConfig: {
     type: 'ALL',
     currentPage: 1,
@@ -36,6 +37,7 @@ const routesInitialState: RoutesListState = {
 const routesInteractionInitialState: RoutesInteractionState = {
   selectedRouteType: ['lcn', 'rcn', 'ncn', 'icn'] as RouteType[],
   hoveredRouteFeedId: null,
+  isSidebarOpen: true,
 };
 
 export type {
@@ -44,4 +46,4 @@ export type {
   RoutesInteractionState,
   RoutesListConfig,
 };
-export { RouteTypes, routesInitialState, routesInteractionInitialState };
+export { RouteTypes, routesDataState, routesInteractionInitialState };

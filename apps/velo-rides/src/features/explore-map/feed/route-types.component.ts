@@ -12,7 +12,7 @@ import { HlmHoverCardContentComponent } from '@spartan-ng/ui-hovercard-helm';
 
 @Component({
   standalone: true,
-  selector: 'sidebar-route-types',
+  selector: 'velo-route-types',
   imports: [
     BrnHoverCardComponent,
     BrnHoverCardContentDirective,

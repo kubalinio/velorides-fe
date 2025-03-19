@@ -23,7 +23,7 @@ import type {
   MapDataEvent,
   MapMouseEvent,
   MapSourceDataEvent,
-  mapTilesDataEvent,
+  MapStyleDataEvent,
   MapTouchEvent,
   MapWheelEvent,
   PointLike,
@@ -276,10 +276,10 @@ export class MapComponent implements OnChanges, OnDestroy, MapEvent {
   readonly render = output<MapLibreEvent & EventData>();
   readonly mapError = output<ErrorEvent & EventData>();
   readonly data = output<MapDataEvent & EventData>();
-  readonly styleData = output<mapTilesDataEvent & EventData>();
+  readonly styleData = output<MapStyleDataEvent & EventData>();
   readonly sourceData = output<MapSourceDataEvent & EventData>();
   readonly dataLoading = output<MapDataEvent & EventData>();
-  readonly styleDataLoading = output<mapTilesDataEvent & EventData>();
+  readonly styleDataLoading = output<MapStyleDataEvent & EventData>();
   readonly sourceDataLoading = output<MapSourceDataEvent & EventData>();
   readonly styleImageMissing = output<
     {

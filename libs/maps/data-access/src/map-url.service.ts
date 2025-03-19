@@ -21,7 +21,7 @@ export class MapUrlService implements OnDestroy {
   private readonly DEFAULT_CENTER: [number, number] = [
     18.966941330820333, 50.66308832195875,
   ];
-  private readonly DEFAULT_ZOOM = 9;
+  private readonly DEFAULT_ZOOM = 10;
   private readonly DEFAULT_BEARING = 0;
   private readonly DEFAULT_PITCH = 0;
 

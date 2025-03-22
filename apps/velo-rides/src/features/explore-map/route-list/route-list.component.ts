@@ -50,9 +50,9 @@ import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
 
     NgIconComponent,
   ],
-  templateUrl: './routes.component.html',
+  templateUrl: './route-list.component.html',
 })
-export class RoutesComponent {
+export class RouteListComponent {
   protected readonly hlm = hlm;
   private readonly router = inject(Router);
   private readonly activatedRoute = inject(ActivatedRoute);

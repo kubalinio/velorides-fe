@@ -1,6 +1,6 @@
 import { Routes } from '@angular/router';
-import { RoutesComponent } from './feed/routes.component';
-import { EditRouteComponent } from './edit/edit-route.component';
+import { RouteListComponent } from './route-list/route-list.component';
+import { RouteDetailsComponent } from './route-details/route-details.component';
 export const EXPLORE_MAP_ROUTES: Routes = [
   {
     path: '',
@@ -9,11 +9,11 @@ export const EXPLORE_MAP_ROUTES: Routes = [
     children: [
       {
         path: 'explore-map',
-        component: RoutesComponent,
+        component: RouteListComponent,
       },
       {
         path: 'explore-map/:id',
-        component: EditRouteComponent,
+        component: RouteDetailsComponent,
       },
     ],
   },

@@ -13,7 +13,7 @@ import { RouteSkeletonComponent } from '../../shared/components/route-skeleton.c
 
 import { HlmLargeDirective } from '@spartan-ng/ui-typography-helm';
 import { RouteAlertErrorComponent } from './route-alert-error/route-alert-error.component';
-import { RouteDetailsComponent } from './route-details/route-details.component';
+import { RouteDetailComponent } from './route-details/route-detail.component';
 import { RouteFooterComponent } from './route-footer/route-footer.component';
 import { EditHeaderComponent } from './header/header.component';
 
@@ -23,16 +23,16 @@ import { EditHeaderComponent } from './header/header.component';
   imports: [
     EditHeaderComponent,
     RouteWaysComponent,
-    RouteDetailsComponent,
+    RouteDetailComponent,
     RouteSkeletonComponent,
     RouteAlertErrorComponent,
     RouteFooterComponent,
 
     HlmLargeDirective,
   ],
-  templateUrl: './edit-route.component.html',
+  templateUrl: './route-details.component.html',
 })
-export class EditRouteComponent {
+export class RouteDetailsComponent {
   protected readonly hlm = hlm;
   private readonly router = inject(Router);
   private readonly activatedRoute = inject(ActivatedRoute);

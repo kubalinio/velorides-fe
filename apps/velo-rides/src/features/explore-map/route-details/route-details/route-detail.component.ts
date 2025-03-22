@@ -9,7 +9,7 @@ import { Feature } from 'geojson';
 
 @Component({
   standalone: true,
-  selector: 'velo-route-details',
+  selector: 'velo-route-detail',
   providers: [
     provideIcons({
       lucideMapPin,
@@ -22,9 +22,9 @@ import { Feature } from 'geojson';
     HlmCardContentDirective,
     NgIconComponent,
   ],
-  templateUrl: './route-details.component.html',
+  templateUrl: './route-detail.component.html',
 })
-export class RouteDetailsComponent {
+export class RouteDetailComponent {
   protected readonly hlm = hlm;
 
   $selectedRoute = input<NonNullable<Feature['properties']>>();

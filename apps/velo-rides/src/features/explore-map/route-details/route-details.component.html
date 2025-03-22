@@ -4,9 +4,7 @@
   ></velo-edit-header>
 
   @defer (when $selectedRoute()) {
-    <velo-route-details
-      [$selectedRoute]="$selectedRoute()"
-    ></velo-route-details>
+    <velo-route-detail [$selectedRoute]="$selectedRoute()"></velo-route-detail>
   } @placeholder {
     @if (!$isErrorWays() && !$isLoadingWays()) {
       <div class="p-4 text-center">

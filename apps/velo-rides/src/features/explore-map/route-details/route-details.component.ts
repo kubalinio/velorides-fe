@@ -7,7 +7,7 @@ import {
   GpxExportService,
   RoutesStore,
   RouteStore,
-} from '@velo/routes/data-access';
+} from '@velo/routes-data-access';
 import { RouteWaysComponent } from './route-ways/route-ways.component';
 import { RouteSkeletonComponent } from '../../shared/components/route-skeleton.component';
 

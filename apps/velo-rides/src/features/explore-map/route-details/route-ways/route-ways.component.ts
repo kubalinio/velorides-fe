@@ -19,7 +19,7 @@ import {
   HlmMenuItemIconDirective,
 } from '@spartan-ng/ui-menu-helm';
 
-import { RouteStore, RouteWaysService } from '@velo/routes/data-access';
+import { RouteStore, RouteWaysService } from '@velo/routes-data-access';
 
 @Component({
   selector: 'velo-route-ways',

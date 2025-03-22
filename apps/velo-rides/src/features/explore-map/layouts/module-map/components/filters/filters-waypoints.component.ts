@@ -10,10 +10,10 @@ import {
   HlmMenuItemCheckComponent,
   HlmMenuItemIconDirective,
 } from '@spartan-ng/ui-menu-helm';
-import { WaypointsStore } from '@velo/waypoints/data-access';
+import { WaypointsStore } from '@velo/waypoints-data-access';
 import { ViewpointType } from 'libs/waypoints/data-access/src/models/viewpoint';
 import { hlm } from '@spartan-ng/brain/core';
-import { RoutesStore } from '@velo/routes/data-access';
+import { RoutesStore } from '@velo/routes-data-access';
 
 @Component({
   selector: 'filters-waypoints',

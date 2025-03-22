@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { RoutesStore, RouteStore } from '@velo/routes/data-access';
+import { RoutesStore, RouteStore } from '@velo/routes-data-access';
 
 import { hlm } from '@spartan-ng/brain/core';
 
@@ -11,7 +11,7 @@ import {
   lucideTriangleAlert,
 } from '@ng-icons/lucide';
 
-import { MapStore } from '@velo/maps/data-access';
+import { MapStore } from '@velo/maps-data-access';
 import { RouteTypesComponent } from './route-types.component';
 import { RoutesFeedComponent } from './routes-feed.component';
 import { ActivatedRoute, Router } from '@angular/router';

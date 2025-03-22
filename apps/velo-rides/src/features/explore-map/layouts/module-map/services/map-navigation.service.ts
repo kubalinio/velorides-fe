@@ -1,7 +1,7 @@
 import { effect, inject, Injectable } from '@angular/core';
 import { MapInitService } from './map-init.service';
 import { LngLatBounds } from 'maplibre-gl';
-import { RouteStore, RoutesStore } from '@velo/routes/data-access';
+import { RouteStore, RoutesStore } from '@velo/routes-data-access';
 import { Router } from '@angular/router';
 
 @Injectable({

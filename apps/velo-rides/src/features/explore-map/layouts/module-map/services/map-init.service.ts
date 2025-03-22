@@ -1,6 +1,6 @@
 import { inject, Injectable, signal } from '@angular/core';
-import { MapUrlService } from '@velo/maps/data-access';
-import { RoutesStore } from '@velo/routes/data-access';
+import { MapUrlService } from '@velo/maps-data-access';
+import { RoutesStore } from '@velo/routes-data-access';
 import { Map } from 'maplibre-gl';
 import { BBox } from 'geojson';
 

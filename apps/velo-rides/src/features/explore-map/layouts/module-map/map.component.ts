@@ -11,7 +11,7 @@ import { SidebarButtonComponent } from './components/sidebar-button.component';
 import { HoverPopupComponent } from './components/popups/popup-hover.component';
 import { ClickPopupComponent } from './components/popups/popup-click.component';
 
-import { MapStore, MapUrlService } from '@velo/maps/data-access';
+import { MapStore, MapUrlService } from '@velo/maps-data-access';
 import { FiltersRouteComponent } from './components/filters/filters-route.component';
 import { ViewingMapViewpointsComponent } from './components/viewpoints/viewpoints.component';
 import { FiltersWaypointsComponent } from './components/filters/filters-waypoints.component';
@@ -22,7 +22,7 @@ import {
   RoutesStore,
   RouteStore,
   RouteWaysService,
-} from '@velo/routes/data-access';
+} from '@velo/routes-data-access';
 import { MapStylesService } from './services/map-styles.service';
 import { WayLayerComponent } from './components/routes/way-layer.component';
 import { RouteLayerComponent } from './components/routes/route-layer.component';

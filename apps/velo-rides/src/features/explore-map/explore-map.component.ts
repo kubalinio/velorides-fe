@@ -6,7 +6,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { RouterOutlet } from '@angular/router';
 import { hlm } from '@spartan-ng/brain/core';
 import { ExploreMapComponent } from './layouts/module-map/map.component';
-import { RoutesStore, RouteStore } from '@velo/routes/data-access';
+import { RoutesStore, RouteStore } from '@velo/routes-data-access';
 
 @Component({
   standalone: true,

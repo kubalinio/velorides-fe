@@ -1,8 +1,8 @@
 import { effect, inject, Injectable } from '@angular/core';
 import { MapLayerMouseEvent } from 'maplibre-gl';
-import { MapUrlService } from '@velo/maps/data-access';
-import { MapStore } from '@velo/maps/data-access';
-import { RouteStore } from '@velo/routes/data-access';
+import { MapUrlService } from '@velo/maps-data-access';
+import { MapStore } from '@velo/maps-data-access';
+import { RouteStore } from '@velo/routes-data-access';
 import { MapInitService } from './map-init.service';
 import { Marker } from 'maplibre-gl';
 import { BBox } from 'geojson';

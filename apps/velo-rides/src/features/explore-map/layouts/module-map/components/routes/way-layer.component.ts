@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { LayerComponent } from '@velo/ngx-maplibre-gl';
 import { MapInteractionService } from '../../services/map-interaction.service';
-import { RouteStore } from '@velo/routes/data-access';
+import { RouteStore } from '@velo/routes-data-access';
 
 @Component({
   selector: 'map-way-layer',

@@ -1,0 +1,13 @@
+{
+  "name": "routes-feat-route-edit",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/routes/feat-route-edit/src",
+  "prefix": "lib",
+  "projectType": "library",
+  "tags": ["feature"],
+  "targets": {
+    "lint": {
+      "executor": "@nx/eslint:lint"
+    }
+  }
+}

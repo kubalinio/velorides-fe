@@ -13,7 +13,7 @@ import {
   PointDirective,
   PopupComponent,
 } from '@velo/ngx-maplibre-gl';
-import { WaypointsStore } from '@velo/waypoints/data-access';
+import { WaypointsStore } from '@velo/waypoints-data-access';
 
 @Component({
   selector: 'viewing-map-viewpoints',

@@ -2,11 +2,7 @@ import type { Config } from 'tailwindcss';
 
 const config: Config = {
   presets: [require('@spartan-ng/brain/hlm-tailwind-preset')],
-  content: [
-    './apps/velo-rides/src/**/*.{html,ts}',
-    './libs/ngx-maplibre-gl/src/**/*.{html,ts}',
-    './libs/shared/ui/**/*.{html,ts}',
-  ],
+  content: ['./apps/velo-rides/src/**/*.{html,ts}', './libs/**/*.{html,ts}'],
   theme: {
     screens: {
       sm: '576px',

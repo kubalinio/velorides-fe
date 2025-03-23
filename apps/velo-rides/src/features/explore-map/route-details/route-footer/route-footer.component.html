@@ -13,8 +13,7 @@
   </button>
 
   <a
-    [href]="'https://openstreetmap.org/' + routeId()"
-    target="_blank"
+    routerLink="/explore-map/{{ formattedRouteId() }}/edit"
     hlmBtn
     variant="default"
     class="flex items-center gap-2 text-sm md:text-base px-3 md:px-4"

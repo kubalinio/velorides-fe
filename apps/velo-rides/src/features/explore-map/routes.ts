@@ -1,4 +1,7 @@
 import { Routes } from '@angular/router';
+
+import { RouteEditComponent } from '@velo/routes-feat-route-edit';
+
 import { RouteListComponent } from './route-list/route-list.component';
 import { RouteDetailsComponent } from './route-details/route-details.component';
 export const EXPLORE_MAP_ROUTES: Routes = [
@@ -14,6 +17,10 @@ export const EXPLORE_MAP_ROUTES: Routes = [
       {
         path: 'explore-map/:id',
         component: RouteDetailsComponent,
+      },
+      {
+        path: 'explore-map/:id/edit',
+        component: RouteEditComponent,
       },
     ],
   },

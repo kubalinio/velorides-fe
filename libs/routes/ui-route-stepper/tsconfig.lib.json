@@ -1,0 +1,21 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "outDir": "../../../dist/out-tsc",
+    "declaration": true,
+    "declarationMap": true,
+    "inlineSources": true,
+    "types": []
+  },
+  "exclude": ["src/**/*.spec.ts", "jest.config.ts", "src/**/*.test.ts"],
+  "include": [
+    "src/**/*.ts",
+    "../../shared/ui/ui-stepper-brn/src/lib/brn-stepper-item.directive.ts",
+    "../../shared/ui/ui-stepper-brn/src/lib/brn-stepper-navigation.directive.ts",
+    "../../shared/ui/ui-stepper-brn/src/lib/brn-stepper.directive.ts",
+    "../../shared/ui/ui-stepper-brn/src/lib/brn-stepper.service.ts",
+    "../../shared/ui/ui-stepper-brn/src/lib/brn-stepper.token.ts",
+    "../../shared/ui/ui-stepper-brn/src/lib/index.ts",
+    "../../shared/ui/ui-stepper-brn/src/lib/types.ts"
+  ]
+}

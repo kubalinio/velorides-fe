@@ -45,15 +45,21 @@
       "@spartan-ng/ui-typography-helm": [
         "libs/shared/ui/ui-typography-helm/src/index.ts"
       ],
+      "@spartan-ng/ui-stepper-brn": [
+        "libs/shared/ui/ui-stepper-brn/src/index.ts"
+      ],
       "@velo/core-api-types": ["libs/core/api-types/src/index.ts"],
-      "@velo/core-http-client": ["libs/core/http-client/src/index.ts"],
       "@velo/core-data-access": ["libs/core/data-access/src/index.ts"],
+      "@velo/core-http-client": ["libs/core/http-client/src/index.ts"],
       "@velo/maps-data-access": ["libs/maps/data-access/src/index.ts"],
       "@velo/ngx-maplibre-gl": ["dist/libs/ngx-maplibre-gl"],
+      "@velo/routes-data-access": ["libs/routes/data-access/src/index.ts"],
       "@velo/routes-feat-route-edit": [
         "libs/routes/feat-route-edit/src/index.ts"
       ],
-      "@velo/routes-data-access": ["libs/routes/data-access/src/index.ts"],
+      "@velo/routes-ui-route-stepper": [
+        "libs/routes/ui-route-stepper/src/index.ts"
+      ],
       "@velo/waypoints-data-access": ["libs/waypoints/data-access/src/index.ts"]
     },
     "strict": true,

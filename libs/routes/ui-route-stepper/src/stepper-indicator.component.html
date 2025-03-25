@@ -1,0 +1,31 @@
+<div class="relative inline-flex items-center justify-center">
+  <svg [attr.width]="size()" [attr.height]="size()">
+    <title>Step Indicator</title>
+    <circle
+      [attr.cx]="size() / 2"
+      [attr.cy]="size() / 2"
+      [attr.r]="radius()"
+      fill="none"
+      stroke="currentColor"
+      [attr.stroke-width]="strokeWidth()"
+      class="text-muted-foreground"
+    ></circle>
+    <circle
+      [attr.cx]="size() / 2"
+      [attr.cy]="size() / 2"
+      [attr.r]="radius()"
+      fill="none"
+      stroke="currentColor"
+      [attr.stroke-width]="strokeWidth()"
+      [attr.stroke-dasharray]="circumference()"
+      [attr.stroke-dashoffset]="dashOffset()"
+      class="text-primary transition-all duration-300 ease-in-out"
+      [attr.transform]="'rotate(-90 ' + size() / 2 + ' ' + size() / 2 + ')'"
+    ></circle>
+  </svg>
+  <div class="absolute inset-0 flex items-center justify-center">
+    <span class="text-xs font-medium" aria-live="polite">
+      {{ currentStep() }} of {{ totalSteps() }}
+    </span>
+  </div>
+</div>

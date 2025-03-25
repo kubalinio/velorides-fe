@@ -1,5 +1,83 @@
 <section>
-  <h1>Route Edit</h1>
+  <velo-route-edit-header
+    [routeName]="$selectedRoute()?.name"
+  ></velo-route-edit-header>
 
-  <lib-routes-ui-route-stepper></lib-routes-ui-route-stepper>
+  @if (!steps || steps.length === 0) {
+    <div class="text-center text-gray-500">No route ways found</div>
+  }
+
+  @if (steps && steps.length > 0) {
+    <div
+      brnStepper
+      [steps]="steps"
+      (stepChange)="onChangeStep($event)"
+      class="flex flex-col gap-y-4 mx-auto pl-2.5 pr-4 py-4"
+    >
+      <ui-route-stepper-indicator
+        [size]="82"
+        [currentStep]="currentStepIndex + 1"
+        [totalSteps]="stepper?.all.length"
+      ></ui-route-stepper-indicator>
+
+      <div class="">
+        <h3
+          class="text-xl font-bold mb-4 line-clamp-1"
+          title="{{ stepper?.current?.properties?.['name'] || 'Unnamed' }}"
+        >
+          Route Way {{ stepper?.current?.properties?.['name'] || 'Unnamed' }}
+        </h3>
+
+        @for (step of stepper?.all ?? []; track step.id) {
+          @if (step.id === stepper?.current?.id) {
+            <route-edit-form
+              brnStepperItem
+              [step]="step"
+              [wayData]="step"
+              (formValid)="onFormValidityChange($event)"
+              (formSubmit)="onWayFormSubmit($event)"
+            ></route-edit-form>
+          }
+        }
+      </div>
+
+      <div class="flex justify-between">
+        @if (!stepper?.isFirst) {
+          <button hlmBtn variant="outline" (click)="prevStep()">
+            Previous
+          </button>
+        }
+
+        <div class="flex gap-x-2 ml-auto">
+          @if (!stepper?.isLast) {
+            <button hlmBtn variant="secondary" (click)="skipStep()">
+              Skip
+            </button>
+          }
+
+          @if (!stepper?.isLast) {
+            <button
+              hlmBtn
+              class="ml-auto"
+              (click)="nextStep()"
+              [disabled]="!currentStepValid"
+            >
+              Save & Next
+            </button>
+          }
+
+          @if (stepper?.isLast) {
+            <button
+              hlmBtn
+              class="ml-auto"
+              (click)="onFinalSubmit()"
+              [disabled]="!currentStepValid"
+            >
+              Finish
+            </button>
+          }
+        </div>
+      </div>
+    </div>
+  }
 </section>

@@ -1,1 +1,1 @@
-export * from './route-stepper.component';
+export * from './stepper-indicator.component';

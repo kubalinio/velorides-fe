@@ -1,4 +1,5 @@
-import { Component, output } from '@angular/core';
+import { Component, inject, input, output } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NgIconComponent, provideIcons } from '@ng-icons/core';
 import { lucideArrowLeft } from '@ng-icons/lucide';
 import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
@@ -6,7 +7,7 @@ import { HlmLargeDirective } from '@spartan-ng/ui-typography-helm';
 
 @Component({
   standalone: true,
-  selector: 'velo-route-details-header',
+  selector: 'velo-route-edit-header',
   imports: [HlmButtonDirective, NgIconComponent, HlmLargeDirective],
   providers: [
     provideIcons({
@@ -15,7 +16,7 @@ import { HlmLargeDirective } from '@spartan-ng/ui-typography-helm';
   ],
   template: `
     <div class="relative flex items-center justify-center mt-2 mb-4 h-full">
-      <button
+      <a
         hlmBtn
         variant="secondary"
         size="icon"
@@ -23,16 +24,21 @@ import { HlmLargeDirective } from '@spartan-ng/ui-typography-helm';
         (click)="onClickReturn()"
       >
         <ng-icon name="lucide:arrow-left" class="!size-4"></ng-icon>
-      </button>
+      </a>
 
-      <h2 hlmLarge class="font-semibold">Selected Route</h2>
+      <h2 hlmLarge class="font-semibold line-clamp-1" title="{{ routeName() }}">
+        {{ routeName() || 'Unnamed Route' }}
+      </h2>
     </div>
   `,
 })
 export class EditHeaderComponent {
+  routeName = input<string>('');
+  readonly _router = inject(Router);
+  readonly _route = inject(ActivatedRoute);
   clearSelectedRoute = output<void>();
 
   onClickReturn() {
-    this.clearSelectedRoute.emit();
+    this._router.navigate(['/explore-map', this._route.snapshot.params['id']]);
   }
 }

@@ -1,0 +1,55 @@
+<form [formGroup]="_wayForm" class="space-y-6">
+  <hlm-form-field id="way_name" class="group relative w-full">
+    <label
+      htmlFor="way_name"
+      hlmLabel
+      class="bg-sidebar-background text-foreground absolute start-1 top-0 z-10 block -translate-y-1/2 px-2 text-xs font-medium group-has-disabled:opacity-50"
+      >Way Name</label
+    >
+
+    <input
+      id="way_name"
+      hlmInput
+      type="text"
+      formControlName="name"
+      aria-label="Way Name"
+      placeholder="Way Name"
+      class="w-full"
+    />
+    @if (isInvalid('name')) {
+      <hlm-error>Way name is required</hlm-error>
+    }
+  </hlm-form-field>
+
+  <hlm-form-field id="way_surface" class="group relative w-full">
+    <label
+      htmlFor="way_surface"
+      hlmLabel
+      class="bg-sidebar-background text-foreground absolute start-1 top-1.5 z-10 block -translate-y-1/2 px-2 text-xs font-medium group-has-disabled:opacity-50"
+      >Surface</label
+    >
+
+    <brn-select
+      id="way_surface"
+      formControlName="surface"
+      [placeholder]="getSurfaceLabel(_wayForm.get('surface')?.value)"
+      class="inline-block w-full"
+    >
+      <hlm-select-trigger class="w-full bg-sidebar-background">
+        <hlm-select-value />
+      </hlm-select-trigger>
+
+      <hlm-select-content>
+        <hlm-select-label>Surfaces</hlm-select-label>
+
+        @for (option of surfaceOptions; track option.value) {
+          <hlm-option [value]="option.value">{{ option.label }}</hlm-option>
+        }
+      </hlm-select-content>
+    </brn-select>
+
+    @if (isInvalid('surface')) {
+      <hlm-error>Way surface is required</hlm-error>
+    }
+  </hlm-form-field>
+</form>

@@ -6,4 +6,6 @@
 export const environment = {
   production: false,
   api_url: '',
+  OSM_API_CLIENT_ID: 'djWp3Zf2B-6PVhtxybsNjMq3KyFojHlCOUC9uFC53S0',
+  OSM_API_CLIENT_SECRET: 'qTqL6Qv5KTmYF-J1mpPNGnGq4G7BeTuBQF5BDakqJyU',
 };

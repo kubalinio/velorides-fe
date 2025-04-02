@@ -10,7 +10,8 @@
     "isolatedModules": true,
     "esModuleInterop": true,
     "strictNullChecks": false,
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "types": ["node"]
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,

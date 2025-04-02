@@ -1,4 +1,11 @@
-import { Component, effect, inject, ViewChild } from '@angular/core';
+import {
+  Component,
+  effect,
+  inject,
+  signal,
+  ViewChild,
+  WritableSignal,
+} from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import {
@@ -13,6 +20,8 @@ import {
 import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
 import { EditHeaderComponent } from './header/header.component';
 import { RoutesUiStepperIndicatorComponent } from '@velo/routes-ui-route-stepper';
+// import { environment } from '../../../../apps/velo-rides/src/environments/environment';
+import { osmAuth } from 'osm-auth';
 
 @Component({
   standalone: true,
@@ -58,6 +67,34 @@ export class RouteEditComponent {
   // Track the current step form validity
   protected currentStepValid = false;
 
+  auth = new osmAuth({
+    apiUrl: 'https://master.apis.dev.openstreetmap.org',
+    url: 'https://master.apis.dev.openstreetmap.org',
+    client_id: 'BoQU2aPpXO5EpIG1hOd-p3nG8UoOulH5bg4zwycjlKo',
+    redirect_uri: 'http://127.0.0.1:4200/explore-map/1829759/edit',
+    scope: 'read_prefs write_api',
+    singlepage: true,
+  });
+
+  $osmUserDetails: WritableSignal<{
+    display_name: string;
+    id: number;
+    count: number;
+  } | null> = signal(null);
+
+  private getUserDetails() {
+    this.auth.xhr(
+      { method: 'GET', path: '/api/0.6/user/details.json' },
+      (err, result) => {
+        console.log('OSM AUTH ERROR ', err);
+
+        if (result) {
+          this.$osmUserDetails.set(JSON.parse(result).user);
+        }
+      },
+    );
+  }
+
   constructor() {
     effect(() => {
       const currentRoute = this.$routeWays();
@@ -73,7 +110,22 @@ export class RouteEditComponent {
       if (this.steps.length > 0 && !this.routeStore.selectedWay()) {
         setTimeout(() => this.selectWayZoom(this.steps[0]), 0);
       }
+
+      if (
+        window.location.search
+          .slice(1)
+          .split('&')
+          .some(function (p) {
+            return p.indexOf('code=') === 0;
+          })
+      ) {
+        this.auth.authenticate(function () {
+          history.pushState({}, '', window.location.pathname);
+        });
+      }
     });
+
+    this.getUserDetails();
   }
 
   // Computed property to get current step index
@@ -161,5 +213,18 @@ export class RouteEditComponent {
 
     // Optionally reset the stepper or navigate away
     // this.router.navigate(['/routes']);
+  }
+
+  loginToOSM() {
+    this.auth.authenticate(() => {
+      if (this.auth.authenticated()) {
+        this.getUserDetails();
+      }
+    });
+  }
+
+  logoutFromOSM() {
+    this.auth.logout();
+    this.$osmUserDetails.set(null);
   }
 }

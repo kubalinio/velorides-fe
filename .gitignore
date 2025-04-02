@@ -45,6 +45,8 @@ Thumbs.db
 .nx/workspace-data
 .angular
 .env
+.env.dev
+.env.prod
 
 # CURSOR
 .cursorrules

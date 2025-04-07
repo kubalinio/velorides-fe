@@ -7,7 +7,7 @@ import {
   withProps,
   withState,
 } from '@ngrx/signals';
-import { pipe, switchMap } from 'rxjs';
+import { catchError, map, Observable, of, pipe, switchMap } from 'rxjs';
 import { tap } from 'rxjs';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { Feature } from 'geojson';
@@ -24,6 +24,7 @@ import {
   setLoading,
   withCallState,
 } from '@angular-architects/ngrx-toolkit';
+import { RouteWaysService } from './services/route-ways.service';
 
 export const RouteStore = signalStore(
   { providedIn: 'root' },
@@ -31,6 +32,7 @@ export const RouteStore = signalStore(
   withState<RouteInteractionState>(routeInteractionInitialState),
   withProps(() => ({
     _routeService: inject(RouteService),
+    _routeWaysService: inject(RouteWaysService),
   })),
   withMethods((store) => ({
     getRouteById: rxMethod<number>(
@@ -112,6 +114,121 @@ export const RouteStore = signalStore(
         ),
       ),
     ),
+    getChangeset: rxMethod<{
+      osm_username: string;
+      routeId: string;
+    }>(
+      pipe(
+        tap(() =>
+          patchState(store, {
+            ...routeInitialState,
+            ...setLoading('getChangeset'),
+          }),
+        ),
+        switchMap((args) =>
+          store._routeWaysService.getChangeset(args).pipe(
+            tapResponse(
+              () => {
+                patchState(store, {
+                  ...routeInitialState,
+                  ...setLoaded('getChangeset'),
+                });
+              },
+              (error: { message: string }) => {
+                patchState(store, {
+                  ...routeInitialState,
+                  ...setLoaded('updateWay'),
+                  ...setError(error.message, 'updateWay'),
+                });
+              },
+            ),
+          ),
+        ),
+      ),
+    ),
+    updateWay(payload: {
+      osm_username: string | null;
+      routeId: string;
+      wayId: string;
+      surface: string;
+    }): Observable<{ success: boolean; error: string }> {
+      patchState(store, (state) => ({
+        ...state,
+        ...setLoading('updateWay'),
+      }));
+
+      return store._routeWaysService.updateRouteWay(payload).pipe(
+        tapResponse(
+          (response: { success: boolean; error: string }) => {
+            if (response && response.success) {
+              patchState(store, (state) => ({
+                ...state,
+                ...setLoaded('updateWay'),
+              }));
+              // in routeWays() signal here if the service provides enough info.
+            } else {
+              patchState(store, (state) => ({
+                ...state,
+                ...setError(response.error || 'Update failed', 'updateWay'),
+              }));
+            }
+          },
+          (error: Error | any) => {
+            patchState(store, (state) => ({
+              ...state,
+              ...setError(
+                error?.message || 'An unknown error occurred during update',
+                'updateWay',
+              ),
+            }));
+          },
+        ),
+        // Ensure the original response is passed through for the component subscriber
+        map((response) => response),
+        // Catch errors in the stream and convert them to a success:false emission
+        catchError((error) => {
+          patchState(store, (state) => ({
+            ...state,
+            ...setError(error?.message || 'Failed to update way', 'updateWay'),
+          }));
+          // Return an observable emitting a standard error object
+          return of({
+            success: false,
+            error: error?.message || 'Failed to update way',
+          });
+        }),
+      );
+    },
+    closeChangeset: rxMethod<string>(
+      pipe(
+        tap(() =>
+          patchState(store, (state) => ({
+            ...state,
+            ...setLoading('closeChangeset'),
+          })),
+        ),
+        switchMap((changesetId: string) =>
+          store._routeWaysService.closeChangesetOSM(changesetId).pipe(
+            tapResponse(
+              () => {
+                patchState(store, (state) => ({
+                  ...state,
+                  ...setLoaded('closeChangeset'),
+                }));
+              },
+              (error: { message: string }) => {
+                patchState(store, (state) => ({
+                  ...state,
+                  ...setError(error.message, 'closeChangeset'),
+                }));
+              },
+            ),
+          ),
+        ),
+      ),
+    ),
   })),
   withCallState({ collection: 'getRoute' }),
+  withCallState({ collection: 'updateWay' }),
+  withCallState({ collection: 'closeChangeset' }),
 );

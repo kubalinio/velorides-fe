@@ -63,6 +63,8 @@ export class RouteService {
             };
           }
 
+          console.log('GET ROUTE BY ID routeGeoJson', subways);
+
           return of({
             route: routeGeoJson,
             subways,

@@ -39,6 +39,7 @@ import { osmAuth } from 'osm-auth';
 })
 export class RouteEditComponent {
   private readonly routeStore = inject(RouteStore);
+  // private readonly ngZone = inject(NgZone);
 
   @ViewChild(BrnStepperDirective) protected stepper: BrnStepperDirective<
     typeof this.steps
@@ -57,7 +58,6 @@ export class RouteEditComponent {
     },
   );
 
-  // Route ways from store;
   $routeWays = this.routeStore.routeWays;
   $selectedRoute = this.routeStore.selectedRoute;
 
@@ -67,10 +67,11 @@ export class RouteEditComponent {
   // Track the current step form validity
   protected currentStepValid = false;
 
+  // client_id: 'BoQU2aPpXO5EpIG1hOd-p3nG8UoOulH5bg4zwycjlKo',
   auth = new osmAuth({
-    apiUrl: 'https://master.apis.dev.openstreetmap.org',
-    url: 'https://master.apis.dev.openstreetmap.org',
-    client_id: 'BoQU2aPpXO5EpIG1hOd-p3nG8UoOulH5bg4zwycjlKo',
+    // apiUrl: 'https://master.apis.dev.openstreetmap.org',
+    // url: 'https://master.apis.dev.openstreetmap.org',
+    client_id: '1766W5mAorVnh5QYqT0YHCgSXOFOZUWg0gjiQg-bgdY',
     redirect_uri: 'http://127.0.0.1:4200/explore-map/1829759/edit',
     scope: 'read_prefs write_api',
     singlepage: true,
@@ -81,6 +82,64 @@ export class RouteEditComponent {
     id: number;
     count: number;
   } | null> = signal(null);
+
+  constructor() {
+    // Initialize auth check
+    this.checkAndHandleAuth();
+
+    // Setup effects
+    this.setupEffects();
+
+    // Get initial user details
+    this.getUserDetails();
+  }
+
+  private checkAndHandleAuth() {
+    if (
+      window.location.search
+        .slice(1)
+        .split('&')
+        .some((p) => p.indexOf('code=') === 0)
+    ) {
+      this.auth.authenticate(() => {
+        history.pushState({}, '', window.location.pathname);
+      });
+    }
+  }
+
+  private setupEffects() {
+    // Route ways effect
+    effect(() => {
+      const currentRoute = this.$routeWays();
+
+      if (!currentRoute) return;
+
+      this.steps = currentRoute.map((way) => ({
+        ...way,
+        id: `${way.id}`,
+        title: `Way ${way.properties?.['name'] ?? 'Unnamed'}`,
+      }));
+    });
+
+    // Selected way effect
+    effect(() => {
+      const steps = this.steps;
+      if (steps.length > 0 && !this.routeStore.selectedWay()) {
+        this.selectWayZoom(steps[0]);
+      }
+    });
+
+    // User details effect
+    effect(() => {
+      const userDetails = this.$osmUserDetails();
+      if (userDetails?.id) {
+        this.routeStore.getChangeset({
+          osm_username: userDetails.display_name,
+          routeId: this._activatedRoute.snapshot.params['id'],
+        });
+      }
+    });
+  }
 
   private getUserDetails() {
     this.auth.xhr(
@@ -95,40 +154,6 @@ export class RouteEditComponent {
     );
   }
 
-  constructor() {
-    effect(() => {
-      const currentRoute = this.$routeWays();
-
-      if (!currentRoute) return;
-
-      this.steps = currentRoute.map((way) => ({
-        ...way,
-        id: `${way.id}`,
-        title: `Way ${way.properties?.['name'] ?? 'Unnamed'}`,
-      }));
-
-      if (this.steps.length > 0 && !this.routeStore.selectedWay()) {
-        setTimeout(() => this.selectWayZoom(this.steps[0]), 0);
-      }
-
-      if (
-        window.location.search
-          .slice(1)
-          .split('&')
-          .some(function (p) {
-            return p.indexOf('code=') === 0;
-          })
-      ) {
-        this.auth.authenticate(function () {
-          history.pushState({}, '', window.location.pathname);
-        });
-      }
-    });
-
-    this.getUserDetails();
-  }
-
-  // Computed property to get current step index
   get currentStepIndex(): number {
     if (!this.stepper || !this.stepper.current) return 0;
 
@@ -152,29 +177,25 @@ export class RouteEditComponent {
     );
   }
 
-  // Update form validity status from child component
   onFormValidityChange(isValid: boolean): void {
     this.currentStepValid = isValid;
   }
 
   // Handle form submission from child component
   onWayFormSubmit(wayFormData: WayFormData): void {
-    // Extract the numeric ID from the wayId (remove 'way-' prefix)
-    const wayIdNumeric = wayFormData.wayId.replace('way-', '');
-
-    // Here you would save the data to the backend
-    // this.routeStore.updateWay(wayIdNumeric, wayFormData);
-
-    // For demo, just log the data
-    console.log(`Updating way ${wayIdNumeric} with:`, {
-      name: wayFormData.name,
+    const payload = {
+      osm_username: this.$osmUserDetails()?.display_name!,
+      wayId: wayFormData.wayId,
+      routeId: this._activatedRoute.snapshot.params['id'],
       surface: wayFormData.surface,
-    });
+    };
 
-    // Proceed to next step if not the last step
-    if (this.stepper && !this.stepper.isLast) {
-      this.stepper.next();
-    }
+    this.routeStore.updateWay(payload).subscribe((res) => {
+      console.log('res', res);
+      if (res.success) {
+        this.stepper?.next();
+      }
+    });
   }
 
   // Go to previous step
@@ -203,8 +224,12 @@ export class RouteEditComponent {
   onFinalSubmit(): void {
     if (!this.currentForm) return;
 
+    const routeId = this._activatedRoute.snapshot.params['id'];
+
     // Submit the current form
     this.currentForm.submitForm();
+
+    this.routeStore.closeChangeset(routeId);
 
     // Here you could add additional logic for final submission
     // such as updating the entire route or finalizing the changes

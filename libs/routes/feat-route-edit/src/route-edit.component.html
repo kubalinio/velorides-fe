@@ -1,4 +1,4 @@
-<section>
+<section class="h-full">
   <velo-route-edit-header
     [routeName]="$selectedRoute()?.name"
   ></velo-route-edit-header>
@@ -12,7 +12,7 @@
       brnStepper
       [steps]="steps"
       (stepChange)="onChangeStep($event)"
-      class="flex flex-col gap-y-4 mx-auto pl-2.5 pr-4 py-4"
+      class="flex flex-col gap-y-4 mx-auto pl-2.5 pr-4 py-4 h-full"
     >
       <div class="flex justify-between">
         <ui-route-stepper-indicator
@@ -85,26 +85,27 @@
           @if (!stepper?.isLast) {
             <button
               hlmBtn
+              variant="secondary"
               class="ml-auto"
               (click)="nextStep()"
               [disabled]="!currentStepValid"
             >
-              Save & Next
-            </button>
-          }
-
-          @if (stepper?.isLast) {
-            <button
-              hlmBtn
-              class="ml-auto"
-              (click)="onFinalSubmit()"
-              [disabled]="!currentStepValid"
-            >
-              Finish
+              Next
             </button>
           }
         </div>
       </div>
+
+      @if (!stepper?.isFirst) {
+        <button
+          hlmBtn
+          class="sticky bottom-0 left-full right-0 w-full"
+          (click)="onFinalSubmit()"
+          [disabled]="!currentStepValid"
+        >
+          Finish
+        </button>
+      }
     </div>
   }
 </section>
